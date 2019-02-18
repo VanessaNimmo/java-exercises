@@ -28,7 +28,7 @@ class App {
         person.setFirstName(firstName);
         person.setLastName(lastName);
 
-        System.out.println("Hi " + person.getFirstName() + " " + person.getLastName() + "!");
+        System.out.println("Hi " + person.getFullName() + "!");
 
         int annualSalary = getPositiveInteger("annual salary");
         float superRate = getPositiveFloat("super rate");
@@ -51,7 +51,16 @@ class App {
 
         // Present information
 
-        
+        String payslip = "Your payslip has been generated:\n" +
+                        "Name: " + person.getFullName() + "\n" +
+                        "Pay Period: " + payDetails.getPayPeriod() + "\n" +
+                        "Gross Income: " + payDetails.getGrossMonthlySalary() + "\n" +
+                        "Income Tax: " + payDetails.getIncomeTax() + "\n" +
+                        "Net Income: " + payDetails.getNetIncome() + "\n" +
+                        "Super: " + payDetails.getSuperAmount() + "\n\n" +
+                        "Thank you for using MYOB!";
+
+        System.out.println(payslip);
 
     }
 
@@ -119,38 +128,64 @@ class Employee {
 
     public String getLastName() { return this.lastName; }
 
+    public String getFullName() { return (this.firstName + " " + this.lastName); }
+
 }
 
 class Pay {
 
-    public Int annualSalary, grossMonthlySalary, incomeTax, netIncome, superRate, superAmount;
+    public int annualSalary, grossMonthlySalary, superAmount;
+    public long incomeTax, netIncome;
+    public float superRate;
     public String payPeriodStart, payPeriodEnd;
 
-    public void setSalary(Int annualSalary) {
+    public void setSalary(int annualSalary) {
         this.annualSalary = annualSalary;
-        this.grossMonthlySalary = Math.round(annualSalary/12.0);
+        this.grossMonthlySalary = Math.toIntExact(Math.round(annualSalary / 12.0));
         this.incomeTax = this.calculateTax();
         this.netIncome = grossMonthlySalary - incomeTax;
     };
 
     public void setSuper(float superRate) {
         this.superRate = superRate;
-        this.superAmount = Math.round(this.grossMonthlySalary * superRate);
+        this.superAmount = Math.round(this.grossMonthlySalary * (superRate/100));
     }
 
     public void setPayPeriodStart(String payPeriodStart) { this.payPeriodStart = payPeriodStart; }
     public void setPayPeriodEnd(String payPeriodEnd) { this.payPeriodEnd = payPeriodEnd; }
 
     public String getPayPeriod() { return (this.payPeriodStart + " - " + this.payPeriodEnd); }
-    public Int getGrossMonthlySalary() { return this.grossMonthlySalary; }
-    public Int getIncomeTax() { return this.incomeTax; }
-    public Int getNetIncome() { return this.netIncome; }
-    public Int getSuperAmount() { return this.superAmount; }
+    public int getGrossMonthlySalary() { return this.grossMonthlySalary; }
+    public long getIncomeTax() { return this.incomeTax; }
+    public long getNetIncome() { return this.netIncome; }
+    public int getSuperAmount() { return this.superAmount; }
 
-
-    private int calculateTax() {
+    private long calculateTax() {
         // Do tax calculations here
-        return 5;
+        long tax = 0;
+        int baseAmount = 0;
+        double rateAbove = 0;
+        int overAmount = 0;
+        if (this.annualSalary > 180001) {
+            baseAmount = 54232;
+            rateAbove = 0.45;
+        } else if (this.annualSalary > 87000) {
+            baseAmount = 19822;
+            rateAbove = 0.37;
+            overAmount = 87000;
+        } else if (this.annualSalary > 37000) {
+            baseAmount = 3572;
+            rateAbove = 0.325;
+            overAmount = 37000;
+        } else if (this.annualSalary > 18200) {
+            baseAmount = 0;
+            rateAbove = 0.19;
+            overAmount = 18200;
+        }
+        int amountToTax = this.annualSalary - overAmount;
+        double monthlyTaxAmount = (baseAmount + (amountToTax*rateAbove))/12;
+        tax = Math.round(monthlyTaxAmount);
+        return tax;
     }
 
 }
