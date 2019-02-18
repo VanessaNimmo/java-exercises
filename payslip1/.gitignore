@@ -5,6 +5,9 @@
 # Compiled class file
 **.class
 
+# Taking out whole output file
+**/out
+
 # Log file
 **.log
 
