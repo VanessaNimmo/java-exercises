@@ -28,28 +28,23 @@ class App {
 
         int annualSalary = getPositiveInteger("annual salary");
         float superRate = getPositiveFloat("super rate");
-
         String paymentStartDate = getString("payment start date");
         String paymentEndDate = getString("payment end date");
-
-        System.out.println(annualSalary);
-        System.out.println(superRate);
-        System.out.println(paymentStartDate);
-        System.out.println(paymentEndDate);
 
         /* Do calculations */
 
         Pay payDetails = new Pay(annualSalary, superRate, paymentStartDate, paymentEndDate);
+        Tax taxDetails = new Tax(payDetails.getAnnualSalary(), payDetails.getSuperRate());
 
         // Present information
 
         String payslip = "Your payslip has been generated:\n" +
                 "Name: " + person.getFullName() + "\n" +
                 "Pay Period: " + payDetails.getPayPeriod() + "\n" +
-                "Gross Income: " + payDetails.getGrossMonthlySalary() + "\n" +
-                "Income Tax: " + payDetails.getIncomeTax() + "\n" +
-                "Net Income: " + payDetails.getNetIncome() + "\n" +
-                "Super: " + payDetails.getSuperAmount() + "\n\n" +
+                "Gross Income: " + taxDetails.getGrossMonthlySalary() + "\n" +
+                "Income Tax: " + taxDetails.getIncomeTax() + "\n" +
+                "Net Income: " + taxDetails.getNetIncome() + "\n" +
+                "Super: " + taxDetails.getSuperAmount() + "\n\n" +
                 "Thank you for using MYOB!";
 
         System.out.println(payslip);
