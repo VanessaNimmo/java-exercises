@@ -7,20 +7,16 @@ public class Pay {
     public float superRate;
     public String payPeriodStart, payPeriodEnd;
 
-    public void setSalary(int annualSalary) {
+    public Pay(int annualSalary, float superRate, String paymentStartDate, String paymentEndDate) {
         this.annualSalary = annualSalary;
+        this.superRate = superRate;
+        this.payPeriodStart = paymentStartDate;
+        this.payPeriodEnd = paymentEndDate;
         this.grossMonthlySalary = Math.toIntExact(Math.round(annualSalary / 12.0));
         this.incomeTax = this.calculateTax();
         this.netIncome = grossMonthlySalary - incomeTax;
-    };
-
-    public void setSuper(float superRate) {
-        this.superRate = superRate;
         this.superAmount = Math.round(this.grossMonthlySalary * (superRate/100));
     }
-
-    public void setPayPeriodStart(String payPeriodStart) { this.payPeriodStart = payPeriodStart; }
-    public void setPayPeriodEnd(String payPeriodEnd) { this.payPeriodEnd = payPeriodEnd; }
 
     public String getPayPeriod() { return (this.payPeriodStart + " - " + this.payPeriodEnd); }
     public int getGrossMonthlySalary() { return this.grossMonthlySalary; }
@@ -55,5 +51,4 @@ public class Pay {
         tax = Math.round(monthlyTaxAmount);
         return tax;
     }
-
 }

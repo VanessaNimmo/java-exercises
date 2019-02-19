@@ -20,13 +20,9 @@ class App {
 
         // Get info from person, convert from strings to usable stuff
 
-        Employee person = new Employee();
-
         String firstName = getString("first name");
         String lastName = getString("last name");
-
-        person.setFirstName(firstName);
-        person.setLastName(lastName);
+        Employee person = new Employee(firstName, lastName);
 
         System.out.println("Hi " + person.getFullName() + "!");
 
@@ -43,11 +39,7 @@ class App {
 
         /* Do calculations */
 
-        Pay payDetails = new Pay();
-        payDetails.setSalary(annualSalary);
-        payDetails.setSuper(superRate);
-        payDetails.setPayPeriodStart(paymentStartDate);
-        payDetails.setPayPeriodEnd(paymentEndDate);
+        Pay payDetails = new Pay(annualSalary, superRate, paymentStartDate, paymentEndDate);
 
         // Present information
 
