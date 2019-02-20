@@ -15,16 +15,26 @@ public class StringCalculator {
             String[] lines = expression.split("\n");
             expressionBody = lines[1];
         }
-        return parseAndSum(expressionBody.split(delimiter));
+        ArrayList<Integer> expressionToSum = getNumbers(expressionBody, delimiter);
+//        checkforNegatives(expressionToSum);
+        return sumNumbersBelow1000(expressionToSum);
     }
 
-    private static int parseAndSum(String[] words){
+    private static ArrayList<Integer> getNumbers(String expressionBody, String delimiter) {
+        String[] numbersAsStrings = expressionBody.split(delimiter);
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        for(int i=0; i<numbersAsStrings.length; i++){
+            numbers.add(Integer.parseInt(numbersAsStrings[i]));
+        }
+        return numbers;
+    }
+
+    private static int sumNumbersBelow1000(ArrayList<Integer> numbers){
         int sum = 0;
         ArrayList<Integer> negatives = new ArrayList<Integer>();
-        for(int i=0; i<words.length; i++){
-            int number = Integer.parseInt(words[i]);
-            if(number<0){ negatives.add(number); }
-            sum+=number;
+        for(Integer num:numbers){
+            if(num<0) negatives.add(num);
+            if(num<1000) sum += num;
         }
         if(!negatives.isEmpty()) {
             String negativesForError = "";

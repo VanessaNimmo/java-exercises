@@ -62,4 +62,9 @@ public class StringCalculatorTest {
         exceptionRule.expectMessage("Negatives not allowed: -1, -3" );
         StringCalculator.add("-1,2,-3");
     }
+
+    @Test
+    public void numbersGreaterThanOrEqualTo1000ShouldBeIgnored() {
+        assertEquals(2, StringCalculator.add("1000,1001,2"));
+    }
 }
