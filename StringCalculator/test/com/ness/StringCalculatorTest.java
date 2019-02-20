@@ -1,6 +1,8 @@
 package com.ness;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.*;
 
@@ -49,5 +51,15 @@ public class StringCalculatorTest {
     @Test
     public void takesAnAlternateDelimiterAtTheStartOfTheStringFlaggedWithForwardSlashes() {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
+
+    @Test
+    public void throwsExceptionWhenNegativesIncluded() {
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.expectMessage("Negatives not allowed: -1, -3" );
+        StringCalculator.add("-1,2,-3");
     }
 }
