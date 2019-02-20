@@ -38,15 +38,35 @@ public class StringCalculator {
         if(!expression.contains("[")) {
             return Character.toString(expression.charAt(2));
         }
+        // Need to check for multiple delimiters
+        ArrayList<String> delimiters = new ArrayList<String>();
+        String delim;
         int startIndex = expression.indexOf("[") + 1;
         int endIndex = expression.indexOf("]");
-        String delim = expression.substring(startIndex, endIndex);
+        do {
+            delim = expression.substring(startIndex, endIndex);
+            delimiters.add(delim);
+            startIndex = expression.indexOf("[", startIndex) + 1;
+            endIndex = expression.indexOf("]", endIndex + 1);
+        } while (startIndex>0 && endIndex>0);
+        // Check each delim for escape chars
+        ArrayList<String> checkedDelims = new ArrayList<String>();
+        for(int i=0; i<delimiters.size(); i++) {
+            checkedDelims.add(checkEscapeChars(delimiters.get(i)));
+        }
+        // Build the delimiters into one regex to return
+        delim = checkedDelims.get(0);
+        for(int i=1; i<checkedDelims.size(); i++) { delim += "|" + checkedDelims.get(i); }
+        return delim;
+    }
+
+    private static String checkEscapeChars(String delim) {
         if (delim.contains("*")) {
             // Insert escape characters before each one
             StringBuilder str = new StringBuilder();
             for(int i=0; i<delim.length(); i++){
                 if(delim.charAt(i)=='*'){
-                   str.append('\\');
+                    str.append('\\');
                 }
                 str.append(delim.charAt(i));
             }
