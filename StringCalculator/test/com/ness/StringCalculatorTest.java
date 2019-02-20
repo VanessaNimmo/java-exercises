@@ -82,4 +82,9 @@ public class StringCalculatorTest {
     public void handleMultipleDelimitersWithLengthGreaterThanOneCharacter() {
         assertEquals(10, StringCalculator.add("//[***][#][%]\n1***2#3%4"));
     }
+
+    @Test
+    public void handleDelimitersThatHaveNumbersInside() {
+        assertEquals(6, StringCalculator.add("//[*1*][%]\n1*1*2%3"));
+    }
 }
