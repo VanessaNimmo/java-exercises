@@ -43,20 +43,11 @@ public class StringCalculator {
 
     private static int[] getNumbers(String expressionBody, String delimiter) {
         String[] numbersAsStrings = expressionBody.split(delimiter);
-
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
-        for(int i=0; i<numbersAsStrings.length; i++){
-            numbers.add(Integer.parseInt(numbersAsStrings[i]));
-        }
         return Arrays.stream(numbersAsStrings).mapToInt(Integer::parseInt).toArray();
     }
 
     private static int sumNumbersBelow1000(int[] numbers){
-        int sum = 0;
-        for(int num:numbers){
-            if(num<1000) sum += num;
-        }
-        return sum;
+        return Arrays.stream(numbers).filter(num -> num < 1000).sum();
     }
 
     private static boolean hasHeader(String word){
