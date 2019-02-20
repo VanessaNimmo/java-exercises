@@ -1,8 +1,8 @@
 package com.company;
 
-public class Employee {
+class Employee {
 
-    public String firstName, lastName;
+    private final String firstName, lastName;
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;

@@ -1,10 +1,10 @@
 package com.company;
 
-public class Pay {
+class Pay {
 
-    public int annualSalary;
-    public float superRate;
-    public String payPeriodStart, payPeriodEnd;
+    private final int annualSalary;
+    private final float superRate;
+    private final String payPeriodStart, payPeriodEnd;
 
     public Pay(int annualSalary, float superRate, String paymentStartDate, String paymentEndDate) {
         this.annualSalary = annualSalary;

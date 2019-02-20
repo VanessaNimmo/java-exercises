@@ -1,8 +1,8 @@
 package com.company;
 
-public class Tax {
+class Tax {
 
-    public long incomeTax, netIncome, grossMonthlySalary, superAmount;
+    private final long incomeTax, netIncome, grossMonthlySalary, superAmount;
     private int baseAmount, overAmount;
     private double rateAbove;
 

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -28,6 +29,12 @@ class App {
 
         int annualSalary = getPositiveInteger("annual salary");
         float superRate = getPositiveFloat("super rate");
+        // Could possibly get in date and make a date object to check that the payslip applies to the tax rates given - Java docs are still a bit daunting
+//        int payStartDay = getPositiveInteger("pay start date day");
+//        int payStartMonth = getPositiveInteger("pay start date month");
+//        int payStartYear = getPositiveInteger("pay start date year");
+//        Date paymentStartDate = new Date(payStartDay, payStartMonth, payStartYear);
+
         String paymentStartDate = getString("payment start date");
         String paymentEndDate = getString("payment end date");
 
