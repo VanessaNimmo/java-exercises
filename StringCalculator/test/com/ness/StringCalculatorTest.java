@@ -67,4 +67,9 @@ public class StringCalculatorTest {
     public void numbersGreaterThanOrEqualTo1000ShouldBeIgnored() {
         assertEquals(2, StringCalculator.add("1000,1001,2"));
     }
+
+    @Test
+    public void delimitersCanBeOfAnyLength() {
+        assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
+    }
 }
