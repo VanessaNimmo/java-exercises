@@ -54,7 +54,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void anyAmountOfNumbersReturnsThoseNumbersAdditionalTest() {
+    public void anyAmountOfNumbersReturnsThoseNumbersAdditionalTestCase() {
         String input = "3,5,3,9";
 
         int result = StringCalculator.add(input);
@@ -63,7 +63,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void newLineBreaksAndCommasShouldBeInterchangableBetweenNumbers() {
+    public void newLineBreaksAndCommasShouldBeInterchangeableBetweenNumbers() {
         String input = "1,2\n3";
 
         int result = StringCalculator.add(input);
@@ -72,7 +72,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void newLineBreaksAndCommasShouldBeInterchangeableAdditionalTest() {
+    public void newLineBreaksAndCommasShouldBeInterchangeableAdditionalTestCase() {
         String input = "3\n5\n3,9";
 
         int result = StringCalculator.add(input);
