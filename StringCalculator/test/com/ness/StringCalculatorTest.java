@@ -7,50 +7,86 @@ import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
 
 public class StringCalculatorTest {
-
+    /* Now using Arrange Act Assert as the structure for tests */
     @Test
     public void addTakesAStringAndReturnsANumber() {
-        assertEquals(0, StringCalculator.add(""));
+        String input = "";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(0, result);
     }
 
     @Test
     public void aSingleNumberReturnsThatNumber() {
-        assertEquals(1, StringCalculator.add("1"));
+        String input = "1";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(1, result);
     }
 
     @Test
     public void aDifferentSingleNumberReturnsThatNumber() {
-        assertEquals(3, StringCalculator.add("3"));
+        String input = "3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(3, result);
     }
 
     @Test
     public void twoNumbersReturnTheSumOfTheNumbers() {
-        assertEquals(3, StringCalculator.add("1,2"));
+        String input = "1,2";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(3, result);
     }
 
     @Test
     public void anyAmountOfNumbersReturnsThoseNumbers() {
-        assertEquals(6, StringCalculator.add("1,2,3"));
+        String input = "1,2,3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(6, result);
     }
 
     @Test
     public void anyAmountOfNumbersReturnsThoseNumbersAdditionalTest() {
-        assertEquals(20, StringCalculator.add("3,5,3,9"));
+        String input = "3,5,3,9";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(20, result);
     }
 
     @Test
     public void newLineBreaksAndCommasShouldBeInterchangableBetweenNumbers() {
-        assertEquals(6, StringCalculator.add("1,2\n3"));
+        String input = "1,2\n3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(6, result);
     }
 
     @Test
     public void newLineBreaksAndCommasShouldBeInterchangeableAdditionalTest() {
-        assertEquals(20, StringCalculator.add("3\n5\n3,9"));
+        String input = "3\n5\n3,9";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(20, result);
     }
 
     @Test
     public void takesAnAlternateDelimiterAtTheStartOfTheStringFlaggedWithForwardSlashes() {
-        assertEquals(3, StringCalculator.add("//;\n1;2"));
+        String input = "//;\n1;2";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(3, result);
     }
 
     @Rule
@@ -65,26 +101,46 @@ public class StringCalculatorTest {
 
     @Test
     public void numbersGreaterThanOrEqualTo1000ShouldBeIgnored() {
-        assertEquals(2, StringCalculator.add("1000,1001,2"));
+        String input = "1000,1001,2";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(2, result);
     }
 
     @Test
     public void delimitersCanBeOfAnyLength() {
-        assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
+        String input = "//[***]\n1***2***3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(6, result);
     }
 
     @Test
     public void allowMultipleDelimiters() {
-        assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
+        String input = "//[*][%]\n1*2%3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(6, result);
     }
 
     @Test
     public void handleMultipleDelimitersWithLengthGreaterThanOneCharacter() {
-        assertEquals(10, StringCalculator.add("//[***][#][%]\n1***2#3%4"));
+        String input = "//[***][#][%]\n1***2#3%4";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(10, result);
     }
 
     @Test
     public void handleDelimitersThatHaveNumbersInside() {
-        assertEquals(6, StringCalculator.add("//[*1*][%]\n1*1*2%3"));
+        String input = "//[*1*][%]\n1*1*2%3";
+
+        int result = StringCalculator.add(input);
+
+        assertEquals(6, result);
     }
 }
