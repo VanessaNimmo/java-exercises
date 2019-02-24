@@ -10,6 +10,10 @@ public class Board {
         this.state = new char[][] {{'.', '.', '.'}, {'.', '.', '.'}, {'.', '.', '.'}};
     }
 
+//    private String[] makeBoardLabels() {
+//
+//    }
+
     public boolean moveIsOnBoard(char entry, int column, int row) {
         if (column >= size || row >= size) return false;
         return true;
