@@ -22,6 +22,7 @@ public class Board {
     }
 
     public boolean squareIsEmpty(int column, int row) {
+        // Feels like this needs a square class
         return true;
     }
 }
