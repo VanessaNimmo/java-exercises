@@ -18,11 +18,10 @@ public class BoardTest {
     @Test
     public void shouldReturnTrueWhenMoveIsOnTheBoard() {
         Board tictactoe = new Board(3);
-        char entry = 'X';
         int column = 0;
         int row = 0;
 
-        boolean result = tictactoe.moveIsOnBoard(entry, column, row);
+        boolean result = tictactoe.moveIsOnBoard(column, row);
 
         assertEquals(true, result);
     }
@@ -30,11 +29,10 @@ public class BoardTest {
     @Test
     public void shouldReturnFalseWhenMoveIsOffTheBoard() {
         Board tictactoe = new Board(3);
-        char entry = 'X';
         int column = 3;
         int row = 1;
 
-        boolean result = tictactoe.moveIsOnBoard(entry, column, row);
+        boolean result = tictactoe.moveIsOnBoard(column, row);
 
         assertEquals(false, result);
     }

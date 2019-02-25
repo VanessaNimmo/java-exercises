@@ -10,17 +10,12 @@ public class Board {
         this.state = new char[][] {{'.', '.', '.'}, {'.', '.', '.'}, {'.', '.', '.'}};
     }
 
-//    private String[] makeBoardLabels() {
-//
-//    }
-
-    public boolean moveIsOnBoard(char entry, int column, int row) {
-        if (column >= size || row >= size) return false;
-        return true;
+    public boolean moveIsOnBoard(int column, int row) {
+        return column < size && row < size;
     }
 
     public void move(char entry, int column, int row) {
-        if(moveIsOnBoard(entry, column, row) && squareIsEmpty(column, row)) {
+        if(moveIsOnBoard(column, row) && squareIsEmpty(column, row)) {
             this.state[column][row] = entry;
         }
     }
