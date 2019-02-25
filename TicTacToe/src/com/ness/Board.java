@@ -6,6 +6,7 @@ public class Board {
 
     public final int size;
     public Square[][] state;
+    public boolean isFull = false;
 
     public Board(int size) {
         this.size = size;

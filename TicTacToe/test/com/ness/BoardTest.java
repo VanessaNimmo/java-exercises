@@ -68,4 +68,18 @@ public class BoardTest {
         assertEquals(expectedDisplayValue, result);
     }
 
+    @Test
+    public void shouldReturnTrueForIsFullOnceEverySquareIsFull() {
+        int boardSize = 3;
+        Board tictactoe = new Board(boardSize);
+        char entry = 'X';
+        for(int i=0; i<boardSize; i++) {
+            for(int j=0; j<boardSize; j++) tictactoe.move(entry, i, j);
+        }
+
+        boolean result = tictactoe.isFull;
+
+        assertTrue(result);
+    }
+
 }
