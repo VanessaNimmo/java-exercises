@@ -21,7 +21,7 @@ public class SquareTest {
 
         char result = one.displayValue;
 
-        assertEquals('.', result);
+        assertEquals('*', result);
     }
 
     @Test

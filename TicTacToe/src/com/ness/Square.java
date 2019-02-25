@@ -3,7 +3,7 @@ package com.ness;
 public class Square {
 
     public boolean isEmpty;
-    public char displayValue = '.';
+    public char displayValue = '*';
 
     public Square() {
         this.isEmpty = true;

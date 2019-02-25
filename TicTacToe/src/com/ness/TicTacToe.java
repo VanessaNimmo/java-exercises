@@ -3,6 +3,7 @@ package com.ness;
 public class TicTacToe {
 
     public static void main(String[] args) {
-	// write your code here
+        Game newGame = new Game(3);
+        newGame.play();
     }
 }
