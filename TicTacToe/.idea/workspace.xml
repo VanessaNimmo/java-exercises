@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76dfb801-ed8b-40e0-a289-870daa5c63fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/ness/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ness/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ness/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ness/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/com/ness/SquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/ness/SquareTest.java" afterDir="false" />
     </list>
@@ -27,8 +26,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ness/Square.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="264">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#128#129#0" expanded="true" />
+                <element signature="e#163#164#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -37,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/test/com/ness/SquareTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
-              <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+              <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -101,14 +104,14 @@
         <option value="$PROJECT_DIR$/test/com/ness/PlayerTest.java" />
         <option value="$PROJECT_DIR$/test/com/ness/MoveTest.java" />
         <option value="$PROJECT_DIR$/test/com/ness/BoardTest.java" />
-        <option value="$PROJECT_DIR$/src/com/ness/Square.java" />
         <option value="$PROJECT_DIR$/src/com/ness/Board.java" />
+        <option value="$PROJECT_DIR$/src/com/ness/Square.java" />
         <option value="$PROJECT_DIR$/test/com/ness/SquareTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="53" />
+    <option name="y" value="95" />
     <option name="width" value="1680" />
     <option name="height" value="967" />
   </component>
@@ -164,7 +167,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551050245652" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551052842344" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
@@ -295,44 +298,44 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550788775101</updated>
-      <workItem from="1550788779404" duration="12225000" />
+      <workItem from="1550788779404" duration="13432000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BoardTest - 2019.02.22 at 11h 27m 08s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.22 at 11h 39m 14s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.22 at 11h 39m 50s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.22 at 11h 44m 18s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.25 at 09h 38m 45s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.25 at 09h 40m 43s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.25 at 09h 48m 52s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="BoardTest - 2019.02.25 at 09h 49m 28s.xml">
-      <configuration name="BoardTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="SquareTest - 2019.02.25 at 10h 02m 56s.xml">
       <configuration name="SquareTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="SquareTest - 2019.02.25 at 10h 05m 16s.xml">
       <configuration name="SquareTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 16m 45s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 17m 28s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 55m 39s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 56m 25s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 56m 49s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 57m 01s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 10h 57m 16s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SquareTest - 2019.02.25 at 11h 00m 14s.xml">
+      <configuration name="SquareTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12225000" />
+    <option name="totallyTimeSpent" value="13432000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="960" extended-state="6" />
@@ -428,13 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ness/Square.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ness/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -442,10 +438,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ness/Square.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#128#129#0" expanded="true" />
+            <element signature="e#163#164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/com/ness/SquareTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+          <caret line="48" column="1" lean-forward="true" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
