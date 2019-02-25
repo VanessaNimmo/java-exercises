@@ -2,13 +2,13 @@ package com.ness;
 
 import java.util.Arrays;
 
-public class Board {
+class Board {
 
-    public final int size;
-    public Square[][] state;
-    public boolean isFull = false;
+    final int size;
+    Square[][] state;
+    boolean isFull = false;
 
-    public Board(int size) {
+    Board(int size) {
         this.size = size;
         this.state = new Square[this.size][this.size];
         for(int i=0; i<this.size; i++) {
@@ -16,11 +16,11 @@ public class Board {
         }
     }
 
-    public boolean moveIsOnBoard(int column, int row) {
+    boolean moveIsOnBoard(int column, int row) {
         return column < size && row < size;
     }
 
-    public void move(char entry, int column, int row) {
+    void move(char entry, int column, int row) {
         if(moveIsOnBoard(column, row) && this.state[column][row].isEmpty) {
             this.state[column][row].makeEntry(entry);
         }

@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
 
     @Test
-    public void shouldBeInitalisedWithAToken() {
+    public void shouldBeInitialisedWithAToken() {
         Player player1 = new Player('O');
 
         char result = player1.token;

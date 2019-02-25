@@ -1,10 +1,10 @@
 package com.ness;
 
-public class Player {
+class Player {
 
-    public char token;
+    char token;
 
-    public Player(char token) {
+    Player(char token) {
         this.token = token;
     }
 }
