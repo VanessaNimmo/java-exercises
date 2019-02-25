@@ -38,27 +38,34 @@ public class BoardTest {
     }
 
     @Test
-    public void shouldReturnCurrentStateOfGameAsArrayOfArrays() {
-        Board tictactoe = new Board(3);
+    public void shouldReturnCurrentStateOfGameAsArrayOfArraysOfSquareObjects() {
+        int boardSize = 3;
+        Board tictactoe = new Board(boardSize);
 
-        char[][] result = tictactoe.state;
+        Square[][] result = tictactoe.state;
 
-        char[][] expectedState = new char[][] {{'.', '.', '.'}, {'.', '.', '.'}, {'.', '.', '.'}};
-
-        assertArrayEquals(expectedState, result);
+        assertTrue(result[0][0] instanceof Square);
     }
 
     @Test
     public void afterAcceptingAMoveBoardStateShouldChange() {
-        Board tictactoe = new Board(3);
-        char entry = 'X', column = 1, row = 2;
+        int boardSize = 3;
+        Board tictactoe = new Board(boardSize);
+        char entry = 'X';
+        int column = 1;
+        int row = 2;
         tictactoe.move(entry, column, row);
 
-        char[][] result = tictactoe.state;
+        char result = tictactoe.state[column][row].displayValue;
 
-        char[][] expectedState = new char[][] {{'.', '.', '.'}, {'.', '.', 'X'}, {'.', '.', '.'}};
+        Square[][] expectedState = new Square[boardSize][boardSize];
+        for(int i=0; i<boardSize; i++) {
+            for(int j=0; j<boardSize; j++) expectedState[i][j] = new Square();
+        }
+        expectedState[column][row].makeEntry('X');
+        char expectedDisplayValue = expectedState[column][row].displayValue;
 
-        assertArrayEquals(expectedState, result);
+        assertEquals(expectedDisplayValue, result);
     }
 
 }
