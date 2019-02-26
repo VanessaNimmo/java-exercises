@@ -12,6 +12,8 @@ interface Board {
 
     boolean squareIsAvailable(int markerPlacement);
 
-    void placeMarker(char marker, int markerPlacement);
+    void placeMarker(String marker, int markerPlacement);
+
+    String markerHasWon();
 
 }

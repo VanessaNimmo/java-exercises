@@ -10,7 +10,7 @@ public class GameTest {
     public void boardShouldBeEmptyAtStartOfGame () {
         int boardSize = 3;
         Board tictactoeBoard = new TicTacToeBoard(boardSize);
-        char marker1 = 'X', marker2 = 'O';
+        String marker1 = "X", marker2 = "O";
         Player player1 = new Player(marker1);
         Player player2 = new Player(marker2);
         Game tictactoe = new Game(tictactoeBoard, player1, player2);
@@ -20,8 +20,5 @@ public class GameTest {
 
         assertEquals(expected, result);
     }
-
-    @Test
-    public void boardShould
 
 }

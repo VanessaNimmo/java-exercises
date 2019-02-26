@@ -4,6 +4,7 @@ class Game {
 
     Board board;
     private Player player1, player2;
+    private int count = 0;
 
     Game(Board tictactoeBoard, Player player1, Player player2) {
         this.board = tictactoeBoard;
@@ -20,15 +21,20 @@ class Game {
         boolean endGame = false;
         boolean markerPlaced = false;
         Player player;
+        Player winningPlayer = player1;
         int markerPlacement;
+        String playerName;
 
         do {
             if(changePlayerToken) {
                 player = this.player1;
+                playerName = "Player 1";
             } else {
                 player = this.player2;
+                playerName = "Player 2";
             }
             // Print the board - should this be a separate method to represent the state of the board to anything outside the system?
+            System.out.println(String.format("%s, please choose a square:", playerName));
             System.out.println(this.board.toString());
             // Get first move from player
             // Validate that move - keep asking for a move until you get a valid one
@@ -42,19 +48,35 @@ class Game {
             } while (!markerPlaced);
 
             // Check if someone has won
-            if (this.gameIsWon()) endGame=true;
+            if (this.gameIsWon()) {
+                endGame=true;
+                winningPlayer = player;
+            }
             // Alternate between player 1 and player 2 in this loop
             changePlayerToken = !changePlayerToken;
         } while (!this.board.isFull() && !endGame);
             // IF board is full and no one has won, print out draw message and set finished = true
 
             // IF someone has won print out the win message and set finished = true OR do some sort of break thing
-
+            if(endGame) {
+                System.out.println(this.board.toString());
+                System.out.println(String.format("%s has won!", winningPlayer.getMarker()));
+            }
         // After game is done, exit the program
     }
 
     private boolean gameIsWon() {
         // check this.board for if the game has been won
-        return true;
+        String winningMarker = this.board.markerHasWon();
+        if (winningMarker.equals("N")) {
+            return false;
+        } else {
+            return true;
+        }
+//        count++;
+//        if (count<12) {
+//            return false;
+//        }
+//        return true;
     }
 }
