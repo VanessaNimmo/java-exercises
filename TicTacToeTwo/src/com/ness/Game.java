@@ -49,7 +49,7 @@ class Game {
             // IF board is full and no one has won, print out draw message and set finished = true
 
             // IF someone has won print out the win message and set finished = true OR do some sort of break thing
-        
+
         // After game is done, exit the program
     }
 

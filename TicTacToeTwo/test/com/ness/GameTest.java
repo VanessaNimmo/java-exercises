@@ -15,10 +15,13 @@ public class GameTest {
         Player player2 = new Player(marker2);
         Game tictactoe = new Game(tictactoeBoard, player1, player2);
 
-        String[][] expected = new String[boardSize][boardSize];
-        String[][] result = tictactoe.board;
+        String expected = "123\n456\n789\n";
+        String result = tictactoe.board.toString();
 
-        assertArrayEquals(expected, result);
+        assertEquals(expected, result);
     }
+
+    @Test
+    public void boardShould
 
 }

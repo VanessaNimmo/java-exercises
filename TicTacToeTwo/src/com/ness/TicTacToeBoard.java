@@ -20,9 +20,26 @@ class TicTacToeBoard implements Board {
     @Override
     public String toString() {
         StringBuilder boardRep = new StringBuilder();
-        for(i=0; i<this.squares.length; i++){
-            boardRep.append("*");
+        for(int i=0; i<this.squares.length; i++){
+            if(this.squares[i] == null) {
+                boardRep.append(String.valueOf(i+1));
+            } else {
+                boardRep.append(this.squares[i]);
+            }
+            if((i+1)%this.size==0) {
+                boardRep.append('\n');
+            }
         }
         return boardRep.toString();
+    }
+
+    @Override
+    public boolean squareIsAvailable(int markerPlacement) {
+        return (this.squares[markerPlacement]==null);
+    }
+
+    @Override
+    public void placeMarker(char marker, int markerPlacement) {
+        this.squares[markerPlacement-1] = String.valueOf(marker);
     }
 }

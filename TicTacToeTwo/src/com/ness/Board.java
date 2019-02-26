@@ -9,4 +9,9 @@ interface Board {
     boolean isFull();
 
     String toString();
+
+    boolean squareIsAvailable(int markerPlacement);
+
+    void placeMarker(char marker, int markerPlacement);
+
 }

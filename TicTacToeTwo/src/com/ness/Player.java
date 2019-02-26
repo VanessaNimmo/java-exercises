@@ -11,4 +11,9 @@ class Player {
     char getMarker() {
         return marker;
     }
+
+    public int choosePosition(int boardSize) {
+        // Get an integer less than or equal to boardSize*boardSize
+        return 4;
+    }
 }
