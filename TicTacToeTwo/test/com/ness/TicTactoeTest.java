@@ -7,8 +7,20 @@ import static org.junit.Assert.*;
 public class TicTactoeTest {
 
     @Test
+    public void shouldReturnNWhenMarkerHasWonIsCalledForAnEmptyBoard() {
+        TicTacToeBoard board = new TicTacToeBoard(3);
+
+        String result = board.markerHasWon();
+
+        assertEquals("N", result);
+    }
+
+    @Test
     public void shouldReturnNWhenMarkerHasWonIsCalledForANoWinBoard() {
         TicTacToeBoard board = new TicTacToeBoard(3);
+        board.placeMarker("X", 1);
+        board.placeMarker("X", 3);
+        board.placeMarker("O", 2);
 
         String result = board.markerHasWon();
 
@@ -88,7 +100,7 @@ public class TicTactoeTest {
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfFirstDiagonal() {
+    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfLeftToRightDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
         board.placeMarker("X", 1);
         board.placeMarker("X", 5);
@@ -100,7 +112,7 @@ public class TicTactoeTest {
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfSecondDiagonal() {
+    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfRightToLeftDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
         board.placeMarker("X", 3);
         board.placeMarker("X", 5);
@@ -185,7 +197,7 @@ public class TicTactoeTest {
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfFirstDiagonal() {
+    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfLeftToRightDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
         board.placeMarker("O", 1);
         board.placeMarker("O", 5);
@@ -197,7 +209,7 @@ public class TicTactoeTest {
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfSecondDiagonal() {
+    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfRightToLeftDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
         board.placeMarker("O", 3);
         board.placeMarker("O", 5);
@@ -206,5 +218,18 @@ public class TicTactoeTest {
         String result = board.markerHasWon();
 
         assertEquals("O", result);
+    }
+
+    @Test
+    public void shouldReturnXWhenMarkerHasWonIsCalledForASize4BoardOfRightToLeftDiagonal() {
+        TicTacToeBoard board = new TicTacToeBoard(4);
+        board.placeMarker("X", 4);
+        board.placeMarker("X", 7);
+        board.placeMarker("X", 10);
+        board.placeMarker("X", 13);
+
+        String result = board.markerHasWon();
+
+        assertEquals("X", result);
     }
 }

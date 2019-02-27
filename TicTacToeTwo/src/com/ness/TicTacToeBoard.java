@@ -31,13 +31,13 @@ class TicTacToeBoard implements Board {
     @Override
     public String toString() {
         StringBuilder boardRep = new StringBuilder();
-        for(int i=0; i<this.squares.length; i++){
-            if(this.squares[i].equals("*")) {
-                boardRep.append((i + 1));
+        for(int square=0; square<this.squares.length; square++){
+            if(this.squares[square].equals("*")) {
+                boardRep.append((square + 1));
             } else {
-                boardRep.append(this.squares[i]);
+                boardRep.append(this.squares[square]);
             }
-            if((i+1)%this.size==0) {
+            if((square+1)%this.size==0) {
                 boardRep.append('\n');
             }
         }
@@ -72,38 +72,39 @@ class TicTacToeBoard implements Board {
     }
 
     private boolean checkRows(String marker){
-        if(this.squares[0].equals(marker) && this.squares[1].equals(marker) && this.squares[2].equals(marker)) {
-            return true;
-        }
-        if(this.squares[3].equals(marker) && this.squares[4].equals(marker) && this.squares[5].equals(marker)) {
-            return true;
-        }
-        if(this.squares[6].equals(marker) && this.squares[7].equals(marker) && this.squares[8].equals(marker)) {
-            return true;
+        int markersInRow;
+        for(int row=0; row<this.size; row++) {
+            markersInRow = 0;
+            for(int column=0; column<this.size; column++) {
+                if(this.squares[column + row*this.size].equals(marker)) markersInRow++;
+            }
+            if (markersInRow==this.size) return true;
         }
         return false;
     }
 
     private boolean checkColumns(String marker) {
-        if(this.squares[0].equals(marker) && this.squares[3].equals(marker) && this.squares[6].equals(marker)) {
-            return true;
-        }
-        if(this.squares[1].equals(marker) && this.squares[4].equals(marker) && this.squares[7].equals(marker)) {
-            return true;
-        }
-        if(this.squares[2].equals(marker) && this.squares[5].equals(marker) && this.squares[8].equals(marker)) {
-            return true;
+        int markersInColumn;
+        for (int column=0; column<this.size; column++) {
+            markersInColumn = 0;
+            for (int row=0; row<this.size; row++) {
+                if (this.squares[column + row*this.size].equals(marker)) markersInColumn++;
+            }
+            if (markersInColumn==this.size) return true;
         }
         return false;
     }
 
     private boolean checkDiagonals(String marker) {
-        if(this.squares[0].equals(marker) && this.squares[4].equals(marker) && this.squares[8].equals(marker)) {
-            return true;
+        int leftToRight = 0, rightToLeft = 0;
+        for(int row=0; row < this.size; row++) {
+            if (this.squares[row*this.size + row].equals(marker)) leftToRight++;
         }
-        if(this.squares[2].equals(marker) && this.squares[4].equals(marker) && this.squares[6].equals(marker)) {
-            return true;
+        if (leftToRight == this.size) return true;
+        for(int j=1; j <= this.size; j++) {
+            if (this.squares[j*this.size - j].equals(marker)) rightToLeft++;
         }
+        if (rightToLeft == this.size) return true;
         return false;
     }
 }
