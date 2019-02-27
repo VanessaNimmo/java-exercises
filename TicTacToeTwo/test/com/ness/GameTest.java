@@ -11,8 +11,8 @@ public class GameTest {
         int boardSize = 3;
         Board tictactoeBoard = new TicTacToeBoard(boardSize);
         String marker1 = "X", marker2 = "O";
-        Player player1 = new Player(marker1);
-        Player player2 = new Player(marker2);
+        Player player1 = new RandomPlayer(marker1);
+        Player player2 = new RandomPlayer(marker2);
         Game tictactoe = new Game(tictactoeBoard, player1, player2);
 
         String expected = "123\n456\n789\n";

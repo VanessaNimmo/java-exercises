@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PlayerTest {
+public class RandomPlayerTest {
 
     @Test
     public void shouldReturnAnIntegerBetween1AndTheSquareOfTheBoardSize() {
-        Player player1 = new Player("X");
+        Player player1 = new RandomPlayer("X");
 
         int result = player1.choosePosition(3);
 
