@@ -19,7 +19,7 @@ class Game {
 
         boolean changePlayerToken = true;
         boolean endGame = false;
-        boolean markerPlaced = false;
+        boolean markerPlaced;
         Player player;
         Player winningPlayer = player1;
         int markerPlacement;
@@ -39,11 +39,17 @@ class Game {
             // Get first move from player
             // Validate that move - keep asking for a move until you get a valid one
             do {
+                markerPlaced = false;
                 markerPlacement = player.choosePosition(this.board.getSize());
                 // Place that move on the board - only if that part of the board is empty
                 if(this.board.squareIsAvailable(markerPlacement)) {
                     this.board.placeMarker(player.getMarker(), markerPlacement);
                     markerPlaced = true;
+                    System.out.println(String.format("You chose %d!", markerPlacement));
+                    System.out.println(this.board.toString());
+                } else {
+                    System.out.println(String.format("%s, please choose an available square: ", playerName));
+                    System.out.println(this.board.toString());
                 }
             } while (!markerPlaced);
 
@@ -55,12 +61,13 @@ class Game {
             // Alternate between player 1 and player 2 in this loop
             changePlayerToken = !changePlayerToken;
         } while (!this.board.isFull() && !endGame);
-            // IF board is full and no one has won, print out draw message and set finished = true
-
-            // IF someone has won print out the win message and set finished = true OR do some sort of break thing
+            // IF someone has won print out the win message
+            // IF board is full and no one has won, print out draw message
             if(endGame) {
                 System.out.println(this.board.toString());
                 System.out.println(String.format("%s has won!", winningPlayer.getMarker()));
+            } else {
+                System.out.println("Game was a draw.");
             }
         // After game is done, exit the program
     }

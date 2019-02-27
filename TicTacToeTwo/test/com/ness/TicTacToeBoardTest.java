@@ -28,14 +28,33 @@ public class TicTacToeBoardTest {
     }
 
     @Test
-    public void squareIsAvailable() {
+    public void squareIsAvailableReturnsTrueWhenNoMarkerHasBeenPlacedThere() {
+        TicTacToeBoard board = new TicTacToeBoard(3);
+
+        boolean result = board.squareIsAvailable(1);
+
+        assertTrue(result);
     }
 
     @Test
-    public void placeMarker() {
+    public void squareIsAvailableReturnsFalesWhenAMarkerHasBeenPlacedThere() {
+        TicTacToeBoard board = new TicTacToeBoard(3);
+        board.placeMarker("X", 9);
+
+        boolean result = board.squareIsAvailable(9);
+
+        assertFalse(result);
     }
 
     @Test
-    public void markerHasWon() {
+    public void shouldPlaceAMarkerAtArrayPosition0WhenMarkerPosition1IsEntered() {
+        TicTacToeBoard board = new TicTacToeBoard(3);
+        board.placeMarker("X", 1);
+
+        String result = board.toString();
+        String expected = "X23\n456\n789\n";
+
+        assertEquals(expected, result);
     }
+
 }
