@@ -37,9 +37,7 @@ class TicTacToeBoard implements Board {
             } else {
                 boardRep.append(this.squares[square]);
             }
-            if((square+1)%this.size==0) {
-                boardRep.append('\n');
-            }
+            if((square+1)%this.size==0) boardRep.append('\n');
         }
         return boardRep.toString();
     }

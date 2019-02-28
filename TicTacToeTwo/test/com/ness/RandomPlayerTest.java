@@ -8,11 +8,11 @@ public class RandomPlayerTest {
 
     @Test
     public void shouldReturnAnIntegerBetween1AndTheSquareOfTheBoardSize() {
-        Player player1 = new RandomPlayer("X");
+        RandomPlayer player1 = new RandomPlayer("X");
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+        int result = player1.choosePosition(boardSize);
 
-        int result = player1.choosePosition(3);
-
-        assertEquals(4, result);
-
+        assertTrue(1<= result && result <= squareOfBoardSize);
     }
 }

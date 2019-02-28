@@ -4,7 +4,6 @@ class Game {
 
     Board board;
     private Player player1, player2;
-    private int count = 0;
 
     Game(Board tictactoeBoard, Player player1, Player player2) {
         this.board = tictactoeBoard;
@@ -18,7 +17,7 @@ class Game {
         // Explain what the game is?
 
         boolean changePlayerToken = true;
-        boolean endGame = false;
+        boolean gameWon = false;
         boolean markerPlaced;
         Player player;
         Player winningPlayer = player1;
@@ -33,39 +32,35 @@ class Game {
                 player = this.player2;
                 playerName = "Player 2";
             }
-            // Print the board - should this be a separate method to represent the state of the board to anything outside the system?
-            System.out.println(String.format("%s, please choose a square:", playerName));
-            System.out.println(this.board.toString());
-            // Get first move from player
+            // Interface outputs - asking player to choose a thing, showing player the board
+            System.out.format("%s, please choose a square: %n", playerName);
             // Validate that move - keep asking for a move until you get a valid one
             do {
                 markerPlaced = false;
                 markerPlacement = player.choosePosition(this.board.getSize());
                 // Place that move on the board - only if that part of the board is empty
+
+                // Should the player deal with an IO interface or not?
+                // Also could make this a helper method in this class just to get it out of this big flow and make it easier to read
                 if(this.board.squareIsAvailable(markerPlacement)) {
                     this.board.placeMarker(player.getMarker(), markerPlacement);
                     markerPlaced = true;
-                    System.out.println(String.format("You chose %d!", markerPlacement));
-                    System.out.println(this.board.toString());
+                    System.out.format("You chose %d!%n", markerPlacement);
+                    System.out.println(this.board);
                 } else {
-                    System.out.println(String.format("%s, please choose an available square: ", playerName));
-                    System.out.println(this.board.toString());
+                    System.out.format("%s, please choose an available square: %n", playerName);
+                    System.out.println(this.board);
                 }
             } while (!markerPlaced);
 
-            // Check if someone has won
             if (this.gameIsWon()) {
-                endGame=true;
+                gameWon=true;
                 winningPlayer = player;
             }
-            // Alternate between player 1 and player 2 in this loop
             changePlayerToken = !changePlayerToken;
-        } while (!this.board.isFull() && !endGame);
-            // IF someone has won print out the win message
-            // IF board is full and no one has won, print out draw message
-            if(endGame) {
-                System.out.println(this.board.toString());
-                System.out.println(String.format("%s has won!", winningPlayer.getMarker()));
+        } while (!this.board.isFull() && !gameWon);
+            if(gameWon) {
+                System.out.format("%s has won!%n", winningPlayer.getMarker());
             } else {
                 System.out.println("Game was a draw.");
             }
@@ -75,15 +70,6 @@ class Game {
     private boolean gameIsWon() {
         // check this.board for if the game has been won
         String winningMarker = this.board.markerHasWon();
-        if (winningMarker.equals("N")) {
-            return false;
-        } else {
-            return true;
-        }
-//        count++;
-//        if (count<12) {
-//            return false;
-//        }
-//        return true;
+        return !winningMarker.equals("N");
     }
 }

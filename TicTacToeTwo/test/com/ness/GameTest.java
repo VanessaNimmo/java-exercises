@@ -21,4 +21,31 @@ public class GameTest {
         assertEquals(expected, result);
     }
 
+    class TestBoard implements Board {
+
+        @Override
+        public int getSize() {
+            return 0;
+        }
+
+        @Override
+        public boolean isFull() {
+            return true;
+        }
+
+        @Override
+        public boolean squareIsAvailable(int markerPlacement) {
+            return false;
+        }
+
+        @Override
+        public void placeMarker(String marker, int markerPlacement) {
+
+        }
+
+        @Override
+        public String markerHasWon() {
+            return null;
+        }
+    }
 }
