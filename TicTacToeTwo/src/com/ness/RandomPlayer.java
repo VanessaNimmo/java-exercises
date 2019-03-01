@@ -2,16 +2,20 @@ package com.ness;
 
 class RandomPlayer implements Player {
 
-    private final String marker;
+    private final String marker, name;
 
-    RandomPlayer(String marker) {
+    RandomPlayer(String marker, String name) {
         this.marker = marker;
+        this.name = name;
     }
 
     @Override
     public String getMarker() {
         return marker;
     }
+
+    @Override
+    public String getName() { return name; }
 
     @Override
     public int choosePosition(int boardSize) {
