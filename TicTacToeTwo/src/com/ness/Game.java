@@ -14,7 +14,7 @@ class Game {
     }
 
     void play() {
-        io.printWelcomeMessage("Tic Tac Toe");
+        io.print("Welcome to Tic Tac Toe!");
 
         boolean changePlayerToken = true;
         boolean gameWon = false;

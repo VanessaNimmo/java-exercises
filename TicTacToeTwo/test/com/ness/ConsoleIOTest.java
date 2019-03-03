@@ -27,11 +27,11 @@ public class ConsoleIOTest {
     }
 
     @Test
-    public void printsWelcomeMessageWhenStartGameIsCalled() {
-        String gameName = "Tic Tac Toe";
+    public void printsMessageWhenPrintIsCalled() {
+        String message = "Welcome to Tic Tac Toe!";
         ConsoleIO testConsole = new ConsoleIO();
 
-        testConsole.printWelcomeMessage(gameName);
+        testConsole.print(message);
 
         assertThat(outContent.toString(), containsString("Welcome to Tic Tac Toe!"));
     }
