@@ -3,8 +3,8 @@ package com.ness;
 public class ConsoleIO implements IO {
 
     @Override
-    public void startGame(String gameName) {
-
+    public void printWelcomeMessage(String gameName) {
+        System.out.format("Welcome to %s!", gameName);
     }
 
     @Override

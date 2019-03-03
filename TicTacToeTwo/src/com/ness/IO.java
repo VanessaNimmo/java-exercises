@@ -2,7 +2,7 @@ package com.ness;
 
 public interface IO {
 
-    void startGame(String gameName);
+    void printWelcomeMessage(String gameName);
 
     int getBoard();
 }

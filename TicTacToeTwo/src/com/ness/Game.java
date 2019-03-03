@@ -4,15 +4,17 @@ class Game {
 
     Board board;
     private Player player1, player2;
+    IO io;
 
-    Game(Board tictactoeBoard, Player player1, Player player2) {
+    Game(Board tictactoeBoard, Player player1, Player player2, IO inputOutput) {
         this.board = tictactoeBoard;
         this.player1 = player1;
         this.player2 = player2;
+        this.io = inputOutput;
     }
 
     void play() {
-        System.out.println("Welcome to TicTacToe!\n");
+        io.printWelcomeMessage("Tic Tac Toe");
 
         boolean changePlayerToken = true;
         boolean gameWon = false;

@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Console;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -32,7 +31,7 @@ public class ConsoleIOTest {
         String gameName = "Tic Tac Toe";
         ConsoleIO testConsole = new ConsoleIO();
 
-        testConsole.startGame(gameName);
+        testConsole.printWelcomeMessage(gameName);
 
         assertThat(outContent.toString(), containsString("Welcome to Tic Tac Toe!"));
     }
