@@ -44,13 +44,27 @@ public class ConsoleIOTest {
         ConsoleIO testConsole = new ConsoleIO();
         int boardSize = 3;
         int squareOfBoardSize = boardSize*boardSize;
-        String input = String.format("11%n2");
+        String input = "2";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
 
         assertEquals(2, result);
+    }
+
+    @Test
+    public void printsAnErrorMessageWhenInputIsOutOfRange() {
+        ConsoleIO testConsole = new ConsoleIO();
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+        String input = String.format("11%n3");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+
+        assertThat(outContent.toString(), containsString("Please choose a valid square:"));
     }
 
 }

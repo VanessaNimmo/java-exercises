@@ -12,7 +12,6 @@ public class ConsoleIO implements IO {
     @Override
     public int getNextMove(int rangeMin, int rangeMax, String board) {
         Scanner in = new Scanner(System.in);
-        this.print(board);
         int nextMove = in.nextInt();
         while(!validateInputRange(rangeMin, rangeMax, nextMove)) {
             this.print("Please choose a valid square: ");
