@@ -10,7 +10,7 @@ public class GameTest {
     public void boardShouldBeEmptyAtStartOfGame() {
         int boardSize = 3;
         Board tictactoeBoard = new TicTacToeBoard(boardSize);
-        String marker1 = "X", marker2 = "O";
+        Marker marker1 = Marker.X, marker2 = Marker.Y;
         Player player1 = new RandomPlayer(marker1, "Player 1");
         Player player2 = new RandomPlayer(marker2, "Player 2");
         IO inputOutput = new ConsoleIO();

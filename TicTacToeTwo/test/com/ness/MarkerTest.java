@@ -14,4 +14,22 @@ public class MarkerTest {
 
         assertEquals("X", result);
     }
+
+    @Test
+    public void typeYHasValueOfStringY () {
+        Marker marker1 = Marker.Y;
+
+        String result = String.valueOf(marker1);
+
+        assertEquals("Y", result);
+    }
+
+    @Test
+    public void typePlaceHolderEHasValueOfStringAsterisk () {
+        Marker marker1 = Marker.E;
+
+        String result = String.valueOf(marker1);
+
+        assertEquals("*", result);
+    }
 }
