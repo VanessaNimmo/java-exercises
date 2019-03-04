@@ -36,4 +36,15 @@ public class ConsoleIOTest {
         assertThat(outContent.toString(), containsString("Welcome to Tic Tac Toe!"));
     }
 
+    @Test
+    public void returnsAnIntWhenAskedForNextMove() {
+        ConsoleIO testConsole = new ConsoleIO();
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+
+        int result = testConsole.getNextMove(1, squareOfBoardSize, "Player 1", "1 2 3\n4 5 6\n7 8 9\n");
+
+        assertTrue(1<= result && result <= squareOfBoardSize);
+    }
+
 }

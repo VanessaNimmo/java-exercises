@@ -4,7 +4,7 @@ class Game {
 
     Board board;
     private Player player1, player2;
-    IO io;
+    private IO io;
 
     Game(Board tictactoeBoard, Player player1, Player player2, IO inputOutput) {
         this.board = tictactoeBoard;
@@ -25,7 +25,9 @@ class Game {
 
         do {
             player = changePlayer(changePlayerToken);
-            System.out.format("%s, please choose a square: %n", player.getName());
+            String getMoveMessage = String.format("%s, please choose a square: %n", player.getName());
+            io.print(getMoveMessage);
+            io.print(this.board.toString());
             do {
                 markerPlacement = player.choosePosition(this.board.getSize());
                 markerPlaced = placeMarker(player, markerPlacement);
@@ -39,26 +41,28 @@ class Game {
             changePlayerToken = !changePlayerToken;
 
         } while (!this.board.isFull() && !gameWon);
-            if(gameWon) {
-                System.out.format("%s has won!%n", winningPlayer.getMarker());
-            } else {
-                System.out.println("Game was a draw.");
-            }
+        io.print(this.endGameMessage(gameWon, winningPlayer));
+    }
+
+    private String endGameMessage(boolean gameWon, Player winningPlayer) {
+         return gameWon ? String.format("%s has won!%n", winningPlayer.getMarker()) : "Game was a draw.";
     }
 
     private Player changePlayer(boolean changePlayerToken) {
-        return changePlayerToken ? this.player1: this.player2;
+        return changePlayerToken ? this.player1 : this.player2;
     }
 
     private boolean placeMarker(Player player, int markerPlacement) {
         if(this.isSquareAvailable(markerPlacement)) {
             this.board.placeMarker(player.getMarker(), markerPlacement);
-            System.out.format("You chose %d!%n", markerPlacement);
-            System.out.println(this.board);
+            String markerPlacementConfirmationMessage = String.format("You chose %d!%n", markerPlacement);
+            io.print(markerPlacementConfirmationMessage);
+            io.print(this.board.toString());
             return true;
         } else {
-            System.out.format("%s, please choose an available square: %n", player.getName());
-            System.out.println(this.board);
+            String markerPlacementErrorMessage = String.format("%s, please choose an available square: %n", player.getName());
+            io.print(markerPlacementErrorMessage);
+            io.print(this.board.toString());
         }
         return false;
     }
@@ -68,7 +72,6 @@ class Game {
     }
 
     private boolean gameIsWon() {
-        String winningMarker = this.board.markerHasWon();
-        return !winningMarker.equals("N");
+        return !this.board.markerHasWon().equals("N");
     }
 }

@@ -4,5 +4,5 @@ public interface IO {
 
     void print(String message);
 
-    int getBoard();
+    int getNextMove(int rangeMin, int rangeMax, String playerName, String board);
 }
