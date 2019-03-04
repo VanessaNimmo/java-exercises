@@ -71,7 +71,5 @@ class Game {
         return this.board.squareIsAvailable(markerPlacement);
     }
 
-    private boolean gameIsWon() {
-        return !this.board.markerHasWon().equals("N");
-    }
+    private boolean gameIsWon() { return !this.board.markerHasWon().equals("N"); }
 }

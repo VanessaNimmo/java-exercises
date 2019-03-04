@@ -2,9 +2,12 @@ package com.ness;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -41,10 +44,13 @@ public class ConsoleIOTest {
         ConsoleIO testConsole = new ConsoleIO();
         int boardSize = 3;
         int squareOfBoardSize = boardSize*boardSize;
+        String input = String.format("11%n2");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
 
-        int result = testConsole.getNextMove(1, squareOfBoardSize, "Player 1", "1 2 3\n4 5 6\n7 8 9\n");
+        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
 
-        assertTrue(1<= result && result <= squareOfBoardSize);
+        assertEquals(2, result);
     }
 
 }

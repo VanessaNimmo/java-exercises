@@ -6,14 +6,12 @@ public class ConsoleIO implements IO {
 
     @Override
     public void print(String message) {
-        System.out.format("%s%n%n", message);
+        System.out.format("%s%n", message);
     }
 
     @Override
-    public int getNextMove(int rangeMin, int rangeMax, String playerName, String board) {
+    public int getNextMove(int rangeMin, int rangeMax, String board) {
         Scanner in = new Scanner(System.in);
-        String playerMessage = String.format("%s, please choose a square: %n", playerName);
-        this.print(playerMessage);
         this.print(board);
         int nextMove = in.nextInt();
         while(!validateInputRange(rangeMin, rangeMax, nextMove)) {
