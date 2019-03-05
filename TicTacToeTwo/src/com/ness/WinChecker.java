@@ -3,11 +3,11 @@ package com.ness;
 class WinChecker {
 
     public boolean gameIsWon(Marker[] squares, int size) {
-        boolean rowsWonX = this.checkRows(Marker.X, squares, size);
-        boolean columnsWonX = this.checkColumns(Marker.X, squares, size);
+        boolean rowsWonX = this.checkLines(Marker.X, squares, size, true);
+        boolean columnsWonX = this.checkLines(Marker.X, squares, size, false);
         boolean diagonalsWonX = this.checkDiagonals(Marker.X, squares, size);
-        boolean rowsWonO = this.checkRows(Marker.O, squares, size);
-        boolean columnsWonO = this.checkColumns(Marker.O, squares, size);
+        boolean rowsWonO = this.checkLines(Marker.O, squares, size, true);
+        boolean columnsWonO = this.checkLines(Marker.O, squares, size, false);
         boolean diagonalsWonO = this.checkDiagonals(Marker.O, squares, size);
         if (rowsWonX || columnsWonX || diagonalsWonX) {
             return true;
@@ -15,26 +15,18 @@ class WinChecker {
         return rowsWonO || columnsWonO || diagonalsWonO;
     }
 
-    private boolean checkRows(Marker marker, Marker[] squares, int size){
-        int markersInRow;
-        for(int row=0; row<size; row++) {
-            markersInRow = 0;
-            for(int column=0; column<size; column++) {
-                if(squares[column + row*size].equals(marker)) markersInRow++;
+    private boolean checkLines(Marker marker, Marker[] squares, int size, boolean rows) {
+        int markersInLine;
+        for(int column=0; column<size; column++) {
+            markersInLine = 0;
+            for(int row=0; row<size; row++) {
+                if(rows) {
+                    if(squares[row + column*size].equals(marker)) markersInLine++;
+                } else {
+                    if (squares[column + row*size].equals(marker)) markersInLine++;
+                }
             }
-            if (markersInRow==size) return true;
-        }
-        return false;
-    }
-
-    private boolean checkColumns(Marker marker, Marker[] squares, int size) {
-        int markersInColumn;
-        for (int column=0; column<size; column++) {
-            markersInColumn = 0;
-            for (int row=0; row<size; row++) {
-                if (squares[column + row*size].equals(marker)) markersInColumn++;
-            }
-            if (markersInColumn==size) return true;
+            if (markersInLine==size) return true;
         }
         return false;
     }
