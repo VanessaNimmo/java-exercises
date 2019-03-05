@@ -2,7 +2,6 @@ package com.ness;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -13,7 +12,7 @@ import java.io.PrintStream;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
-public class ConsoleIOTest {
+public class ConsoleHumanPlayerIOTest {
 
     private PrintStream sysOut;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -32,7 +31,7 @@ public class ConsoleIOTest {
     @Test
     public void printsMessageWhenPrintIsCalled() {
         String message = "Welcome to Tic Tac Toe!";
-        ConsoleIO testConsole = new ConsoleIO();
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
 
         testConsole.print(message);
 
@@ -41,7 +40,7 @@ public class ConsoleIOTest {
 
     @Test
     public void returnsAnIntWhenAskedForNextMove() {
-        ConsoleIO testConsole = new ConsoleIO();
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
         int boardSize = 3;
         int squareOfBoardSize = boardSize*boardSize;
         String input = "2";
@@ -55,7 +54,7 @@ public class ConsoleIOTest {
 
     @Test
     public void printsAnErrorMessageWhenInputIsOutOfRange() {
-        ConsoleIO testConsole = new ConsoleIO();
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
         int boardSize = 3;
         int squareOfBoardSize = boardSize*boardSize;
         String input = String.format("11%n3");

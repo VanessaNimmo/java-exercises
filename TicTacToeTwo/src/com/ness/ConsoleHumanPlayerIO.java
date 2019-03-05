@@ -2,7 +2,7 @@ package com.ness;
 
 import java.util.Scanner;
 
-public class ConsoleIO implements IO {
+public class ConsoleHumanPlayerIO implements IO {
 
     @Override
     public void print(String message) {

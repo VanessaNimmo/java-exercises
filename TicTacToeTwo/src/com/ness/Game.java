@@ -50,7 +50,7 @@ class Game {
     }
 
     private void printMoveInstructions(Player player) {
-        String getMoveMessage = String.format("%s, please choose a square: %n", player.getName());
+        String getMoveMessage = String.format("%s, please choose a square, or enter q to quit: %n", player.getName());
         io.print(getMoveMessage);
         io.print(this.board.toString());
     }
@@ -67,8 +67,8 @@ class Game {
         boolean markerValid = false;
         int markerPlacement = 0;
         do {
-//            markerPlacement = io.getNextMove(1, 9, this.board.toString());
-           markerPlacement = player.choosePosition(this.board.getSize());
+            markerPlacement = io.getNextMove(1, 9, this.board.toString());
+//           markerPlacement = player.choosePosition(this.board.getSize());
            markerValid = checkMarkerValidity(player, markerPlacement);
         } while (!markerValid);
         return markerPlacement;
