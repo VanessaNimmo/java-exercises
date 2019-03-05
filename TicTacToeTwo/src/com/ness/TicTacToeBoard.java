@@ -1,17 +1,15 @@
 package com.ness;
 
-import java.util.Arrays;
-
 class TicTacToeBoard implements Board {
 
     private final int size;
-    private String[] squares;
+    private Marker[] squares;
 
     TicTacToeBoard(int boardSize) {
         this.size = boardSize;
-        this.squares = new String[boardSize*boardSize];
+        this.squares = new Marker[boardSize*boardSize];
         for(int i=0; i<boardSize*boardSize; i++) {
-            this.squares[i] = "*";
+            this.squares[i] = Marker.E;
         }
     }
 
@@ -21,7 +19,7 @@ class TicTacToeBoard implements Board {
     public boolean isFull() {
         boolean full = true;
         for(int i=0; i<this.size*this.size; i++) {
-            if(this.squares[i].equals("*")) {
+            if(this.squares[i] == Marker.E) {
                 full = false;
             }
         }
@@ -32,10 +30,10 @@ class TicTacToeBoard implements Board {
     public String toString() {
         StringBuilder boardRep = new StringBuilder();
         for(int square=0; square<this.squares.length; square++){
-            if(this.squares[square].equals("*")) {
+            if(this.squares[square]==Marker.E) {
                 boardRep.append((square + 1));
             } else {
-                boardRep.append(this.squares[square]);
+                boardRep.append(squares[square]);
             }
             if((square+1)%this.size==0) boardRep.append('\n');
         }
@@ -44,32 +42,29 @@ class TicTacToeBoard implements Board {
 
     @Override
     public boolean squareIsAvailable(int markerPlacement) {
-        return (this.squares[markerPlacement-1].equals("*"));
+        return (this.squares[markerPlacement-1]==Marker.E);
     }
 
     @Override
-    public void placeMarker(String marker, int markerPlacement) {
+    public void placeMarker(Marker marker, int markerPlacement) {
         this.squares[markerPlacement-1] = marker;
     }
 
     @Override
-    public String markerHasWon() {
-        boolean rowsWonX = this.checkRows("X");
-        boolean columnsWonX = this.checkColumns("X");
-        boolean diagonalsWonX = this.checkDiagonals("X");
-        boolean rowsWonO = this.checkRows("O");
-        boolean columnsWonO = this.checkColumns("O");
-        boolean diagonalsWonO = this.checkDiagonals("O");
+    public boolean markerHasWon() {
+        boolean rowsWonX = this.checkRows(Marker.X);
+        boolean columnsWonX = this.checkColumns(Marker.X);
+        boolean diagonalsWonX = this.checkDiagonals(Marker.X);
+        boolean rowsWonO = this.checkRows(Marker.O);
+        boolean columnsWonO = this.checkColumns(Marker.O);
+        boolean diagonalsWonO = this.checkDiagonals(Marker.O);
         if (rowsWonX || columnsWonX || diagonalsWonX) {
-            return "X";
+            return true;
         }
-        if (rowsWonO || columnsWonO || diagonalsWonO) {
-            return "O";
-        }
-        return "N";
+        return rowsWonO || columnsWonO || diagonalsWonO;
     }
 
-    private boolean checkRows(String marker){
+    private boolean checkRows(Marker marker){
         int markersInRow;
         for(int row=0; row<this.size; row++) {
             markersInRow = 0;
@@ -81,7 +76,7 @@ class TicTacToeBoard implements Board {
         return false;
     }
 
-    private boolean checkColumns(String marker) {
+    private boolean checkColumns(Marker marker) {
         int markersInColumn;
         for (int column=0; column<this.size; column++) {
             markersInColumn = 0;
@@ -93,7 +88,7 @@ class TicTacToeBoard implements Board {
         return false;
     }
 
-    private boolean checkDiagonals(String marker) {
+    private boolean checkDiagonals(Marker marker) {
         int leftToRight = 0, rightToLeft = 0;
         for(int row=0; row < this.size; row++) {
             if (this.squares[row*this.size + row].equals(marker)) leftToRight++;

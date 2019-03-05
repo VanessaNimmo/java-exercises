@@ -2,7 +2,7 @@ package com.ness;
 
 public enum Marker {
 
-    X("X"), Y("Y"), E("*");
+    X("X"), O("O"), E("*");
 
     private String stringRepresentation;
 

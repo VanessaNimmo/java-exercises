@@ -19,7 +19,7 @@ public class TicTacToeBoardTest {
     public void shouldReturnTrueWhenIsFullIsCalledOnAFullBoard() {
         TicTacToeBoard board = new TicTacToeBoard(3);
         for(int i=0; i<board.getSize()*board.getSize(); i++) {
-            board.placeMarker("X", i+1);
+            board.placeMarker(Marker.X, i+1);
         }
 
         boolean result = board.isFull();
@@ -39,7 +39,7 @@ public class TicTacToeBoardTest {
     @Test
     public void squareIsAvailableReturnsFalseWhenAMarkerHasBeenPlacedThere() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 9);
+        board.placeMarker(Marker.X, 9);
 
         boolean result = board.squareIsAvailable(9);
 
@@ -49,7 +49,7 @@ public class TicTacToeBoardTest {
     @Test
     public void shouldPlaceAMarkerAtArrayPosition0WhenMarkerPosition1IsEntered() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 1);
+        board.placeMarker(Marker.X, 1);
 
         String result = board.toString();
         String expected = "X23\n456\n789\n";
@@ -58,230 +58,230 @@ public class TicTacToeBoardTest {
     }
 
     @Test
-    public void shouldReturnNWhenMarkerHasWonIsCalledForAnEmptyBoard() {
+    public void shouldReturnFalseWhenMarkerHasWonIsCalledForAnEmptyBoard() {
         TicTacToeBoard board = new TicTacToeBoard(3);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("N", result);
+        assertFalse(result);
     }
 
     @Test
-    public void shouldReturnNWhenMarkerHasWonIsCalledForANoWinBoard() {
+    public void shouldReturnFalseWhenMarkerHasWonIsCalledForANoWinBoard() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 1);
-        board.placeMarker("X", 3);
-        board.placeMarker("O", 2);
+        board.placeMarker(Marker.X, 1);
+        board.placeMarker(Marker.X, 3);
+        board.placeMarker(Marker.O, 2);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("N", result);
+        assertFalse(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfTopRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAnXWinBoardOfTopRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 1);
-        board.placeMarker("X", 2);
-        board.placeMarker("X", 3);
+        board.placeMarker(Marker.X, 1);
+        board.placeMarker(Marker.X, 2);
+        board.placeMarker(Marker.X, 3);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfMiddleRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfMiddleRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 4);
-        board.placeMarker("X", 5);
-        board.placeMarker("X", 6);
+        board.placeMarker(Marker.X, 4);
+        board.placeMarker(Marker.X, 5);
+        board.placeMarker(Marker.X, 6);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfBottomRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfBottomRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 7);
-        board.placeMarker("X", 8);
-        board.placeMarker("X", 9);
+        board.placeMarker(Marker.X, 7);
+        board.placeMarker(Marker.X, 8);
+        board.placeMarker(Marker.X, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfFirstColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfFirstColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 1);
-        board.placeMarker("X", 4);
-        board.placeMarker("X", 7);
+        board.placeMarker(Marker.X, 1);
+        board.placeMarker(Marker.X, 4);
+        board.placeMarker(Marker.X, 7);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfSecondColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfSecondColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 2);
-        board.placeMarker("X", 5);
-        board.placeMarker("X", 8);
+        board.placeMarker(Marker.X, 2);
+        board.placeMarker(Marker.X, 5);
+        board.placeMarker(Marker.X, 8);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfThirdColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfThirdColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 3);
-        board.placeMarker("X", 6);
-        board.placeMarker("X", 9);
+        board.placeMarker(Marker.X, 3);
+        board.placeMarker(Marker.X, 6);
+        board.placeMarker(Marker.X, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfLeftToRightDiagonal() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfLeftToRightDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 1);
-        board.placeMarker("X", 5);
-        board.placeMarker("X", 9);
+        board.placeMarker(Marker.X, 1);
+        board.placeMarker(Marker.X, 5);
+        board.placeMarker(Marker.X, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForAXWinBoardOfRightToLeftDiagonal() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAXWinBoardOfRightToLeftDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("X", 3);
-        board.placeMarker("X", 5);
-        board.placeMarker("X", 7);
+        board.placeMarker(Marker.X, 3);
+        board.placeMarker(Marker.X, 5);
+        board.placeMarker(Marker.X, 7);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfTopRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfTopRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 1);
-        board.placeMarker("O", 2);
-        board.placeMarker("O", 3);
+        board.placeMarker(Marker.O, 1);
+        board.placeMarker(Marker.O, 2);
+        board.placeMarker(Marker.O, 3);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfMiddleRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfMiddleRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 4);
-        board.placeMarker("O", 5);
-        board.placeMarker("O", 6);
+        board.placeMarker(Marker.O, 4);
+        board.placeMarker(Marker.O, 5);
+        board.placeMarker(Marker.O, 6);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfBottomRow() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfBottomRow() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 7);
-        board.placeMarker("O", 8);
-        board.placeMarker("O", 9);
+        board.placeMarker(Marker.O, 7);
+        board.placeMarker(Marker.O, 8);
+        board.placeMarker(Marker.O, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfFirstColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfFirstColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 1);
-        board.placeMarker("O", 4);
-        board.placeMarker("O", 7);
+        board.placeMarker(Marker.O, 1);
+        board.placeMarker(Marker.O, 4);
+        board.placeMarker(Marker.O, 7);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfSecondColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfSecondColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 2);
-        board.placeMarker("O", 5);
-        board.placeMarker("O", 8);
+        board.placeMarker(Marker.O, 2);
+        board.placeMarker(Marker.O, 5);
+        board.placeMarker(Marker.O, 8);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfThirdColumn() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfThirdColumn() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 3);
-        board.placeMarker("O", 6);
-        board.placeMarker("O", 9);
+        board.placeMarker(Marker.O, 3);
+        board.placeMarker(Marker.O, 6);
+        board.placeMarker(Marker.O, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfLeftToRightDiagonal() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfLeftToRightDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 1);
-        board.placeMarker("O", 5);
-        board.placeMarker("O", 9);
+        board.placeMarker(Marker.O, 1);
+        board.placeMarker(Marker.O, 5);
+        board.placeMarker(Marker.O, 9);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnOWhenMarkerHasWonIsCalledForAOWinBoardOfRightToLeftDiagonal() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForAOWinBoardOfRightToLeftDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(3);
-        board.placeMarker("O", 3);
-        board.placeMarker("O", 5);
-        board.placeMarker("O", 7);
+        board.placeMarker(Marker.O, 3);
+        board.placeMarker(Marker.O, 5);
+        board.placeMarker(Marker.O, 7);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("O", result);
+        assertTrue(result);
     }
 
     @Test
-    public void shouldReturnXWhenMarkerHasWonIsCalledForASize4BoardOfRightToLeftDiagonal() {
+    public void shouldReturnTrueWhenMarkerHasWonIsCalledForASize4BoardOfRightToLeftDiagonal() {
         TicTacToeBoard board = new TicTacToeBoard(4);
-        board.placeMarker("X", 4);
-        board.placeMarker("X", 7);
-        board.placeMarker("X", 10);
-        board.placeMarker("X", 13);
+        board.placeMarker(Marker.X, 4);
+        board.placeMarker(Marker.X, 7);
+        board.placeMarker(Marker.X, 10);
+        board.placeMarker(Marker.X, 13);
 
-        String result = board.markerHasWon();
+        boolean result = board.markerHasWon();
 
-        assertEquals("X", result);
+        assertTrue(result);
     }
 
 }

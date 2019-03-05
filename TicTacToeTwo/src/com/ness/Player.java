@@ -2,7 +2,7 @@ package com.ness;
 
 interface Player {
 
-    String getMarker();
+    Marker getMarker();
 
     String getName();
 

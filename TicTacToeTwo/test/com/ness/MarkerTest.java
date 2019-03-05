@@ -16,8 +16,8 @@ public class MarkerTest {
     }
 
     @Test
-    public void typeYHasValueOfStringY () {
-        Marker marker1 = Marker.Y;
+    public void typeOHasValueOfStringO () {
+        Marker marker1 = Marker.O;
 
         String result = String.valueOf(marker1);
 

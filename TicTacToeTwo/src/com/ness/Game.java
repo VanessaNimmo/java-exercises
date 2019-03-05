@@ -23,7 +23,7 @@ class Game {
             player = choosePlayer(playerOnesTurn);
             takeTurn(player);
 
-            if (gameIsWon()) {
+            if (this.board.markerHasWon()) {
                 io.print(endGameMessage(true, player));
                 break;
             }
@@ -88,6 +88,4 @@ class Game {
     private boolean isSquareAvailable(int markerPlacement) {
         return this.board.squareIsAvailable(markerPlacement);
     }
-
-    private boolean gameIsWon() { return !this.board.markerHasWon().equals("N"); }
 }

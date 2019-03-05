@@ -11,9 +11,7 @@ class RandomPlayer implements Player {
     }
 
     @Override
-    public String getMarker() {
-        return String.valueOf(marker);
-    }
+    public Marker getMarker() { return marker; }
 
     @Override
     public String getName() { return name; }

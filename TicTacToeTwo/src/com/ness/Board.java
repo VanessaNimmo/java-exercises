@@ -8,8 +8,8 @@ interface Board {
 
     boolean squareIsAvailable(int markerPlacement);
 
-    void placeMarker(String marker, int markerPlacement);
+    void placeMarker(Marker marker, int markerPlacement);
 
-    String markerHasWon();
+    boolean markerHasWon();
 
 }
