@@ -3,17 +3,23 @@ package com.ness;
 class TicTacToeBoard implements Board {
 
     private final int size;
-    private Marker[] squares;
+    Marker[] squares;
+    WinChecker checker;
 
-    TicTacToeBoard(int boardSize) {
+    TicTacToeBoard(int boardSize, WinChecker checker) {
         this.size = boardSize;
         this.squares = new Marker[boardSize*boardSize];
+        this.checker = checker;
         for(int i=0; i<boardSize*boardSize; i++) {
             this.squares[i] = Marker.E;
         }
     }
 
     public int getSize() { return this.size; }
+
+    public Marker[] getSquares() {
+        return squares;
+    }
 
     @Override
     public boolean isFull() {
@@ -51,53 +57,7 @@ class TicTacToeBoard implements Board {
     }
 
     @Override
-    public boolean markerHasWon() {
-        boolean rowsWonX = this.checkRows(Marker.X);
-        boolean columnsWonX = this.checkColumns(Marker.X);
-        boolean diagonalsWonX = this.checkDiagonals(Marker.X);
-        boolean rowsWonO = this.checkRows(Marker.O);
-        boolean columnsWonO = this.checkColumns(Marker.O);
-        boolean diagonalsWonO = this.checkDiagonals(Marker.O);
-        if (rowsWonX || columnsWonX || diagonalsWonX) {
-            return true;
-        }
-        return rowsWonO || columnsWonO || diagonalsWonO;
-    }
-
-    private boolean checkRows(Marker marker){
-        int markersInRow;
-        for(int row=0; row<this.size; row++) {
-            markersInRow = 0;
-            for(int column=0; column<this.size; column++) {
-                if(this.squares[column + row*this.size].equals(marker)) markersInRow++;
-            }
-            if (markersInRow==this.size) return true;
-        }
-        return false;
-    }
-
-    private boolean checkColumns(Marker marker) {
-        int markersInColumn;
-        for (int column=0; column<this.size; column++) {
-            markersInColumn = 0;
-            for (int row=0; row<this.size; row++) {
-                if (this.squares[column + row*this.size].equals(marker)) markersInColumn++;
-            }
-            if (markersInColumn==this.size) return true;
-        }
-        return false;
-    }
-
-    private boolean checkDiagonals(Marker marker) {
-        int leftToRight = 0, rightToLeft = 0;
-        for(int row=0; row < this.size; row++) {
-            if (this.squares[row*this.size + row].equals(marker)) leftToRight++;
-        }
-        if (leftToRight == this.size) return true;
-        for(int j=1; j <= this.size; j++) {
-            if (this.squares[j*this.size - j].equals(marker)) rightToLeft++;
-        }
-        if (rightToLeft == this.size) return true;
-        return false;
+    public boolean gameIsWon() {
+        return this.checker.gameIsWon(squares, size);
     }
 }

@@ -23,7 +23,7 @@ class Game {
             player = choosePlayer(playerOnesTurn);
             takeTurn(player);
 
-            if (this.board.markerHasWon()) {
+            if (this.board.gameIsWon()) {
                 io.print(endGameMessage(true, player));
                 break;
             }

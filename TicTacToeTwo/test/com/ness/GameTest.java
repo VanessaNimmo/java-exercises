@@ -9,7 +9,8 @@ public class GameTest {
     @Test
     public void boardShouldBeEmptyAtStartOfGame() {
         int boardSize = 3;
-        Board tictactoeBoard = new TicTacToeBoard(boardSize);
+        WinChecker checker = new WinChecker();
+        Board tictactoeBoard = new TicTacToeBoard(boardSize, checker);
         Marker marker1 = Marker.X, marker2 = Marker.O;
         Player player1 = new RandomPlayer(marker1, "Player 1");
         Player player2 = new RandomPlayer(marker2, "Player 2");
@@ -58,7 +59,7 @@ public class GameTest {
         }
 
         @Override
-        public boolean markerHasWon() {
+        public boolean gameIsWon() {
             return false;
         }
     }
