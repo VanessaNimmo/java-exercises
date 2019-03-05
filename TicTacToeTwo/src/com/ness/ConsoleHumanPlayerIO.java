@@ -12,6 +12,11 @@ public class ConsoleHumanPlayerIO implements IO {
     @Override
     public int getNextMove(int rangeMin, int rangeMax, String board) {
         Scanner in = new Scanner(System.in);
+        if(!in.hasNextInt()) {
+            if (in.nextLine().equals("q")) {
+                System.exit(0);
+            }
+        }
         int nextMove = in.nextInt();
         while(!validateInputRange(rangeMin, rangeMax, nextMove)) {
             this.print("Please choose a valid square: ");

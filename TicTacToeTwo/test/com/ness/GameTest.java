@@ -14,8 +14,9 @@ public class GameTest {
         Marker marker1 = Marker.X, marker2 = Marker.O;
         Player player1 = new Player(marker1, "Player 1");
         Player player2 = new Player(marker2, "Player 2");
-        IO inputOutput = new ConsoleHumanPlayerIO();
-        Game tictactoe = new Game(tictactoeBoard, player1, player2, inputOutput);
+        IO player1io = new ConsoleHumanPlayerIO();
+        IO player2io = new ConsoleHumanPlayerIO();
+        Game tictactoe = new Game(tictactoeBoard, player1, player2, player1io, player2io);
 
         String expected = "123\n456\n789\n";
         String result = tictactoe.board.toString();
