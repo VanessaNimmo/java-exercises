@@ -14,7 +14,7 @@ public class ConsoleHumanPlayerIO implements IO {
         Scanner in = new Scanner(System.in);
         if(!in.hasNextInt()) {
             if (in.nextLine().equals("q")) {
-                System.exit(0);
+                return 0;
             }
         }
         int nextMove = in.nextInt();

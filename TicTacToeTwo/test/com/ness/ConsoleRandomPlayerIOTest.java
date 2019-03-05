@@ -45,5 +45,4 @@ public class ConsoleRandomPlayerIOTest {
 
         assertTrue(1<= result && result <= 9);
     }
-
 }
