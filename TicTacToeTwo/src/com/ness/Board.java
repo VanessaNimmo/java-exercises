@@ -10,5 +10,5 @@ interface Board {
 
     void placeMarker(Marker marker, int markerPlacement);
 
-    public boolean gameIsWon();
+    boolean gameIsWon();
 }

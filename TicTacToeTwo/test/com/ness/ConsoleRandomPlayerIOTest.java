@@ -37,4 +37,13 @@ public class ConsoleRandomPlayerIOTest {
         assertThat(outContent.toString(), containsString("Welcome to Tic Tac Toe!"));
     }
 
+    @Test
+    public void returnsAnIntWithinRangeWhenAskedForNextMove() {
+        ConsoleRandomPlayerIO testConsole = new ConsoleRandomPlayerIO();
+
+        int result = testConsole.getNextMove(1, 9, "123\n456\n789");
+
+        assertTrue(1<= result && result <= 9);
+    }
+
 }

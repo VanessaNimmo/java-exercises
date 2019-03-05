@@ -1,10 +1,16 @@
 package com.ness;
 
-interface Player {
+class Player {
 
-    Marker getMarker();
+    private final String name;
+    private final Marker marker;
 
-    String getName();
+   Player(Marker marker, String name) {
+        this.marker = marker;
+        this.name = name;
+    }
 
-    int choosePosition(int boardSize);
+    public Marker getMarker() { return marker; }
+
+    public String getName() { return name; }
 }

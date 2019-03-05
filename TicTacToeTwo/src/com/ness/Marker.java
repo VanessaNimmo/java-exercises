@@ -6,7 +6,7 @@ public enum Marker {
 
     private String stringRepresentation;
 
-    private Marker(String stringRepresentation) {
+    Marker(String stringRepresentation) {
         this.stringRepresentation = stringRepresentation;
     }
 
