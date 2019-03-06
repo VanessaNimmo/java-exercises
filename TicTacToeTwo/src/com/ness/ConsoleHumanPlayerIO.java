@@ -13,7 +13,7 @@ public class ConsoleHumanPlayerIO implements IO {
     public int getNextMove(int rangeMin, int rangeMax) {
         Scanner in = new Scanner(System.in);
         int nextMove = getUserInput(in);
-        while (!validateInputRange(0, rangeMax, nextMove)) {
+        while (!validateInputRange(rangeMin, rangeMax, nextMove)) {
             this.print("Please choose a valid square or enter q to quit:");
             nextMove = getUserInput(in);
         }

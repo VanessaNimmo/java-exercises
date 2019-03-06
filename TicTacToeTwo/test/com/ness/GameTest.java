@@ -10,31 +10,32 @@ public class GameTest {
     public void gameShouldEndGameWithDrawConditionIfBoardIsFull() {
         int boardSize = 3;
         WinChecker checker = new WinChecker();
-        Board fullBoard = new FullTestBoard(boardSize, checker);
-        IO drawIO = new DrawIO();
-        Game testGame = new Game(fullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), drawIO, new TestIO());
+        FullTestBoard fullBoard = new FullTestBoard(boardSize, checker);
+        DrawIO drawIO = new DrawIO();
+        Game testGame = new Game(fullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), drawIO, drawIO);
 
         testGame.play();
 
-        boolean result = ((DrawIO) drawIO).getPrintWasCalledWithDrawMessage();
+        boolean result = drawIO.printWasCalledWithDrawMessage;
 
         assertTrue(result);
 
     }
 
     @Test
-    public void shouldAllowUserToQuitAnyTimeUsingq() {
+    public void whenUserQuitsGameShouldNotAskBoardToPlaceAMarker() {
 
-        Board notFullBoard = new NotFullTestBoard();
+        NotFullTestBoard notFullBoard = new NotFullTestBoard();
         IO quitIO = new QuitIO();
         Game testGame = new Game(notFullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), quitIO, new QuitIO());
 
         testGame.play();
 
-        boolean result = ((QuitIO) quitIO).getPrintWasCalledWithExitMessage();
+        boolean result =  notFullBoard.placeMarkerWasCalled;
 
-        assertTrue(result);
+        assertFalse(result);
     }
+
 
     @Test
     public void shouldPreventUserChoosingFilledSquare() {
@@ -63,7 +64,7 @@ public class GameTest {
 
         @Override
         public boolean squareIsAvailable(int markerPlacement) {
-            return false;
+            return true;
         }
 
         @Override
@@ -76,6 +77,8 @@ public class GameTest {
     }
 
     class NotFullTestBoard implements Board {
+
+        boolean placeMarkerWasCalled;
 
         @Override
         public int getSize() {
@@ -94,7 +97,7 @@ public class GameTest {
 
         @Override
         public void placeMarker(Marker marker, int markerPlacement) {
-
+            this.placeMarkerWasCalled = true;
         }
 
         @Override
@@ -139,17 +142,18 @@ public class GameTest {
 
         boolean printWasCalledWithDrawMessage;
 
-        public boolean getPrintWasCalledWithDrawMessage() {
+        boolean getPrintWasCalledWithDrawMessage() {
             return this.printWasCalledWithDrawMessage;
         }
+
         @Override
         public void print(String message) {
-            this.printWasCalledWithDrawMessage = message.equals("Game was a draw;");
+            this.printWasCalledWithDrawMessage = message.equals("Game was a draw.");
         }
 
         @Override
         public int getNextMove(int rangeMin, int rangeMax) {
-            return 0;
+            return 1;
         }
     }
 }

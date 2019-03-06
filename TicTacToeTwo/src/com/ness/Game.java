@@ -46,7 +46,6 @@ class Game {
             playerOnesTurn = !playerOnesTurn;
 
         } while (!this.board.isFull());
-        io.print("Goodbye!");
     }
 
     private Player choosePlayer(boolean changePlayerToken) {
@@ -70,7 +69,8 @@ class Game {
     }
 
     private int getNextMove(Player player, IO io) {
-        int markerPlacement = io.getNextMove(1, 9);
+        int maxRange = this.board.getSize()*this.board.getSize();
+        int markerPlacement = io.getNextMove(0, maxRange);
         if (markerPlacement==0) {
             return markerPlacement;
         }
