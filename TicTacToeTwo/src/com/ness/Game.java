@@ -46,7 +46,7 @@ class Game {
             playerOnesTurn = !playerOnesTurn;
 
         } while (!this.board.isFull());
-        // print goodbye message as a test of end of game?
+        io.print("Goodbye!");
     }
 
     private Player choosePlayer(boolean changePlayerToken) {
