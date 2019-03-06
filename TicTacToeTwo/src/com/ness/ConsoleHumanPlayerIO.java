@@ -21,10 +21,7 @@ public class ConsoleHumanPlayerIO implements IO {
     }
 
     private int getUserInput(Scanner in) {
-        if(!in.hasNextInt()) {
-            if (in.nextLine().equals("q")) return 0;
-        }
-        return in.nextInt();
+        return in.hasNextInt() ? in.nextInt() : 0;
     }
 
     private boolean validateInputRange(int rangeMin, int rangeMax, int moveToCheck) {
