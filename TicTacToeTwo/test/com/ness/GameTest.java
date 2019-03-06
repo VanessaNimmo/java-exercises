@@ -6,18 +6,21 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
-//    @Test
-//    public void gameShouldEndGameWithDrawConditionIfBoardIsFull() {
-//        int boardSize = 3;
-//        WinChecker checker = new WinChecker();
-//        Board fullBoard = new FullTestBoard(boardSize, checker);
-//        Game testGame = new Game(fullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), new TestIO(), new TestIO());
-//
-//        testGame.play();
-//
-//        // could check that it sends a call the endGame that has the draw condition message?
-//
-//    }
+    @Test
+    public void gameShouldEndGameWithDrawConditionIfBoardIsFull() {
+        int boardSize = 3;
+        WinChecker checker = new WinChecker();
+        Board fullBoard = new FullTestBoard(boardSize, checker);
+        IO drawIO = new DrawIO();
+        Game testGame = new Game(fullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), drawIO, new TestIO());
+
+        testGame.play();
+
+        boolean result = ((DrawIO) drawIO).getPrintWasCalledWithDrawMessage();
+
+        assertTrue(result);
+
+    }
 
     @Test
     public void shouldAllowUserToQuitAnyTimeUsingq() {
@@ -31,6 +34,12 @@ public class GameTest {
         boolean result = ((QuitIO) quitIO).getPrintWasCalledWithExitMessage();
 
         assertTrue(result);
+    }
+
+    @Test
+    public void shouldPreventUserChoosingFilledSquare() {
+
+
     }
 
     class FullTestBoard implements Board {
@@ -95,19 +104,17 @@ public class GameTest {
     }
 
     class TestIO implements IO {
-        // does it print the goodbye message?
-        public boolean printWasCalledWithDrawMessage;
 
         @Override
-        public void print(String message) {
-
-        }
+        public void print(String message) {}
 
         @Override
         public int getNextMove(int rangeMin, int rangeMax) {
-            return 0;
+            return 5;
         }
     }
+
+
 
     class QuitIO implements IO {
 
@@ -120,6 +127,24 @@ public class GameTest {
 
         boolean getPrintWasCalledWithExitMessage() {
             return this.printWasCalledWithExitMessage;
+        }
+
+        @Override
+        public int getNextMove(int rangeMin, int rangeMax) {
+            return 0;
+        }
+    }
+
+    class DrawIO implements IO {
+
+        boolean printWasCalledWithDrawMessage;
+
+        public boolean getPrintWasCalledWithDrawMessage() {
+            return this.printWasCalledWithDrawMessage;
+        }
+        @Override
+        public void print(String message) {
+            this.printWasCalledWithDrawMessage = message.equals("Game was a draw;");
         }
 
         @Override
