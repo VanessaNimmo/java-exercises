@@ -10,17 +10,21 @@ public class ConsoleHumanPlayerIO implements IO {
     }
 
     @Override
-    public int getNextMove(int rangeMin, int rangeMax, String board) {
+    public int getNextMove(int rangeMin, int rangeMax) {
         Scanner in = new Scanner(System.in);
+        int nextMove = getUserInput(in);
+        while (!validateInputRange(0, rangeMax, nextMove)) {
+            this.print("Please choose a valid square or enter q to quit:");
+            nextMove = getUserInput(in);
+        }
+        return nextMove;
+    }
+
+    private int getUserInput(Scanner in) {
         if(!in.hasNextInt()) {
             if (in.nextLine().equals("q")) return 0;
         }
-        int nextMove = in.nextInt();
-        while(!validateInputRange(rangeMin, rangeMax, nextMove)) {
-            this.print("Please choose a valid square: ");
-            nextMove = in.nextInt();
-        }
-        return nextMove;
+        return in.nextInt();
     }
 
     private boolean validateInputRange(int rangeMin, int rangeMax, int moveToCheck) {

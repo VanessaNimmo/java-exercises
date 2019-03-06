@@ -70,7 +70,7 @@ class Game {
     }
 
     private int getNextMove(Player player, IO io) {
-        int markerPlacement = io.getNextMove(1, 9, this.board.toString());
+        int markerPlacement = io.getNextMove(1, 9);
         if (markerPlacement==0) {
             return markerPlacement;
         }

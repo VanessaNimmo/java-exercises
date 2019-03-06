@@ -6,7 +6,7 @@ public class ConsoleRandomPlayerIO implements IO {
     public void print(String message) { System.out.format("%s%n", message); }
 
     @Override
-    public int getNextMove(int rangeMin, int rangeMax, String board) {
+    public int getNextMove(int rangeMin, int rangeMax) {
         return (int) Math.floor(Math.random()*rangeMax + 1);
     }
 }

@@ -50,7 +50,7 @@ public class ConsoleHumanPlayerIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+        int result = testConsole.getNextMove(1, squareOfBoardSize);
 
         assertEquals(2, result);
     }
@@ -64,9 +64,23 @@ public class ConsoleHumanPlayerIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+        testConsole.getNextMove(1, squareOfBoardSize);
 
-        assertThat(outContent.toString(), containsString("Please choose a valid square:"));
+        assertThat(outContent.toString(), containsString("Please choose a valid square or enter q to quit:"));
+    }
+
+    @Test
+    public void acceptsSecondAttemptIfItIsWithinRange() {
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+        String input = String.format("11%n3");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        int result = testConsole.getNextMove(1, squareOfBoardSize);
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -74,11 +88,11 @@ public class ConsoleHumanPlayerIOTest {
         ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
         int boardSize = 3;
         int squareOfBoardSize = boardSize*boardSize;
-        String input = String.format("q");
+        String input = "q";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+        int result = testConsole.getNextMove(1, squareOfBoardSize);
 
         assertEquals(0, result);
     }
@@ -92,7 +106,7 @@ public class ConsoleHumanPlayerIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+        int result = testConsole.getNextMove(0, squareOfBoardSize);
 
         assertEquals(0, result);
     }

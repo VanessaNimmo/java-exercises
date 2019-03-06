@@ -104,7 +104,7 @@ public class GameTest {
         }
 
         @Override
-        public int getNextMove(int rangeMin, int rangeMax, String board) {
+        public int getNextMove(int rangeMin, int rangeMax) {
             return 0;
         }
     }
@@ -123,7 +123,7 @@ public class GameTest {
         }
 
         @Override
-        public int getNextMove(int rangeMin, int rangeMax, String board) {
+        public int getNextMove(int rangeMin, int rangeMax) {
             return 0;
         }
     }

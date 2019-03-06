@@ -41,7 +41,7 @@ public class ConsoleRandomPlayerIOTest {
     public void returnsAnIntWithinRangeWhenAskedForNextMove() {
         ConsoleRandomPlayerIO testConsole = new ConsoleRandomPlayerIO();
 
-        int result = testConsole.getNextMove(1, 9, "123\n456\n789");
+        int result = testConsole.getNextMove(1, 9);
 
         assertTrue(1<= result && result <= 9);
     }
