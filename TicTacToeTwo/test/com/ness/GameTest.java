@@ -38,8 +38,18 @@ public class GameTest {
 
 
     @Test
-    public void shouldPreventUserChoosingFilledSquare() {
+    public void shouldPreventUserChoosingAFilledSquareAndThenAllowNextChoiceIfUnfilled() {
+        TicTacToeBoard board = new TicTacToeBoard(3, new WinChecker());
+        SquareNotAvailableTestIO countingIO = new SquareNotAvailableTestIO();
+        Game testGame = new Game(board, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), countingIO, new QuitIO());
+        board.placeMarker(Marker.X, 5);
 
+        testGame.play();
+
+        String result = board.toString();
+        String expected = "12X\n4X6\n789";
+
+        assertEquals(expected, result);
 
     }
 
@@ -106,14 +116,16 @@ public class GameTest {
         }
     }
 
-    class TestIO implements IO {
+    class SquareNotAvailableTestIO implements IO {
 
+        int count = 0;
+        int[] moves = {5,3};
         @Override
         public void print(String message) {}
 
         @Override
         public int getNextMove(int rangeMin, int rangeMax) {
-            return 5;
+            return moves[count++];
         }
     }
 
