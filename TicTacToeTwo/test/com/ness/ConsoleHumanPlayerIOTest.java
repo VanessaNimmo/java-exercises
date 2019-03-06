@@ -83,4 +83,18 @@ public class ConsoleHumanPlayerIOTest {
         assertEquals(0, result);
     }
 
+    @Test
+    public void userCanEnterqAtAnyTimeAndItReturns0() {
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+        String input = String.format("11%nq");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+
+        assertEquals(0, result);
+    }
+
 }
