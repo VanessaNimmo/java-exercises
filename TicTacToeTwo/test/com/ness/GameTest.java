@@ -47,7 +47,7 @@ public class GameTest {
         testGame.play();
 
         String result = board.toString();
-        String expected = "12X\n4X6\n789";
+        String expected = "12X\n4X6\n789\n";
 
         assertEquals(expected, result);
 

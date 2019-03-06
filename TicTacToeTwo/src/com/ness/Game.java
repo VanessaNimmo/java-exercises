@@ -76,7 +76,7 @@ class Game {
         }
         if (!squareIsAvailable(markerPlacement)) {
             printNotAvailableErrorMessage(player, io);
-            getNextMove(player, io);
+            markerPlacement = getNextMove(player, io);
         }
         return markerPlacement;
     }

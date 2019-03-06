@@ -3,7 +3,7 @@ package com.ness;
 class TicTacToeBoard implements Board {
 
     private final int size;
-    Marker[] squares;
+    private Marker[] squares;
     WinChecker checker;
 
     TicTacToeBoard(int boardSize, WinChecker checker) {

@@ -69,9 +69,10 @@ public class TicTacToeBoardTest {
         TicTacToeBoard board = new TicTacToeBoard(3, checker);
         board.placeMarker(Marker.X, 1);
 
-        String result = board.toString();
-        String expected = "X23\n456\n789\n";
+        boolean result = board.squareIsAvailable(1);
+//        String result = board.toString();
+//        String expected = "X23\n456\n789\n";
 
-        assertEquals(expected, result);
+        assertFalse(result);
     }
 }
