@@ -16,16 +16,19 @@ public class ConsoleHumanPlayerIOTest {
 
     private PrintStream sysOut;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private InputStream sysIn;
 
     @Before
     public void setUpStreams() {
         sysOut = System.out;
         System.setOut(new PrintStream(outContent));
+        sysIn = System.in;
     }
 
     @After
     public void revertStreams() {
         System.setOut(sysOut);
+        System.setIn(sysIn);
     }
 
     @Test
@@ -64,6 +67,20 @@ public class ConsoleHumanPlayerIOTest {
         testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
 
         assertThat(outContent.toString(), containsString("Please choose a valid square:"));
+    }
+
+    @Test
+    public void returns0IfUserEntersq() {
+        ConsoleHumanPlayerIO testConsole = new ConsoleHumanPlayerIO();
+        int boardSize = 3;
+        int squareOfBoardSize = boardSize*boardSize;
+        String input = String.format("q");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        int result = testConsole.getNextMove(1, squareOfBoardSize, "1 2 3\n4 5 6\n7 8 9\n");
+
+        assertEquals(0, result);
     }
 
 }

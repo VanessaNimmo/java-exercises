@@ -1,5 +1,6 @@
 package com.ness;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,8 +9,19 @@ public class TicTacToeBoardTest {
 
     private WinChecker checker;
 
-    TicTacToeBoardTest() {
-        this.checker = new WinChecker();
+    @Before
+    public void setUp() {
+       this.checker = new WinChecker();
+    }
+
+    @Test
+    public void shouldBeEmptyWhenInitialised() {
+        TicTacToeBoard board = new TicTacToeBoard(3, checker);
+
+        String result = board.toString();
+        String expected = "123\n456\n789\n";
+
+        assertEquals(expected, result);
     }
 
     @Test
@@ -53,7 +65,7 @@ public class TicTacToeBoardTest {
     }
 
     @Test
-    public void shouldPlaceAMarkerAtArrayPosition0WhenMarkerPosition1IsEntered() {
+    public void shouldPlaceAMarkerAtPosition1WhenPosition1IsEntered() {
         TicTacToeBoard board = new TicTacToeBoard(3, checker);
         board.placeMarker(Marker.X, 1);
 
@@ -62,5 +74,4 @@ public class TicTacToeBoardTest {
 
         assertEquals(expected, result);
     }
-
 }

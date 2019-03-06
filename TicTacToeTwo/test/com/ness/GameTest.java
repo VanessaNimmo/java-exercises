@@ -6,38 +6,41 @@ import static org.junit.Assert.*;
 
 public class GameTest {
 
-    @Test
-    public void boardShouldBeEmptyAtStartOfGame() {
-        int boardSize = 3;
-        WinChecker checker = new WinChecker();
-        Board tictactoeBoard = new TicTacToeBoard(boardSize, checker);
-        Marker marker1 = Marker.X, marker2 = Marker.O;
-        Player player1 = new Player(marker1, "Player 1");
-        Player player2 = new Player(marker2, "Player 2");
-        IO player1io = new ConsoleHumanPlayerIO();
-        IO player2io = new ConsoleHumanPlayerIO();
-        Game tictactoe = new Game(tictactoeBoard, player1, player2, player1io, player2io);
-
-        String expected = "123\n456\n789\n";
-        String result = tictactoe.board.toString();
-
-        assertEquals(expected, result);
-    }
+//    @Test
+//    public void gameShouldEndGameWithDrawConditionIfBoardIsFull() {
+//        int boardSize = 3;
+//        WinChecker checker = new WinChecker();
+//        Board fullBoard = new FullTestBoard(boardSize, checker);
+//        Game testGame = new Game(fullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), new TestIO(), new TestIO());
+//
+//        testGame.play();
+//
+//        // could check that it sends a call the endGame that has the draw condition message?
+//
+//    }
 
     @Test
-    public void boardShouldEndGameWithDrawConditionIfBoardIsFull() {
-        int boardSize = 3;
-        Board tictactoe = new TestBoard(boardSize);
+    public void shouldAllowUserToQuitAnyTimeUsingq() {
 
-        // Does there need to be some sort of win flag or draw flag? There sort of is but its not really doing the job well
+        Board notFullBoard = new NotFullTestBoard();
+        IO quitIO = new QuitIO();
+        Game testGame = new Game(notFullBoard, new Player(Marker.X, "Player 1"), new Player(Marker.O, "Player 2"), quitIO, new QuitIO());
+
+        testGame.play();
+
+        boolean result = ((QuitIO) quitIO).getPrintWasCalledWithExitMessage();
+
+        assertTrue(result);
     }
 
-    class TestBoard implements Board {
+    class FullTestBoard implements Board {
 
         private final int size;
+        private final WinChecker checker;
 
-        TestBoard(int boardSize) {
+        FullTestBoard(int boardSize, WinChecker checker) {
             this.size = boardSize;
+            this.checker = checker;
         }
         @Override
         public int getSize() {
@@ -55,6 +58,32 @@ public class GameTest {
         }
 
         @Override
+        public void placeMarker(Marker marker, int markerPlacement) {}
+
+        @Override
+        public boolean gameIsWon() {
+            return false;
+        }
+    }
+
+    class NotFullTestBoard implements Board {
+
+        @Override
+        public int getSize() {
+            return 0;
+        }
+
+        @Override
+        public boolean isFull() {
+            return false;
+        }
+
+        @Override
+        public boolean squareIsAvailable(int markerPlacement) {
+            return false;
+        }
+
+        @Override
         public void placeMarker(Marker marker, int markerPlacement) {
 
         }
@@ -62,6 +91,40 @@ public class GameTest {
         @Override
         public boolean gameIsWon() {
             return false;
+        }
+    }
+
+    class TestIO implements IO {
+        // does it print the goodbye message?
+        public boolean printWasCalledWithDrawMessage;
+
+        @Override
+        public void print(String message) {
+
+        }
+
+        @Override
+        public int getNextMove(int rangeMin, int rangeMax, String board) {
+            return 0;
+        }
+    }
+
+    class QuitIO implements IO {
+
+        boolean printWasCalledWithExitMessage;
+
+        @Override
+        public void print(String message) {
+            this.printWasCalledWithExitMessage = message.equals("Goodbye!");
+        }
+
+        boolean getPrintWasCalledWithExitMessage() {
+            return this.printWasCalledWithExitMessage;
+        }
+
+        @Override
+        public int getNextMove(int rangeMin, int rangeMax, String board) {
+            return 0;
         }
     }
 }

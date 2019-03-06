@@ -13,9 +13,7 @@ public class ConsoleHumanPlayerIO implements IO {
     public int getNextMove(int rangeMin, int rangeMax, String board) {
         Scanner in = new Scanner(System.in);
         if(!in.hasNextInt()) {
-            if (in.nextLine().equals("q")) {
-                return 0;
-            }
+            if (in.nextLine().equals("q")) return 0;
         }
         int nextMove = in.nextInt();
         while(!validateInputRange(rangeMin, rangeMax, nextMove)) {

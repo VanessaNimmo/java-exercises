@@ -27,12 +27,13 @@ class Game {
 
             printMoveInstructions(player, io);
 
-            int markerPlacement = getMarker(player, io);
-            if (markerPlacement==0) {
+            int nextMove = getNextMove(player, io);
+            if (nextMove==0) {
                 break;
             }
-            this.board.placeMarker(player.getMarker(), markerPlacement);
-            printPlacementMessage(markerPlacement, io);
+
+            this.board.placeMarker(player.getMarker(), nextMove);
+            printPlacementMessage(nextMove, io);
 
             if (this.board.gameIsWon()) {
                 io.print(endGameMessage(true, player));
@@ -45,20 +46,15 @@ class Game {
             playerOnesTurn = !playerOnesTurn;
 
         } while (!this.board.isFull());
-    }
-
-    private IO chooseIO(boolean changePlayerToken) {
-        return changePlayerToken ? this.player1io : this.player2io;
+        // print goodbye message as a test of end of game?
     }
 
     private Player choosePlayer(boolean changePlayerToken) {
         return changePlayerToken ? this.player1 : this.player2;
     }
 
-    private void printPlacementMessage(int markerPlacement, IO io) {
-        String markerPlacementConfirmationMessage = String.format("You chose %d!%nHere is the current board: ", markerPlacement);
-        io.print(markerPlacementConfirmationMessage);
-        io.print(this.board.toString());
+    private IO chooseIO(boolean changePlayerToken) {
+        return changePlayerToken ? this.player1io : this.player2io;
     }
 
     private void printMoveInstructions(Player player, IO io) {
@@ -67,21 +63,26 @@ class Game {
         io.print(this.board.toString());
     }
 
-    private String endGameMessage(boolean gameWon, Player winningPlayer) {
-         return gameWon ? String.format("%s has won!%n", winningPlayer.getMarker()) : "Game was a draw.";
+    private void printPlacementMessage(int markerPlacement, IO io) {
+        String markerPlacementConfirmationMessage = String.format("You chose %d!%nHere is the current board: ", markerPlacement);
+        io.print(markerPlacementConfirmationMessage);
+        io.print(this.board.toString());
     }
 
-    private int getMarker(Player player, IO io) {
-        int markerPlacement = 0;
-        markerPlacement = io.getNextMove(1, 9, this.board.toString());
-        if(markerPlacement==0) {
+    private int getNextMove(Player player, IO io) {
+        int markerPlacement = io.getNextMove(1, 9, this.board.toString());
+        if (markerPlacement==0) {
             return markerPlacement;
         }
         if (!squareIsAvailable(markerPlacement)) {
             printNotAvailableErrorMessage(player, io);
-            getMarker(player, io);
+            getNextMove(player, io);
         }
         return markerPlacement;
+    }
+
+    private boolean squareIsAvailable(int markerPlacement) {
+        return this.board.squareIsAvailable(markerPlacement);
     }
 
     private void printNotAvailableErrorMessage(Player player, IO io) {
@@ -90,7 +91,7 @@ class Game {
         io.print(this.board.toString());
     }
 
-    private boolean squareIsAvailable(int markerPlacement) {
-        return this.board.squareIsAvailable(markerPlacement);
+    private String endGameMessage(boolean gameWon, Player winningPlayer) {
+         return gameWon ? String.format("%s has won!%n", winningPlayer.getMarker()) : "Game was a draw.";
     }
 }
