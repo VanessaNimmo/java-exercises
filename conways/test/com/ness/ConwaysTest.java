@@ -1,15 +1,23 @@
 package com.ness;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ConwaysTest {
 
+    private InputOutput io;
+    private Game conwaysGame;
+
+    @Before
+    public void setUp() {
+        this.io = new ConsoleIO();
+        this.conwaysGame = new Game(this.io);
+    }
+
     @Test
     public void shouldSendAWelcomeMessageToOutput() {
-        InputOutput io = new ConsoleIO();
-        Game conwaysGame = new Game(io);
 
         boolean messageSent = conwaysGame.io.sendWelcome("Welcome to Conway's Game of Life");
 
@@ -18,8 +26,6 @@ public class ConwaysTest {
 
     @Test
     public void shouldGetInitialLiveCellsFromIO() {
-        InputOutput io = new ConsoleIO();
-        Game conwaysGame = new Game(io);
 
         boolean[][] result = conwaysGame.io.getInitialLiveCells();
         boolean[][] expected = {{false, false, false, false}, {false, true, false, false}, {false, false, false, true}, {false, false, false, false}};
@@ -27,17 +33,37 @@ public class ConwaysTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void shouldCreateBoardWithInitialState() {
 
+        boolean [][] initialLiveCells = {{false, false, false, false}, {false, true, false, false}, {false, false, false, true}, {false, false, false, false}};
 
-//    @Test
-//    public void shouldInitaliseBoard() {
-//        InputOutput io = new ConsoleIO();
-//        Game conwaysGame = new Game(io);
-//        int[] boardSize = {10,20};
-//
-//        Board result = game.newBoard(boardSize);
-//
-//        assertThat(result != null);
-//    }
+        Board result = conwaysGame.newBoard(initialLiveCells);
+
+        assertNotNull(result);
+    }
+
+    @Test
+    public void shouldCalculateNextStateOfWorldWhenGivenABoard() {
+        boolean [][] initialLiveCells = {{false, false, false, false}, {false, true, false, false}, {false, false, false, true}, {false, false, false, false}};
+
+        Board oldBoard = conwaysGame.newBoard(initialLiveCells);
+
+        boolean[][] result = conwaysGame.calculateNext(oldBoard);
+        boolean[][] expected = {{false, false, false, false}, {false, false, false, false}, {false, false, false, false}, {false, false, false, false}};
+
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void calculateNextStateWithMoreComplexBoard() {
+        boolean[][] initialLiveCells = {{false, true, false, false}, {false, true, true, false}, {false, false, false, false}, {false, true, false, false}};
+
+        Board oldBoard = conwaysGame.newBoard(initialLiveCells);
+        boolean[][] result = conwaysGame.calculateNext(oldBoard);
+        boolean[][] expected = {{false, true, false, false}, {false, false, true, false}, {false, true, true, false}, {false, false, false, false}};
+
+        assertArrayEquals(expected, result);
+    }
 
 }
