@@ -9,11 +9,13 @@ public class ConwaysTest {
 
     private InputOutput io;
     private Game conwaysGame;
+    private Calculator calculator;
 
     @Before
     public void setUp() {
         this.io = new ConsoleIO();
-        this.conwaysGame = new Game(this.io);
+        this.calculator = new Calculator();
+        this.conwaysGame = new Game(this.io, this.calculator);
     }
 
     @Test

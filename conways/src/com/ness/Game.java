@@ -5,7 +5,7 @@ class Game {
     InputOutput io;
     Calculator calculator;
 
-    Game(InputOutput io) {
+    Game(InputOutput io, Calculator calculator) {
         this.io = io;
         this.calculator = calculator;
     }
