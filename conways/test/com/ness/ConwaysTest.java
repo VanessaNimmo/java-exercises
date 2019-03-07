@@ -17,17 +17,6 @@ public class ConwaysTest {
     }
 
     @Test
-    public void shouldGetBoardSizeFromIO() {
-        InputOutput io = new ConsoleIO();
-        Game conwaysGame = new Game(io);
-
-        int[] result = conwaysGame.io.getBoardSize();
-        int[] expected = {10, 20};
-
-        assertArrayEquals(expected, result);
-    }
-
-    @Test
     public void shouldGetInitialLiveCellsFromIO() {
         InputOutput io = new ConsoleIO();
         Game conwaysGame = new Game(io);
@@ -38,7 +27,8 @@ public class ConwaysTest {
         assertArrayEquals(expected, result);
     }
 
-    
+
+
 //    @Test
 //    public void shouldInitaliseBoard() {
 //        InputOutput io = new ConsoleIO();
