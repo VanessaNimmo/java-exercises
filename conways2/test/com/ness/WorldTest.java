@@ -31,7 +31,7 @@ public class WorldTest {
     public void shouldMakeNewWorldRepresentationFromInitialState() {
         World newWorld = new World(io);
 
-        Board currentState = new Board(newWorld.io.getInitialState());
+        Grid currentState = new Grid(newWorld.io.getInitialState());
 
         assertNotNull(currentState);
     }
@@ -40,7 +40,7 @@ public class WorldTest {
     public void shouldBeAbleToRetrieveStateFromCurrentBoard() {
         World newWorld = new World(io);
 
-        Board currentState = new Board(newWorld.io.getInitialState());
+        Grid currentState = new Grid(newWorld.io.getInitialState());
         boolean[][] result = currentState.getLiveCells();
         boolean[][] expected = {{false, true, false, false}, {true, true, true, false}, {false, false, false, true}, {true, false, true, false}};
 
@@ -51,12 +51,12 @@ public class WorldTest {
     public void shouldCalculateNextStateFromCurrentState() {
         World newWorld = new World(io);
 
-        Board currentState = new Board(newWorld.io.getInitialState());
+        Grid currentState = new Grid(newWorld.io.getInitialState());
 
         boolean[][] newState = cellCalculator.getNextTick(currentState.getLiveCells());
-        boolean[][] expected = {{false, false, false, false}, {false, false, false, true}, {false, false, false, false}, {true, true, true, true}};
+        boolean[][] expected = {{false, false, false, false}, {true, true, true, true}, {false, false, false, false}, {true, true, true, true}};
 
-        currentState = new Board(newState);
+        currentState = new Grid(newState);
         boolean[][] result = currentState.getLiveCells();
 
         assertArrayEquals(expected, result);
@@ -66,7 +66,7 @@ public class WorldTest {
     public void shouldSendStateToIOForDisplay() {
         IO io = new IO();
         World newWorld = new World(io);
-        Board currentState = new Board(newWorld.io.getInitialState());
+        Grid currentState = new Grid(newWorld.io.getInitialState());
         newWorld.io.display(currentState.getLiveCells());
 
         boolean result = io.displayWasCalled;
@@ -77,7 +77,7 @@ public class WorldTest {
     class Calculator {
 
         boolean[][] getNextTick(boolean[][] currentState){
-            return new boolean[][] {{false, false, false, false}, {false, false, false, true}, {false, false, false, false}, {true, true, true, true}};
+            return new boolean[][] {{false, false, false, false}, {true, true, true, true}, {false, false, false, false}, {true, true, true, true}};
         };
 
     }
@@ -96,11 +96,11 @@ public class WorldTest {
         };
     }
 
-    class Board {
+    class Grid {
 
         private final boolean[][] liveCells;
 
-        Board(boolean[][] initialState) {
+        Grid(boolean[][] initialState) {
             this.liveCells = initialState;
         }
 
