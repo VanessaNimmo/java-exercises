@@ -1,5 +1,9 @@
 package com.ness;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Calculator {
     boolean[][] getNextTick(boolean[][] initialState) {
         int gridHeight = initialState.length;
@@ -19,54 +23,38 @@ class Calculator {
         if (aliveNeighbours==3) {
             return true;
         }
-        if (aliveNeighbours==2 && alive) {
-            return true;
-        }
-        return false;
+        return aliveNeighbours == 2 && alive;
     }
 
     private int getAliveNeighbours(boolean[][] initialState, int row, int column) {
         int aliveNeighbours = 0;
-        int rowAbove = row - 1;
-        if (rowAbove == -1) {
-            rowAbove = initialState.length - 1;
-        }
-        int rowBelow = row + 1;
-        if (rowBelow == initialState.length) {
+        int rowAbove = getPrevious(row, initialState.length);
+        int rowBelow = getNext(row, initialState.length);
+        int columnBefore = getPrevious(column, initialState[0].length);
+        int columnAfter = getNext(column, initialState[0].length);
+        ArrayList<Boolean> cells = getCellsList(initialState, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
+        aliveNeighbours = (int) cells.stream().filter(cell -> cell).count();
+        return aliveNeighbours;
+    }
+
+    private ArrayList<Boolean> getCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
+        return new ArrayList<Boolean>(
+                Arrays.asList(initialState[rowAbove][columnBefore], initialState[rowAbove][column], initialState[rowAbove][columnAfter], initialState[row][columnBefore], initialState[row][columnAfter], initialState[rowBelow][columnBefore], initialState[rowBelow][column], initialState[rowBelow][columnAfter]));
+    }
+
+    private int getNext(int rowOrColumn, int totalNumber) {
+        int rowBelow = rowOrColumn + 1;
+        if (rowBelow == totalNumber) {
             rowBelow = 0;
         }
-        int columnBefore = column - 1;
-        if (columnBefore == -1) {
-            columnBefore = initialState[0].length - 1;
+        return rowBelow;
+    }
+
+    private int getPrevious(int rowOrColumn, int totalNumber) {
+        int rowAbove = rowOrColumn - 1;
+        if (rowAbove == -1) {
+            rowAbove = totalNumber - 1;
         }
-        int columnAfter = column + 1;
-        if (columnAfter == initialState[0].length) {
-            columnAfter = 0;
-        }
-        if (initialState[rowAbove][columnBefore]) {
-            aliveNeighbours++;
-        }
-        if (initialState[rowAbove][column]) {
-            aliveNeighbours++;
-        }
-        if (initialState[rowAbove][columnAfter]) {
-            aliveNeighbours++;
-        }
-        if (initialState[row][columnBefore]) {
-            aliveNeighbours++;
-        }
-        if (initialState[row][columnAfter]) {
-            aliveNeighbours++;
-        }
-        if (initialState[rowBelow][columnBefore]) {
-            aliveNeighbours++;
-        }
-        if (initialState[rowBelow][column]) {
-            aliveNeighbours++;
-        }
-        if (initialState[rowBelow][columnAfter]) {
-            aliveNeighbours++;
-        }
-        return aliveNeighbours;
+        return rowAbove;
     }
 }
