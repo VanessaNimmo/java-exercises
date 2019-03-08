@@ -1,5 +1,10 @@
 package com.ness;
 
-public class World {
+class World {
 
+    InputOutput io;
+
+    public World(InputOutput io) {
+        this.io = io;
+    }
 }
