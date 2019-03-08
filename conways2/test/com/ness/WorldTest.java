@@ -8,10 +8,12 @@ import static org.junit.Assert.*;
 public class WorldTest {
 
     private InputOutput io;
+    private Calculator cellCalculator;
 
     @Before
     public void setUp() {
         this.io = new IO();
+        this.cellCalculator = new Calculator();
     }
 
     @Test
@@ -45,12 +47,53 @@ public class WorldTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void shouldCalculateNextStateFromCurrentState() {
+        World newWorld = new World(io);
+
+        Board currentState = new Board(newWorld.io.getInitialState());
+
+        boolean[][] newState = cellCalculator.getNextTick(currentState.getLiveCells());
+        boolean[][] expected = {{false, false, false, false}, {false, false, false, true}, {false, false, false, false}, {true, true, true, true}};
+
+        currentState = new Board(newState);
+        boolean[][] result = currentState.getLiveCells();
+
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void shouldSendStateToIOForDisplay() {
+        IO io = new IO();
+        World newWorld = new World(io);
+        Board currentState = new Board(newWorld.io.getInitialState());
+        newWorld.io.display(currentState.getLiveCells());
+
+        boolean result = io.displayWasCalled;
+
+        assertTrue(result);
+    }
+
+    class Calculator {
+
+        boolean[][] getNextTick(boolean[][] currentState){
+            return new boolean[][] {{false, false, false, false}, {false, false, false, true}, {false, false, false, false}, {true, true, true, true}};
+        };
+
+    }
+
     class IO implements com.ness.InputOutput {
+
+        boolean displayWasCalled;
 
         public boolean[][] getInitialState() {
             boolean[][] initialLiveCells = {{false, true, false, false}, {true, true, true, false}, {false, false, false, true}, {true, false, true, false}};
             return initialLiveCells;
         }
+
+        public void display(boolean[][] state){
+            this.displayWasCalled = true;
+        };
     }
 
     class Board {
