@@ -28,4 +28,15 @@ public class CalculatorTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void whenGivenThreeLiveCellsInLShapeShouldReturnThat4thCellHasComeAlive() {
+        Calculator cellCalculator = new Calculator();
+        boolean[][] initialState = {{false, false, false, false, false}, {false, true, true, false, false}, {false, true, false, false, false}, {false, false, false, false, false}};
+
+        boolean[][] result = cellCalculator.getNextTick(initialState);
+        boolean[][] expected = {{false, false, false, false, false}, {false, true, true, false, false}, {false, true, true, false, false}, {false, false, false, false, false}};
+
+        assertArrayEquals(expected, result);
+    }
+
 }

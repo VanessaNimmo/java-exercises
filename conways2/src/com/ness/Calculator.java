@@ -43,18 +43,10 @@ class Calculator {
     }
 
     private int getNext(int rowOrColumn, int totalNumber) {
-        int rowBelow = rowOrColumn + 1;
-        if (rowBelow == totalNumber) {
-            rowBelow = 0;
-        }
-        return rowBelow;
+        return rowOrColumn + 1 == totalNumber ? 0 : rowOrColumn + 1;
     }
 
     private int getPrevious(int rowOrColumn, int totalNumber) {
-        int rowAbove = rowOrColumn - 1;
-        if (rowAbove == -1) {
-            rowAbove = totalNumber - 1;
-        }
-        return rowAbove;
+        return rowOrColumn - 1 < 0 ? totalNumber - 1 : rowOrColumn - 1;
     }
 }
