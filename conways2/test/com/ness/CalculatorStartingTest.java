@@ -4,11 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CalculatorTest {
+public class CalculatorStartingTest {
 
     @Test
     public void shouldReturnANewLiveCellCollectionFromOldCellCollection() {
-        Calculator cellCalculator = new Calculator();
+        CalculatorStarting cellCalculator = new CalculatorStarting();
         boolean[][] initialState = {{false, true, false, false}, {true, true, true, false}, {false, false, false, true}, {true, false, true, false}};
 
         boolean[][] result = cellCalculator.getNextTick(initialState);
@@ -19,7 +19,7 @@ public class CalculatorTest {
 
     @Test
     public void shouldReturnNewLiveCellCollectionDifferentScenario() {
-        Calculator cellCalculator = new Calculator();
+        CalculatorStarting cellCalculator = new CalculatorStarting();
         boolean[][] initialState = {{false, true, false, false}, {false, true, true, false}, {false, false, false, false}, {false, true, false, false}};
 
         boolean[][] result = cellCalculator.getNextTick(initialState);
@@ -30,7 +30,7 @@ public class CalculatorTest {
 
     @Test
     public void whenGivenThreeLiveCellsInLShapeShouldReturnThat4thCellHasComeAlive() {
-        Calculator cellCalculator = new Calculator();
+        CalculatorStarting cellCalculator = new CalculatorStarting();
         boolean[][] initialState = {{false, false, false, false, false}, {false, true, true, false, false}, {false, true, false, false, false}, {false, false, false, false, false}};
 
         boolean[][] result = cellCalculator.getNextTick(initialState);
