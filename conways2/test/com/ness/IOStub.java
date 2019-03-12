@@ -10,7 +10,12 @@ class IOStub implements com.ness.InputOutput {
 
     public void display(boolean[][] state){
         this.displayWasCalled = true;
-    };
+    }
+
+    @Override
+    public void print(String message) {}
+
+    ;
 
     public boolean getDisplayWasCalled() { return displayWasCalled; }
 }
