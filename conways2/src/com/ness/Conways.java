@@ -6,8 +6,9 @@ public class Conways {
 
         InputOutput consoleIO = new ConsoleIO();
         int numberOfTicks = 5;
-        CalculatorStarting cellCalculator = new CalculatorStarting();
-        World conwaysWorld = new World(consoleIO, 5, cellCalculator);
-
+        Calculator cellCalculator = new CalculatorStarting();
+        int sleepTime = 500;
+        World conwaysWorld = new World(consoleIO, 5, cellCalculator, sleepTime);
+        conwaysWorld.run();
     }
 }

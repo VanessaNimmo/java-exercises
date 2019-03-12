@@ -18,7 +18,7 @@ public class WorldTest {
 
     @Test
     public void shouldAcceptInitialStateFromAUser() {
-        World newWorld = new World(io, 1, cellCalculatorStub);
+        World newWorld = new World(io, 1, cellCalculatorStub, 500);
 
         boolean[][] result = newWorld.io.getInitialState();
 
@@ -29,7 +29,7 @@ public class WorldTest {
 
     @Test
     public void shouldMakeNewWorldRepresentationFromInitialState() {
-        World newWorld = new World(io, 1, cellCalculatorStub);
+        World newWorld = new World(io, 1, cellCalculatorStub, 500);
 
         GridStub currentState = new GridStub(newWorld.io.getInitialState());
 
@@ -38,7 +38,7 @@ public class WorldTest {
 
     @Test
     public void shouldBeAbleToRetrieveStateFromCurrentBoard() {
-        World newWorld = new World(io, 1, cellCalculatorStub);
+        World newWorld = new World(io, 1, cellCalculatorStub, 500);
 
         GridStub currentState = new GridStub(newWorld.io.getInitialState());
         boolean[][] result = currentState.getLiveCells();
@@ -49,7 +49,7 @@ public class WorldTest {
 
     @Test
     public void shouldCalculateNextStateFromCurrentState() {
-        World newWorld = new World(io, 1, cellCalculatorStub);
+        World newWorld = new World(io, 1, cellCalculatorStub, 500);
 
         GridStub currentState = new GridStub(newWorld.io.getInitialState());
 
@@ -64,7 +64,7 @@ public class WorldTest {
 
     @Test
     public void shouldSendStateToIOForDisplay() {
-        World newWorld = new World(io, 1, cellCalculatorStub);
+        World newWorld = new World(io, 1, cellCalculatorStub, 500);
         GridStub currentState = new GridStub(newWorld.io.getInitialState());
         newWorld.io.display(currentState.getLiveCells());
 
@@ -76,12 +76,24 @@ public class WorldTest {
     @Test
     public void shouldSendAPredefinedNumberOfBoardsToTheIOThenEndGame() {
         int numberOfTicks = 5;
-        World newWorld = new World(io, numberOfTicks, cellCalculatorStub);
+        World newWorld = new World(io, numberOfTicks, cellCalculatorStub, 10);
 
         newWorld.run();
 
         int result = io.displayCount;
 
         assertEquals(5, result);
+    }
+
+    @Test
+    public void shouldTakeAPredefinedLengthBetweenTicksToPlayTheGame() {
+        int numberOfTicks = 1;
+        int sleepTime = 500;
+        World newWorld = new World(io, numberOfTicks, cellCalculatorStub, sleepTime);
+        long startTime = System.currentTimeMillis();
+        newWorld.run();
+        long endTime = System.currentTimeMillis();
+
+        assertTrue(endTime-startTime > 500);
     }
 }

@@ -13,6 +13,7 @@ public class ConsoleIO implements InputOutput {
 
     @Override
     public void display(boolean[][] liveCells) {
+
         System.out.print("\n");
         String cell;
         int gridHeight = liveCells.length;
@@ -42,5 +43,9 @@ public class ConsoleIO implements InputOutput {
             gridSize[i] = Integer.parseInt(splitInput[i]);
         }
         return gridSize;
+    }
+
+    boolean[][] addLiveCell(boolean[][] emptyGrid) {
+        return new boolean[0][0];
     }
 }

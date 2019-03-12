@@ -94,4 +94,17 @@ public class ConsoleIOTest {
         assertArrayEquals(new int[]{1, 1}, result);
     }
 
+    @Test
+    public void shouldGatherLiveCellInformationFromUser() {
+        ConsoleIO consoleDisplay = new ConsoleIO();
+        String input = "1 1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+
+        boolean[][] emptyGrid = {{false}};
+        boolean[][] result = consoleDisplay.addLiveCell(emptyGrid);
+        boolean[][] expected = {{true}};
+
+        assertArrayEquals(expected, result);
+    }
+
 }
