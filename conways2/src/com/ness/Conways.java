@@ -8,6 +8,8 @@ public class Conways {
         int numberOfTicks = 5;
         Calculator cellCalculator = new CalculatorStarting();
         int sleepTime = 500;
+        // get initial state
+        // pass initial state into world
         World conwaysWorld = new World(consoleIO, 5, cellCalculator, sleepTime);
         conwaysWorld.run();
     }

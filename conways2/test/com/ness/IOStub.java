@@ -1,5 +1,7 @@
 package com.ness;
 
+import java.util.Arrays;
+
 class IOStub implements com.ness.InputOutput {
 
     boolean displayWasCalled;
@@ -11,6 +13,7 @@ class IOStub implements com.ness.InputOutput {
 
     public void display(boolean[][] state){
         this.displayWasCalled = true;
+        System.out.print(Arrays.deepToString(state));
         displayCount++;
     }
 

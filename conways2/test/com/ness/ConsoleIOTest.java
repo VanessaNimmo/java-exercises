@@ -85,21 +85,22 @@ public class ConsoleIOTest {
     @Test
     public void shouldGatherGridSizeInformationFromUser() {
         ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = "1 1";
+        String input = String.format("1 1");
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        int[] result = consoleDisplay.getGridSize();
+        boolean[][] result = consoleDisplay.getNewGrid();
+        boolean[][] expected = {{false}};
 
-        assertArrayEquals(new int[]{1, 1}, result);
+        assertArrayEquals(expected, result);
     }
 
     @Test
     public void shouldGatherLiveCellInformationFromUser() {
         ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = "1 1";
+        String input = String.format("1 1");
         InputStream in = new ByteArrayInputStream(input.getBytes());
-
+        System.setIn(in);
         boolean[][] emptyGrid = {{false}};
         boolean[][] result = consoleDisplay.addLiveCell(emptyGrid);
         boolean[][] expected = {{true}};
@@ -107,4 +108,33 @@ public class ConsoleIOTest {
         assertArrayEquals(expected, result);
     }
 
+    @Test
+    public void shouldRejectLiveCellChoicesOutsideTheGridSize() {
+        ConsoleIO consoleDisplay = new ConsoleIO();
+        String input = String.format("2 1");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean[][] emptyGrid = {{false}};
+
+        consoleDisplay.addLiveCell(emptyGrid);
+
+        assertThat(outContent.toString(), containsString("Invalid placement. Please choose inside the grid."));
+    }
+
+    @Test
+    public void shouldRejectGridsLargerThan56Cells() {
+        ConsoleIO consoleDisplay = new ConsoleIO();
+        String input = String.format("57 1%n5 5");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        consoleDisplay.getNewGrid();
+
+        assertThat(outContent.toString(), containsString("Please choose a grid size smaller than 56"));
+    }
+
+    @Test
+    public void shouldGetGridSizeFromUserAndAddLiveCellsToIt() {
+
+    }
 }

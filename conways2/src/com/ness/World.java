@@ -17,8 +17,8 @@ class World {
     void run() {
         boolean[][] nextGrid = io.getInitialState();
         for (int i=0; i < this.numberOfTicks; i++) {
-            nextGrid = cellCalculator.getNextTick(nextGrid);
             io.display(nextGrid);
+            nextGrid = cellCalculator.getNextTick(nextGrid);
             try {
                 Thread.sleep(this.sleepTime);
             } catch (InterruptedException e) {

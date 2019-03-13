@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class WorldTest {
 
     private IOStub io;
-    private CalculatorStub cellCalculatorStub;
+    private Calculator cellCalculatorStub;
 
     @Before
     public void setUp() {
@@ -95,5 +95,15 @@ public class WorldTest {
         long endTime = System.currentTimeMillis();
 
         assertTrue(endTime-startTime > 500);
+    }
+
+    @Test
+    public void shouldUpdateSentBoardWithEachTick() {
+        int numberOfTicks = 5;
+        int sleepTime = 500;
+        Calculator cellCalcualtor = new com.ness.CalculatorStarting();
+        World newWorld = new World(io, numberOfTicks, cellCalcualtor, sleepTime);
+
+
     }
 }
