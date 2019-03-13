@@ -1,5 +1,7 @@
 package com.ness;
 
+import java.util.ArrayList;
+
 class World {
 
     InputOutput io;
@@ -15,10 +17,12 @@ class World {
     }
 
     void run() {
-        boolean[][] nextGrid = io.getInitialState();
+        boolean[][] initialState = io.getInitialState();
+        ArrayList<boolean[][]> states = new ArrayList<>();
+        states.add(initialState);
         for (int i=0; i < this.numberOfTicks; i++) {
-            io.display(nextGrid);
-            nextGrid = cellCalculator.getNextTick(nextGrid);
+            io.display(states.get(i));
+            states.add(cellCalculator.getNextTick(states.get(i)));
             try {
                 Thread.sleep(this.sleepTime);
             } catch (InterruptedException e) {

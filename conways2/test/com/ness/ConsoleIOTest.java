@@ -138,7 +138,7 @@ public class ConsoleIOTest {
     @Test
     public void shouldKeepAcceptingCellsUntilUserSaysn() {
         ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("1 1%n1 2%n1 3%nn");
+        String input = String.format("1 1%ny%n1 2%ny%n1 3%nn");
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         boolean[][] emptyGrid = {{false, false, false}, {false, false, false}, {false, false, false}};
