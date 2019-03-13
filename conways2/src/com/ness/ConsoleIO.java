@@ -44,12 +44,12 @@ public class ConsoleIO implements InputOutput {
         return new boolean[gridSize[0]][gridSize[1]];
     }
 
-    private boolean[][] addLiveStartingCells(boolean[][] startingGrid) {
+    boolean[][] addLiveStartingCells(boolean[][] startingGrid) {
         startingGrid = addLiveCell(startingGrid);
         System.out.print("Add another cell? y/n");
         Scanner in = new Scanner(System.in);
         if(in.nextLine().equals("y")) {
-
+            startingGrid = addLiveStartingCells(startingGrid);
         }
         return startingGrid;
     }

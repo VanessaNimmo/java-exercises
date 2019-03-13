@@ -133,8 +133,31 @@ public class ConsoleIOTest {
         assertThat(outContent.toString(), containsString("Please choose a grid size smaller than 56"));
     }
 
-    @Test
-    public void shouldGetGridSizeFromUserAndAddLiveCellsToIt() {
 
+    // This test is the one that Scanner can't find the next line for - something to do with having different scanners in different methods maybe? Tried having the Scanner as an attribute of the IO class but not much luck.
+    @Test
+    public void shouldKeepAcceptingCellsUntilUserSaysn() {
+        ConsoleIO consoleDisplay = new ConsoleIO();
+        String input = String.format("1 1%n1 2%n1 3%nn");
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        boolean[][] emptyGrid = {{false, false, false}, {false, false, false}, {false, false, false}};
+
+        boolean[][] result = consoleDisplay.addLiveStartingCells(emptyGrid);
+        boolean[][] expected = {{false, true, false},{false, true, false},{false, true, false}};
+
+        assertArrayEquals(expected, result);
     }
+
+//    @Test
+//    public void shouldPrintErrorMessageForIncorrectDataEntry() {
+//        ConsoleIO consoleDisplay = new ConsoleIO();
+//        String input = "1";
+//        InputStream in = new ByteArrayInputStream();
+//        System.setIn(in);
+//
+//        consoleDisplay.getNewGrid();
+//
+//        assertThat(outContent.toString(), containsString(""));
+//    }
 }
