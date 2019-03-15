@@ -48,7 +48,7 @@ public class ConsoleIOTest {
         Grid oneLiveCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(oneLiveCell);
+        consoleDisplay.print(oneLiveCell.toString());
 
         assertThat(outContent.toString(), containsString("\uD83C\uDF06"));
     }
@@ -59,7 +59,7 @@ public class ConsoleIOTest {
         Grid oneDeadCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(oneDeadCell);
+        consoleDisplay.print(oneDeadCell.toString());
 
         assertThat(outContent.toString(), containsString("\uD83C\uDFD9"));
     }
@@ -70,7 +70,7 @@ public class ConsoleIOTest {
         Grid oneSmallWorld = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(oneSmallWorld);
+        consoleDisplay.print(oneSmallWorld.toString());
 
         assertThat(outContent.toString(), containsString("\uD83C\uDFD9\n\uD83C\uDF06\n\uD83C\uDFD9\n"));
     }
@@ -81,7 +81,7 @@ public class ConsoleIOTest {
         Grid oneDeadCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(oneDeadCell);
+        consoleDisplay.print(oneDeadCell.toString());
 
         assertThat(outContent.toString(), startsWith("\n"));
     }

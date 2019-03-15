@@ -10,18 +10,20 @@ public class Conways {
 
         InputOutput io = new ConsoleIO();
         int numberOfTicks = 5;
-        Calculator cellCalculator = new CalculatorStarting();
+        Calculator cellCalculator = new TickCalculator();
         int sleepTime = 500;
-        ArrayList<Grid> history = new ArrayList<Grid>();
+        ArrayList<Grid> history = new ArrayList<>();
+
         Grid initialState = getInitialState(io);
-        io.display(initialState);
+        io.print(initialState.toString());
         history.add(initialState);
+
         int counter = 0;
         Grid startingState = initialState;
         while (counter < numberOfTicks) {
             Grid finalState = cellCalculator.getNextTick(startingState);
             history.add(finalState);
-            io.display(finalState);
+            io.print(finalState.toString());
             startingState = finalState;
             counter++;
             try {

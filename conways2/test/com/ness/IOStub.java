@@ -20,11 +20,6 @@ class IOStub implements com.ness.InputOutput {
     }
 
     @Override
-    public void display(Grid liveCells) {
-
-    }
-
-    @Override
     public void print(String message) {}
 
 }

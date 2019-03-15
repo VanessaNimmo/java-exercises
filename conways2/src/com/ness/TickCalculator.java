@@ -3,7 +3,7 @@ package com.ness;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class CalculatorStarting implements Calculator {
+class TickCalculator implements Calculator {
 
     public Grid getNextTick(Grid initialGrid) {
         boolean[][] initialState = initialGrid.getLiveCells();
