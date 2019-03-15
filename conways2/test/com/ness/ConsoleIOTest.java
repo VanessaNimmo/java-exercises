@@ -89,7 +89,7 @@ public class ConsoleIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        boolean[][] result = consoleDisplay.getNewGrid();
+        boolean[][] result = consoleDisplay.getInitialState();
         boolean[][] expected = {{false}};
 
         assertArrayEquals(expected, result);
@@ -102,7 +102,7 @@ public class ConsoleIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         boolean[][] emptyGrid = {{false}};
-        boolean[][] result = consoleDisplay.addLiveCell(emptyGrid);
+        boolean[][] result = consoleDisplay.getInitialState();
         boolean[][] expected = {{true}};
 
         assertArrayEquals(expected, result);
@@ -116,7 +116,7 @@ public class ConsoleIOTest {
         System.setIn(in);
         boolean[][] emptyGrid = {{false}};
 
-        consoleDisplay.addLiveCell(emptyGrid);
+        consoleDisplay.getInitialState();
 
         assertThat(outContent.toString(), containsString("Invalid placement. Please choose inside the grid."));
     }
@@ -128,7 +128,7 @@ public class ConsoleIOTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        consoleDisplay.getNewGrid();
+        consoleDisplay.getInitialState();
 
         assertThat(outContent.toString(), containsString("Please choose a grid size smaller than 56"));
     }
@@ -143,21 +143,21 @@ public class ConsoleIOTest {
         System.setIn(in);
         boolean[][] emptyGrid = {{false, false, false}, {false, false, false}, {false, false, false}};
 
-        boolean[][] result = consoleDisplay.addLiveStartingCells(emptyGrid);
+        boolean[][] result = consoleDisplay.getInitialState();
         boolean[][] expected = {{false, true, false},{false, true, false},{false, true, false}};
 
         assertArrayEquals(expected, result);
     }
 
-//    @Test
-//    public void shouldPrintErrorMessageForIncorrectDataEntry() {
-//        ConsoleIO consoleDisplay = new ConsoleIO();
-//        String input = "1";
-//        InputStream in = new ByteArrayInputStream();
-//        System.setIn(in);
-//
-//        consoleDisplay.getNewGrid();
-//
-//        assertThat(outContent.toString(), containsString(""));
-//    }
+    @Test
+    public void shouldPrintErrorMessageForIncorrectDataEntry() {
+        ConsoleIO consoleDisplay = new ConsoleIO();
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        consoleDisplay.getInitialState();
+
+        assertThat(outContent.toString(), containsString(""));
+    }
 }

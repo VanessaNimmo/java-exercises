@@ -4,8 +4,8 @@ class GridStub {
 
     private final boolean[][] liveCells;
 
-    GridStub(boolean[][] initialState) {
-        this.liveCells = initialState;
+    GridStub(boolean[][] state) {
+        this.liveCells = state;
     }
 
     boolean[][] getLiveCells() { return this.liveCells;}

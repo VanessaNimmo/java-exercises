@@ -5,7 +5,8 @@ import java.util.Arrays;
 
 class CalculatorStarting implements Calculator {
 
-    public boolean[][] getNextTick(boolean[][] initialState) {
+    public Grid getNextTick(Grid initialGrid) {
+        boolean[][] initialState = initialGrid.getLiveCells();
         int gridHeight = initialState.length;
         int gridWidth = initialState[0].length;
         int aliveNeighbours;
@@ -16,7 +17,7 @@ class CalculatorStarting implements Calculator {
                 newState[row][column] = isCellAlive(aliveNeighbours, initialState[row][column]);
             }
         }
-        return newState;
+        return new Grid(newState);
     }
 
     private boolean isCellAlive(int aliveNeighbours, boolean alive) {

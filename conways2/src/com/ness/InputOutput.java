@@ -2,9 +2,9 @@ package com.ness;
 
 interface InputOutput {
 
-    boolean[][] getInitialState();
+    String getInput(String pattern);
 
-    void display(boolean[][] liveCells);
+    void display(Grid liveCells);
 
     void print(String message);
 }
