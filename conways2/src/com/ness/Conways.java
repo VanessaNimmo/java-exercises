@@ -12,6 +12,7 @@ public class Conways {
         int sleepTime = 500;
         ArrayList<Grid> history = new ArrayList<>();
 
+        io.print(String.valueOf(Message.WELCOME));
         Validator conwaysValidator = new Validator(56);
         Grid initialState = getInitialState(io, conwaysValidator);
         io.print(initialState.toString());
@@ -34,10 +35,10 @@ public class Conways {
     }
 
     private static Grid getInitialState(InputOutput io, Validator conwaysValidator) {
-        io.print("Please enter the height and width of the world grid, separated by a space:");
+        io.print(String.valueOf(Message.GRID));
         int[] gridSize = getIntegerPair(io, conwaysValidator);
         while (!conwaysValidator.validGridSize(gridSize)) {
-            io.print("Please enter a grid size smaller than 56");
+            io.print(String.valueOf(Message.GRID_SIZE_ERROR));
             gridSize = getIntegerPair(io, conwaysValidator);
         }
         boolean[][] emptyGrid = new boolean[gridSize[0]][gridSize[1]];
@@ -58,7 +59,7 @@ public class Conways {
         boolean finished = false;
         while (!finished) {
             startingGrid = addLiveCell(startingGrid, io, conwaysValidator);
-            io.print("Add another cell? y/n");
+            io.print(String.valueOf(Message.ENTER_ANOTHER_CELL));
             if(io.getInput().equals("n")) {
                 finished = true;
             }
@@ -67,10 +68,10 @@ public class Conways {
     }
 
     private static boolean[][] addLiveCell(boolean[][] startingGrid, InputOutput io, Validator conwaysValidator) {
-        io.print("Enter the location of the live starting cell, counting across then down. Separate the numbers with a space: ");
+        io.print(String.valueOf(Message.CELL));
         int[] cellLocation = getIntegerPair(io, conwaysValidator);
         while(!conwaysValidator.validCellLocation(cellLocation, startingGrid)) {
-            io.print("Invalid placement. Please choose inside the grid.");
+            io.print(String.valueOf(Message.INVALID_PLACEMENT));
             cellLocation = getIntegerPair(io, conwaysValidator);
         }
         startingGrid[cellLocation[1]-1][cellLocation[0]-1] = true;
