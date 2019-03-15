@@ -49,7 +49,8 @@ public class Conways {
     private static int[] getIntegerPair(InputOutput io, Validator conwaysValidator) {
         String expression = io.getInput();
         while (!conwaysValidator.validInputString(expression)) {
-            io.print(String.format("You entered %s. Please enter digits only, separated by a single space:", expression));
+            io.print(String.format("You entered %s. ", expression));
+            io.print(String.valueOf(Message.INPUT_RULES));
             expression = io.getInput();
         }
         return parseIntegerPair(expression);

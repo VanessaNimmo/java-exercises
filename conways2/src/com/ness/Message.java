@@ -7,7 +7,8 @@ public enum Message {
     GRID_SIZE_ERROR("Please enter a grid size smaller than 56\n"),
     ENTER_ANOTHER_CELL("Add another cell? y/n\n"),
     CELL("Enter the location of the live starting cell, counting across then down. Separate the numbers with a space:\n"),
-    INVALID_PLACEMENT("Invalid placement. Please choose inside the grid.");
+    INVALID_PLACEMENT("Invalid placement. Please choose inside the grid."),
+    INPUT_RULES( "Please enter digits only, separated by a single space:");
 
     private final String content;
 
