@@ -1,8 +1,10 @@
 package com.ness;
 
+import java.util.regex.Pattern;
+
 interface InputOutput {
 
-    String getInput(String pattern);
+    String getInput();
 
     void display(Grid liveCells);
 

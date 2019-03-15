@@ -45,9 +45,10 @@ public class ConsoleIOTest {
     @Test
     public void displayShouldPrintSunnyEmojiForLiveCell() {
         boolean[][] grid = {{true}};
+        Grid oneLiveCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(grid);
+        consoleDisplay.display(oneLiveCell);
 
         assertThat(outContent.toString(), containsString("\uD83C\uDF06"));
     }
@@ -55,9 +56,10 @@ public class ConsoleIOTest {
     @Test
     public void displayShouldPrintCloudyEmojiForDeadCell() {
         boolean[][] grid = {{false}};
+        Grid oneDeadCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(grid);
+        consoleDisplay.display(oneDeadCell);
 
         assertThat(outContent.toString(), containsString("\uD83C\uDFD9"));
     }
@@ -65,9 +67,10 @@ public class ConsoleIOTest {
     @Test
     public void displayShouldMoveToNewLineForEachRowOfGrid() {
         boolean[][] grid = {{false}, {true}, {false}};
+        Grid oneSmallWorld = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(grid);
+        consoleDisplay.display(oneSmallWorld);
 
         assertThat(outContent.toString(), containsString("\uD83C\uDFD9\n\uD83C\uDF06\n\uD83C\uDFD9\n"));
     }
@@ -75,89 +78,11 @@ public class ConsoleIOTest {
     @Test
     public void displayOutPutShouldStartWithANewLine() {
         boolean[][] grid = {{false}};
+        Grid oneDeadCell = new Grid(grid);
         ConsoleIO consoleDisplay = new ConsoleIO();
 
-        consoleDisplay.display(grid);
+        consoleDisplay.display(oneDeadCell);
 
         assertThat(outContent.toString(), startsWith("\n"));
-    }
-
-    @Test
-    public void shouldGatherGridSizeInformationFromUser() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("1 1");
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        boolean[][] result = consoleDisplay.getInitialState();
-        boolean[][] expected = {{false}};
-
-        assertArrayEquals(expected, result);
-    }
-
-    @Test
-    public void shouldGatherLiveCellInformationFromUser() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("1 1");
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        boolean[][] emptyGrid = {{false}};
-        boolean[][] result = consoleDisplay.getInitialState();
-        boolean[][] expected = {{true}};
-
-        assertArrayEquals(expected, result);
-    }
-
-    @Test
-    public void shouldRejectLiveCellChoicesOutsideTheGridSize() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("2 1");
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        boolean[][] emptyGrid = {{false}};
-
-        consoleDisplay.getInitialState();
-
-        assertThat(outContent.toString(), containsString("Invalid placement. Please choose inside the grid."));
-    }
-
-    @Test
-    public void shouldRejectGridsLargerThan56Cells() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("57 1%n5 5");
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        consoleDisplay.getInitialState();
-
-        assertThat(outContent.toString(), containsString("Please choose a grid size smaller than 56"));
-    }
-
-
-    // This test is the one that Scanner can't find the next line for - something to do with having different scanners in different methods maybe? Tried having the Scanner as an attribute of the IO class but not much luck.
-    @Test
-    public void shouldKeepAcceptingCellsUntilUserSaysn() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = String.format("1 1%ny%n1 2%ny%n1 3%nn");
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        boolean[][] emptyGrid = {{false, false, false}, {false, false, false}, {false, false, false}};
-
-        boolean[][] result = consoleDisplay.getInitialState();
-        boolean[][] expected = {{false, true, false},{false, true, false},{false, true, false}};
-
-        assertArrayEquals(expected, result);
-    }
-
-    @Test
-    public void shouldPrintErrorMessageForIncorrectDataEntry() {
-        ConsoleIO consoleDisplay = new ConsoleIO();
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        consoleDisplay.getInitialState();
-
-        assertThat(outContent.toString(), containsString(""));
     }
 }

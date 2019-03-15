@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class ConsoleIO implements InputOutput {
 
     @Override
-    public String getInput(String pattern) {
+    public String getInput() {
         Scanner in = new Scanner(System.in);
-
-        return null;
+        return in.nextLine();
     }
 
     @Override

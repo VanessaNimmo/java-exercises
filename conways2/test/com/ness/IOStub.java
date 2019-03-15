@@ -9,14 +9,19 @@ class IOStub implements com.ness.InputOutput {
         return new boolean[][]{{false, true, false, false}, {true, true, true, false}, {false, false, false, true}, {true, false, true, false}};
     }
 
-    @Override
-    public String getInput(String pattern) {
-        return null;
-    }
-
     public void display(boolean[][] state){
         this.displayWasCalled = true;
         displayCount++;
+    }
+
+    @Override
+    public String getInput() {
+        return null;
+    }
+
+    @Override
+    public void display(Grid liveCells) {
+
     }
 
     @Override
