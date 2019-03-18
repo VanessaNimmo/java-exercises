@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -13,7 +12,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.*;
 
-public class ConsoleIOTest {
+public class ConsoleOutputTest {
 
     private PrintStream sysOut;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -35,7 +34,7 @@ public class ConsoleIOTest {
     @Test
     public void printShouldPrintReceivedInformationToConsole() {
         String message = "Welcome to Conways Game of Life";
-        ConsoleIO consoleDisplay = new ConsoleIO();
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(message);
 
@@ -46,7 +45,7 @@ public class ConsoleIOTest {
     public void displayShouldPrintSunnyEmojiForLiveCell() {
         boolean[][] grid = {{true}};
         Grid oneLiveCell = new Grid(grid);
-        ConsoleIO consoleDisplay = new ConsoleIO();
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(oneLiveCell.toString());
 
@@ -57,7 +56,7 @@ public class ConsoleIOTest {
     public void displayShouldPrintCloudyEmojiForDeadCell() {
         boolean[][] grid = {{false}};
         Grid oneDeadCell = new Grid(grid);
-        ConsoleIO consoleDisplay = new ConsoleIO();
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(oneDeadCell.toString());
 
@@ -68,7 +67,7 @@ public class ConsoleIOTest {
     public void displayShouldMoveToNewLineForEachRowOfGrid() {
         boolean[][] grid = {{false}, {true}, {false}};
         Grid oneSmallWorld = new Grid(grid);
-        ConsoleIO consoleDisplay = new ConsoleIO();
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(oneSmallWorld.toString());
 
@@ -79,7 +78,7 @@ public class ConsoleIOTest {
     public void displayOutPutShouldStartWithANewLine() {
         boolean[][] grid = {{false}};
         Grid oneDeadCell = new Grid(grid);
-        ConsoleIO consoleDisplay = new ConsoleIO();
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(oneDeadCell.toString());
 

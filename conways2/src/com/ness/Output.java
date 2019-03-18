@@ -2,9 +2,7 @@ package com.ness;
 
 import java.util.regex.Pattern;
 
-interface InputOutput {
-
-    String getInput();
+interface Output {
 
     void print(String message);
 }

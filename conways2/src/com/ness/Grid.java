@@ -4,11 +4,9 @@ class Grid {
 
     private final boolean[][] liveCells;
 
-    Grid(boolean[][] state) {
-        this.liveCells = state;
-    }
+    Grid(boolean[][] state) { this.liveCells = state; }
 
-    boolean[][] getLiveCells() { return this.liveCells;}
+    boolean[][] getCells() { return this.liveCells; }
 
     public String toString() {
         StringBuilder stringRepresentation = new StringBuilder();

@@ -6,7 +6,7 @@ public class Conways {
 
     public static void main(String[] args) {
 
-        InputOutput io = new ConsoleIO();
+        Output io = new ConsoleOutput();
         int numberOfTicks = 5;
         Calculator cellCalculator = new TickCalculator();
         int sleepTime = 500;
@@ -34,7 +34,7 @@ public class Conways {
         }
     }
 
-    private static Grid getInitialState(InputOutput io, Validator conwaysValidator) {
+    private static Grid getInitialState(Output io, Validator conwaysValidator) {
         io.print(String.valueOf(Message.GRID));
         int[] gridSize = getIntegerPair(io, conwaysValidator);
         while (!conwaysValidator.validGridSize(gridSize)) {
@@ -46,7 +46,7 @@ public class Conways {
         return new Grid(startingGrid);
     }
 
-    private static int[] getIntegerPair(InputOutput io, Validator conwaysValidator) {
+    private static int[] getIntegerPair(Output io, Validator conwaysValidator) {
         String expression = io.getInput();
         while (!conwaysValidator.validInputString(expression)) {
             io.print(String.format("You entered %s. ", expression));
@@ -56,7 +56,7 @@ public class Conways {
         return parseIntegerPair(expression);
     }
 
-    private static boolean[][] addLiveStartingCells(boolean[][] startingGrid, InputOutput io, Validator conwaysValidator) {
+    private static boolean[][] addLiveStartingCells(boolean[][] startingGrid, Output io, Validator conwaysValidator) {
         boolean finished = false;
         while (!finished) {
             startingGrid = addLiveCell(startingGrid, io, conwaysValidator);
@@ -68,7 +68,7 @@ public class Conways {
         return startingGrid;
     }
 
-    private static boolean[][] addLiveCell(boolean[][] startingGrid, InputOutput io, Validator conwaysValidator) {
+    private static boolean[][] addLiveCell(boolean[][] startingGrid, Output io, Validator conwaysValidator) {
         io.print(String.valueOf(Message.CELL));
         int[] cellLocation = getIntegerPair(io, conwaysValidator);
         while(!conwaysValidator.validCellLocation(cellLocation, startingGrid)) {
@@ -79,6 +79,7 @@ public class Conways {
         return startingGrid;
     }
 
+    // This doesn't belong in the game class - could be in the validator, or could be in its own parser thing, or in some class you have not yet discovered!
     private static int[] parseIntegerPair(String expression) {
         String[] splitInput = expression.split(" ");
         int[] integerPair = new int[2];

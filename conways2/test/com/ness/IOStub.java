@@ -1,6 +1,6 @@
 package com.ness;
 
-class IOStub implements com.ness.InputOutput {
+class IOStub implements Output {
 
     boolean displayWasCalled;
     int displayCount = 0;
@@ -12,11 +12,6 @@ class IOStub implements com.ness.InputOutput {
     public void display(boolean[][] state){
         this.displayWasCalled = true;
         displayCount++;
-    }
-
-    @Override
-    public String getInput() {
-        return null;
     }
 
     @Override

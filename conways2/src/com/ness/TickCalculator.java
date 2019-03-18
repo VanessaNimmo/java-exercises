@@ -6,7 +6,7 @@ import java.util.Arrays;
 class TickCalculator implements Calculator {
 
     public Grid getNextTick(Grid initialGrid) {
-        boolean[][] initialState = initialGrid.getLiveCells();
+        boolean[][] initialState = initialGrid.getCells();
         int gridHeight = initialState.length;
         int gridWidth = initialState[0].length;
         int aliveNeighbours;
