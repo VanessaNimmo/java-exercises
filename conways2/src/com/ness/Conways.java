@@ -6,16 +6,16 @@ public class Conways {
 
     public static void main(String[] args) {
 
-        Output io = new ConsoleOutput();
+        Output output = new ConsoleOutput();
         int numberOfTicks = 5;
         Calculator cellCalculator = new TickCalculator();
         int sleepTime = 500;
         ArrayList<Grid> history = new ArrayList<>();
 
-        io.print(String.valueOf(Message.WELCOME));
+        output.print(String.valueOf(Message.WELCOME));
         Validator conwaysValidator = new Validator(56);
-        Grid initialState = getInitialState(io, conwaysValidator);
-        io.print(initialState.toString());
+        Grid initialState = getInitialState(output, conwaysValidator);
+        output.print(initialState.toString());
         history.add(initialState);
 
         int counter = 0;
@@ -23,7 +23,7 @@ public class Conways {
         while (counter < numberOfTicks) {
             Grid finalState = cellCalculator.getNextTick(startingState);
             history.add(finalState);
-            io.print(finalState.toString());
+            output.print(finalState.toString());
             startingState = finalState;
             counter++;
             try {
@@ -47,7 +47,7 @@ public class Conways {
     }
 
     private static int[] getIntegerPair(Output io, Validator conwaysValidator) {
-        String expression = io.getInput();
+        // Need to get integer pairs from the arguments passed to the program now
         while (!conwaysValidator.validInputString(expression)) {
             io.print(String.format("You entered %s. ", expression));
             io.print(String.valueOf(Message.INPUT_RULES));
