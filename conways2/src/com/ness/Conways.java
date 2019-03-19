@@ -20,11 +20,21 @@ class Conways {
 
     void run() {
         int count = 0;
-
-        while (count < numberOfTicks) {
-            output.print(String.valueOf(history.get(0)));
+        do {
+            output.print(String.valueOf(history.get(count)));
+            Grid nextTick = new Grid(history.get(count).getCells());
+            history.add(nextTick);
             count++;
-        }
+            try {
+                Thread.sleep(sleepTimeInMs);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (count < numberOfTicks);
 
+    }
+
+    ArrayList<Grid> getHistory() {
+        return this.history;
     }
 }
