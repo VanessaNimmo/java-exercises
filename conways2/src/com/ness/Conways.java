@@ -6,14 +6,16 @@ class Conways {
 
     private final int numberOfTicks, sleepTimeInMs;
     private ArrayList<Grid> history;
-    private Output output;
+    private final Output output;
+    private final Calculator tickCalculator;
 
-    Conways(Grid initialState, int numberOfTicks, int sleepTimeInMs, Output output) {
+    Conways(Grid initialState, int numberOfTicks, int sleepTimeInMs, Output output, Calculator tickCalculator) {
         history = new ArrayList<>();
         history.add(initialState);
         this.numberOfTicks = numberOfTicks;
         this.sleepTimeInMs = sleepTimeInMs;
         this.output = output;
+        this.tickCalculator = tickCalculator;
     }
 
     void run() {

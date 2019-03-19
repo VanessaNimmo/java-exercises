@@ -13,7 +13,8 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        Calculator tickCalculator = new TickCalculator();
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, tickCalculator);
 
         assertNotNull(game);
     }
@@ -25,14 +26,27 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        Calculator tickCalculator = new TickCalculator();
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, tickCalculator);
 
         game.run();
 
         int result = ((OutputStub) output).printCount;
 
         assertEquals(5, result);
+    }
 
+    @Test
+    public void shouldBeInitialisedWithACalculator() {
+        boolean[][] startingCells = {{false}};
+        Grid initialState = new Grid(startingCells);
+        int numberOfTicks = 5;
+        int sleepTimeInMs = 500;
+        Output output = new OutputStub();
+        Calculator tickCalculator = new TickCalculator();
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, tickCalculator);
+
+        assertNotNull(game);
     }
 
 }
