@@ -8,30 +8,15 @@ public class ConwaysApp {
 
         Output output = new ConsoleOutput();
         int numberOfTicks = 5;
-        Calculator cellCalculator = new TickCalculator();
+        Calculator tickCalculator = new TickCalculator();
         int sleepTime = 500;
-        ArrayList<Grid> history = new ArrayList<>();
 
         output.print(String.valueOf(Message.WELCOME));
         Validator conwaysValidator = new Validator(56);
         Grid initialState = getInitialState(output, conwaysValidator);
-        output.print(initialState.toString());
-        history.add(initialState);
 
-        int counter = 0;
-        Grid startingState = initialState;
-        while (counter < numberOfTicks) {
-            Grid finalState = cellCalculator.getNextTick(startingState);
-            history.add(finalState);
-            output.print(finalState.toString());
-            startingState = finalState;
-            counter++;
-            try {
-                Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        Conways game = new Conways(initialState, numberOfTicks, sleepTime, output, tickCalculator);
+        game.run();
     }
 
     private static Grid getInitialState(Output io, Validator conwaysValidator) {
