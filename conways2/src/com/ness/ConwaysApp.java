@@ -1,19 +1,25 @@
 package com.ness;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ConwaysApp {
 
     public static void main(String[] args) {
 
+        int maxGridSize = Integer.parseInt(args[0]);
+        int numberOfTicks = Integer.parseInt(args[1]);
+        int sleepTime = Integer.parseInt(args[2]);
+        String filePath = args[3];
+        File setupFile = new File(filePath);
+
         Output output = new ConsoleOutput();
-        int numberOfTicks = 5;
         Calculator tickCalculator = new TickCalculator();
-        int sleepTime = 500;
+        Validator conwaysValidator = new Validator(maxGridSize);
+        FileReader readFile = new FileReader(setupFile);
+        Grid initialState = readFile.getInitialState(conwaysValidator);
 
         output.print(String.valueOf(Message.WELCOME));
-        Validator conwaysValidator = new Validator(56);
-        Grid initialState = getInitialState(output, conwaysValidator);
 
         Conways game = new Conways(initialState, numberOfTicks, sleepTime, output, tickCalculator);
         game.run();
