@@ -49,7 +49,7 @@ public class ConsoleOutputTest {
 
         consoleDisplay.print(oneLiveCell.toString());
 
-        assertThat(outContent.toString(), containsString("\uD83C\uDF06"));
+        assertThat(outContent.toString(), containsString("\uD83D\uDE01"));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class ConsoleOutputTest {
 
         consoleDisplay.print(oneDeadCell.toString());
 
-        assertThat(outContent.toString(), containsString("\uD83C\uDFD9"));
+        assertThat(outContent.toString(), containsString("\uD83D\uDC7B"));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ConsoleOutputTest {
 
         consoleDisplay.print(oneSmallWorld.toString());
 
-        assertThat(outContent.toString(), containsString("\uD83C\uDFD9\n\uD83C\uDF06\n\uD83C\uDFD9\n"));
+        assertThat(outContent.toString(), containsString(String.format("\uD83D\uDC7B%n\uD83D\uDE01%n\uD83D\uDC7B%n")));
     }
 
     @Test
