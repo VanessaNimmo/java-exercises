@@ -39,11 +39,7 @@ class FileParser {
     }
 
     private boolean[][] addLiveCells(ArrayList<int[]> numberPairs, boolean[][] initialState) {
-        numberPairs.forEach((pair) -> {
-            if (validator.validCellLocation(pair, initialState)) {
-                initialState[pair[1]-1][pair[0]-1] = true;
-            }
-        });
+        numberPairs.stream().filter(pair -> validator.validCellLocation(pair, initialState)).forEach(pair -> initialState[pair[1] - 1][pair[0] - 1] = true);
         return initialState;
     }
 

@@ -28,6 +28,6 @@ class Validator {
         if (cellLocation[0] <= 0 || cellLocation[1] <= 0) {
             return false;
         }
-        return (cellLocation[1] < grid.length && cellLocation[0] < grid[0].length);
+        return (cellLocation[1] <= grid.length && cellLocation[0] <= grid[0].length);
     }
 }
