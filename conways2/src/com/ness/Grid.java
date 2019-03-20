@@ -16,7 +16,7 @@ class Grid {
         int gridWidth = liveCells[0].length;
         for (int row = 0; row < gridHeight; row++ ) {
             for( int column = 0; column < gridWidth; column++) {
-                cell = liveCells[row][column] ? "\uD83C\uDF06" : "\uD83C\uDFD9";
+                cell = liveCells[row][column] ? "\uD83D\uDE01" : "\uD83D\uDC7B";
                 stringRepresentation.append(cell);
             }
             stringRepresentation.append(String.format("%n"));
