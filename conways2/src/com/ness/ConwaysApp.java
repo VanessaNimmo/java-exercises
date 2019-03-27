@@ -14,7 +14,6 @@ public class ConwaysApp {
         File setupFile = new File(filePath);
 
         Output output = new ConsoleOutput();
-        Calculator tickCalculator = new TickCalculator();
         Validator conwaysValidator = new Validator(maxGridSize);
         FileParser readFile = new FileParser(setupFile, conwaysValidator);
         Grid initialState = readFile.getInitialState();
@@ -23,7 +22,7 @@ public class ConwaysApp {
         String welcome = messages.getString("welcome");
         output.print(welcome);
 
-        Conways game = new Conways(initialState, numberOfTicks, sleepTime, output, tickCalculator);
+        Conways game = new Conways(initialState, numberOfTicks, sleepTime, output);
         game.run();
     }
 }
