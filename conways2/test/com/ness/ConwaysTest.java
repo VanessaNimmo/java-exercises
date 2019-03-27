@@ -52,7 +52,7 @@ public class ConwaysTest {
     }
 
     @Test
-    public void shouldCalculateANewGridUsingTheCalculatorOnEachTickAndStoreItInHistory() {
+    public void shouldCalculateANewGridOnEachTickAndStoreItInHistory() {
         boolean[][] startingCells = {{false}};
         Grid initialState = new Grid(startingCells);
         int numberOfTicks = 1;

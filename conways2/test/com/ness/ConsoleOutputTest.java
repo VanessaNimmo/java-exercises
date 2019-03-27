@@ -47,7 +47,7 @@ public class ConsoleOutputTest {
         Grid oneLiveCell = new Grid(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
-        consoleDisplay.print(oneLiveCell.toString());
+        consoleDisplay.displayCellGrid(oneLiveCell.getCells());
 
         assertThat(outContent.toString(), containsString("\uD83D\uDE01"));
     }
@@ -58,7 +58,7 @@ public class ConsoleOutputTest {
         Grid oneDeadCell = new Grid(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
-        consoleDisplay.print(oneDeadCell.toString());
+        consoleDisplay.displayCellGrid(oneDeadCell.getCells());
 
         assertThat(outContent.toString(), containsString("\uD83D\uDC7B"));
     }
@@ -69,7 +69,7 @@ public class ConsoleOutputTest {
         Grid oneSmallWorld = new Grid(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
-        consoleDisplay.print(oneSmallWorld.toString());
+        consoleDisplay.displayCellGrid(oneSmallWorld.getCells());
 
         assertThat(outContent.toString(), containsString(String.format("\uD83D\uDC7B%n\uD83D\uDE01%n\uD83D\uDC7B%n")));
     }
@@ -80,7 +80,7 @@ public class ConsoleOutputTest {
         Grid oneDeadCell = new Grid(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
-        consoleDisplay.print(oneDeadCell.toString());
+        consoleDisplay.displayCellGrid(oneDeadCell.getCells());
 
         assertThat(outContent.toString(), startsWith("\n"));
     }

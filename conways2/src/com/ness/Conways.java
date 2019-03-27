@@ -21,7 +21,7 @@ class Conways {
     void run() {
         int count = 0;
         do {
-            output.print(String.valueOf(history.get(count)));
+            output.displayCellGrid(history.get(count).getCells());
             Grid nextTick = tickCalculator.getNextTick(history.get(count));
             history.add(nextTick);
             count++;

@@ -11,4 +11,9 @@ class OutputStub implements Output {
         printCount++;
     }
 
+    @Override
+    public void displayCellGrid(boolean[][] cells) {
+
+    }
+
 }
