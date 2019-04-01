@@ -44,7 +44,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldPrintSunnyEmojiForLiveCell() {
         boolean[][] grid = {{true}};
-        Grid oneLiveCell = new Grid(grid);
+        Grid2D oneLiveCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.displayCellGrid(oneLiveCell.getCells());
@@ -55,7 +55,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldPrintCloudyEmojiForDeadCell() {
         boolean[][] grid = {{false}};
-        Grid oneDeadCell = new Grid(grid);
+        Grid2D oneDeadCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.displayCellGrid(oneDeadCell.getCells());
@@ -66,7 +66,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldMoveToNewLineForEachRowOfGrid() {
         boolean[][] grid = {{false}, {true}, {false}};
-        Grid oneSmallWorld = new Grid(grid);
+        Grid2D oneSmallWorld = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.displayCellGrid(oneSmallWorld.getCells());
@@ -77,7 +77,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayOutPutShouldStartWithANewLine() {
         boolean[][] grid = {{false}};
-        Grid oneDeadCell = new Grid(grid);
+        Grid2D oneDeadCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.displayCellGrid(oneDeadCell.getCells());

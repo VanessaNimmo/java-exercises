@@ -16,7 +16,7 @@ class FileParser {
         this.validator = conwaysValidator;
     }
 
-    Grid getInitialState() {
+    Grid2D getInitialState() {
         String line = null;
         ArrayList<int[]> numberPairs = new ArrayList<>();
         try (FileReader fileReader = new FileReader(initialGridInfo);
@@ -35,7 +35,7 @@ class FileParser {
         if(numberPairs.size() >= 1) {
             initialState = addLiveCells(numberPairs, initialState);
         }
-        return new Grid(initialState);
+        return new Grid2D(initialState);
     }
 
     private boolean[][] addLiveCells(ArrayList<int[]> numberPairs, boolean[][] initialState) {

@@ -11,7 +11,7 @@ public class ConwaysTest {
     @Test
     public void shouldBeInitialisedWithAStartingGridAndNumOfTicksAndSleepTimeAndOutput() {
         boolean[][] startingCells = {{false}};
-        Grid initialState = new Grid(startingCells);
+        Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
@@ -23,7 +23,7 @@ public class ConwaysTest {
     @Test
     public void shouldRunDisplayGridAsManyTimesAsNumberOfTicks() {
         boolean[][] startingCells = {{false}};
-        Grid initialState = new Grid(startingCells);
+        Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
@@ -39,7 +39,7 @@ public class ConwaysTest {
     @Test
     public void shouldBeInitialisedWithACalculator() {
         boolean[][] startingCells = {{false}};
-        Grid initialState = new Grid(startingCells);
+        Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
@@ -51,7 +51,7 @@ public class ConwaysTest {
     @Test
     public void shouldCalculateANewGridOnEachTickAndStoreItInHistory() {
         boolean[][] startingCells = {{false}};
-        Grid initialState = new Grid(startingCells);
+        Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 1;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
@@ -59,7 +59,7 @@ public class ConwaysTest {
 
         game.run();
 
-        ArrayList<Grid> result = game.getHistory();
+        ArrayList<Grid2D> result = game.getHistory();
 
         assertTrue(result.size()==2);
     }
@@ -67,7 +67,7 @@ public class ConwaysTest {
     @Test
     public void shouldWaitForLengthOfSleepTimeBetweenEachIteration() {
         boolean[][] startingCells = {{false}};
-        Grid initialState = new Grid(startingCells);
+        Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();

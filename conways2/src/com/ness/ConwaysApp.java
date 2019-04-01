@@ -16,7 +16,7 @@ public class ConwaysApp {
         Output output = new ConsoleOutput();
         Validator conwaysValidator = new Validator(maxGridSize);
         FileParser readFile = new FileParser(setupFile, conwaysValidator);
-        Grid initialState = readFile.getInitialState();
+        Grid2D initialState = readFile.getInitialState();
 
         ResourceBundle messages = ResourceBundle.getBundle("messages");
         String welcome = messages.getString("welcome");

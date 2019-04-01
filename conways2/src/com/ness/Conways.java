@@ -5,10 +5,10 @@ import java.util.ArrayList;
 class Conways {
 
     private final int numberOfTicks, sleepTimeInMs;
-    private ArrayList<Grid> history;
+    private ArrayList<Grid2D> history;
     private final Output output;
 
-    Conways(Grid initialState, int numberOfTicks, int sleepTimeInMs, Output output) {
+    Conways(Grid2D initialState, int numberOfTicks, int sleepTimeInMs, Output output) {
         history = new ArrayList<>();
         history.add(initialState);
         this.numberOfTicks = numberOfTicks;
@@ -20,7 +20,7 @@ class Conways {
         int count = 0;
         do {
             output.displayCellGrid(history.get(count).getCells());
-            Grid nextTick = new Grid(history.get(count));
+            Grid2D nextTick = new Grid2D(history.get(count).getCells());
             history.add(nextTick);
             count++;
             try {
@@ -32,7 +32,7 @@ class Conways {
 
     }
 
-    ArrayList<Grid> getHistory() {
+    ArrayList<Grid2D> getHistory() {
         return this.history;
     }
 }
