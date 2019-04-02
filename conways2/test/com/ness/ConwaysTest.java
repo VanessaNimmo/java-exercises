@@ -15,7 +15,8 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        GridCalculator calculator = new GridCalculatorStub();
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         assertNotNull(game);
     }
@@ -27,7 +28,9 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        GridCalculator calculator = new GridCalculatorStub();
+
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
@@ -43,7 +46,9 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        GridCalculator calculator = new GridCalculatorStub();
+
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         assertNotNull(game);
     }
@@ -55,7 +60,9 @@ public class ConwaysTest {
         int numberOfTicks = 1;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        GridCalculator calculator = new GridCalculatorStub();
+
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
@@ -71,7 +78,9 @@ public class ConwaysTest {
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
         Output output = new OutputStub();
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output);
+        GridCalculator calculator = new GridCalculatorStub();
+
+        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
         long startTime = System.currentTimeMillis();
         game.run();
         long endTime = System.currentTimeMillis();
