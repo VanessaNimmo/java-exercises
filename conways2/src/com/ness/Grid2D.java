@@ -2,18 +2,57 @@ package com.ness;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 class Grid2D implements Grid {
 
-    private final boolean[][] liveCells;
+    private final boolean[][] cells;
+    private final ArrayList<Cell> cellList;
+    private int gridHeight, gridWidth;
 
-    Grid2D(boolean[][] state) { this.liveCells = state; }
+    Grid2D(boolean[][] state) {
+        this.cells = state;
+        this.gridHeight = this.cells.length;
+        this.gridWidth = this.cells[0].length;
+        this.cellList = makeCellList();
+    }
 
-    boolean[][] getCells() { return this.liveCells; }
+    Grid2D(List<Cell> cells, int gridHeight, int gridWidth) {
+        this.gridHeight = gridHeight;
+        this.gridWidth = gridWidth;
+        this.cells = extractGrid(cells);
+        this.cellList = makeCellList();
+    }
+
+    private boolean[][] extractGrid(List<Cell> cells) {
+        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
+        for (Cell cell : cells) {
+            cellRepresentation[cell.getRow()][cell.getColumn()] = cell.getAlive();
+        }
+        return cellRepresentation;
+    }
+
+    private ArrayList<Cell> makeCellList() {
+        int gridHeight = this.cells.length;
+        int gridWidth = this.cells[0].length;
+        ArrayList<Cell> cellsList = new ArrayList<>();
+        for (int row = 0; row < gridHeight; row++) {
+            for (int column = 0; column < gridWidth; column++) {
+                cellsList.add(new Cell(row, column, this.cells[row][column]));
+            }
+        }
+        return cellsList;
+    }
+
+    boolean[][] getCells() { return this.cells; }
+    int getGridHeight() { return this.gridHeight; }
+    int getGridWidth() { return this.gridWidth; }
+
+    ArrayList<Cell> getCellList() { return this.cellList; }
 
     @Override
     public boolean cellIsAlive(int row, int column) {
-        return this.liveCells[row-1][column-1];
+        return this.cells[row-1][column-1];
     }
 
     @Override
@@ -21,13 +60,13 @@ class Grid2D implements Grid {
         return getAliveNeighbours(row-1, column-1);
     }
 
-    private int getAliveNeighbours(int row, int column) {
+    int getAliveNeighbours(int row, int column) {
         int aliveNeighbours = 0;
-        int rowAbove = getPrevious(row, this.liveCells.length);
-        int rowBelow = getNext(row, this.liveCells.length);
-        int columnBefore = getPrevious(column, this.liveCells[0].length);
-        int columnAfter = getNext(column, this.liveCells[0].length);
-        ArrayList<Boolean> cells = getCellsList(this.liveCells, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
+        int rowAbove = getPrevious(row, this.cells.length);
+        int rowBelow = getNext(row, this.cells.length);
+        int columnBefore = getPrevious(column, this.cells[0].length);
+        int columnAfter = getNext(column, this.cells[0].length);
+        ArrayList<Boolean> cells = getCellsList(this.cells, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
         aliveNeighbours = (int) cells.stream().filter(cell -> cell).count();
         return aliveNeighbours;
     }
