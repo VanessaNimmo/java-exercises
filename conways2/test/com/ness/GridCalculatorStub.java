@@ -1,9 +1,9 @@
 package com.ness;
 
-class CalculatorStub implements Calculator {
+class GridCalculatorStub implements GridCalculator {
 
-    public Grid getNextTick(Grid currentState){
+    public Grid2D getNextTick(Grid2D currentState){
         boolean[][] nextState = new boolean[][] {{false, false, false, false}, {true, true, true, true}, {false, false, false, false}, {true, true, true, true}};
-        return new Grid(nextState);
+        return new Grid2D(nextState);
     };
 }

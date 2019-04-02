@@ -16,13 +16,14 @@ public class ConwaysApp {
         Output output = new ConsoleOutput();
         Validator conwaysValidator = new Validator(maxGridSize);
         FileParser readFile = new FileParser(setupFile, conwaysValidator);
-        Grid initialState = readFile.getInitialState();
+        Grid2D initialState = readFile.getInitialState();
+        GridCalculator calculator = new GridCalculator2D();
 
         ResourceBundle messages = ResourceBundle.getBundle("messages");
         String welcome = messages.getString("welcome");
         output.print(welcome);
 
-        Conways game = new Conways(initialState, numberOfTicks, sleepTime, output);
+        Conways game = new Conways(initialState, numberOfTicks, sleepTime, output, calculator);
         game.run();
     }
 }

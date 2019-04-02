@@ -14,9 +14,9 @@ public class FileParserTest {
         Validator validator = new Validator(56);
         FileParser reader = new FileParser(initialGridInfo, validator);
 
-        Grid result = reader.getInitialState();
+        Grid2D result = reader.getInitialState();
 
-        Grid expected = new Grid(new boolean[1][1]);
+        Grid2D expected = new Grid2D(new boolean[1][1]);
 
         assertEquals(String.valueOf(expected), String.valueOf(result));
     }
@@ -27,10 +27,10 @@ public class FileParserTest {
         Validator validator = new Validator(56);
         FileParser parser = new FileParser(initialGridInfo, validator);
 
-        Grid result = parser.getInitialState();
+        Grid2D result = parser.getInitialState();
         boolean[][] liveCells = new boolean[1][1];
         liveCells[0][0] = true;
-        Grid expected = new Grid(liveCells);
+        Grid2D expected = new Grid2D(liveCells);
 
         assertEquals(String.valueOf(expected), String.valueOf(result));
     }
