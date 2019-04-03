@@ -14,8 +14,7 @@ public class ConwaysApp {
         File setupFile = new File(filePath);
 
         Output output = new ConsoleOutput();
-        Validator conwaysValidator = new Validator(maxGridSize);
-        FileParser readFile = new FileParser(setupFile, conwaysValidator);
+        FileInputParser readFile = new FileInputParser(setupFile, maxGridSize, output);
         Grid2D initialState = readFile.getInitialState();
         GridCalculator calculator = new GridCalculator2D();
 
