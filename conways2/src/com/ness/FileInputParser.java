@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +22,7 @@ class FileInputParser {
         this.output = output;
     }
 
-    Grid2D getInitialState() {
+    Optional<Grid2D> getInitialState() {
         String line = null;
         ArrayList<int[]> numberPairs = new ArrayList<>();
         try (FileReader fileReader = new FileReader(initialGridInfo);
@@ -39,14 +40,15 @@ class FileInputParser {
             ResourceBundle messages = ResourceBundle.getBundle("messages");
             String invalid = messages.getString("invalid");
             output.print(invalid);
-            return null;
+            return Optional.empty();
         }
         numberPairs.remove(0);
         boolean[][] initialState = new boolean[gridSize[0]][gridSize[1]];
         if(numberPairs.size() >= 1) {
             initialState = addLiveCells(numberPairs, initialState);
         }
-        return new Grid2D(initialState);
+        Grid2D initialStateGrid = new Grid2D(initialState);
+        return Optional.of(initialStateGrid);
     }
 
     private boolean[][] addLiveCells(ArrayList<int[]> numberPairs, boolean[][] initialState) {

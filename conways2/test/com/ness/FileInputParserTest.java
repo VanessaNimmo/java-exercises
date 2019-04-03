@@ -3,6 +3,7 @@ package com.ness;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
@@ -15,11 +16,11 @@ public class FileInputParserTest {
         File initialGridInfo = new File("test/com/ness/setup1.txt");
         FileInputParser reader = new FileInputParser(initialGridInfo,56, output);
 
-        Grid2D result = reader.getInitialState();
+        Optional<Grid2D> result = reader.getInitialState();
 
         Grid2D expected = new Grid2D(new boolean[1][1]);
 
-        assertArrayEquals(expected.getCells(), result.getCells());
+        assertArrayEquals(expected.getCells(), result.get().getCells());
     }
 
     @Test
@@ -28,12 +29,12 @@ public class FileInputParserTest {
         Output output = new ConsoleOutput();
         FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
 
-        Grid2D result = parser.getInitialState();
+        Optional<Grid2D> result = parser.getInitialState();
         boolean[][] liveCells = new boolean[1][1];
         liveCells[0][0] = true;
         Grid2D expected = new Grid2D(liveCells);
 
-        assertArrayEquals(expected.getCells(), result.getCells());
+        assertArrayEquals(expected.getCells(), result.get().getCells());
     }
 
     @Test

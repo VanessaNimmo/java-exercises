@@ -16,10 +16,11 @@ public class ConwaysApp {
 
         Output output = new ConsoleOutput();
         FileInputParser readFile = new FileInputParser(setupFile, maxGridSize, output);
-        Grid2D initialState = readFile.getInitialState();
-        if (initialState == null) {
+        Optional<Grid2D> initialStateOptional = readFile.getInitialState();
+        if (initialStateOptional.isEmpty()) {
             System.exit(0);
         }
+        Grid2D initialState = initialStateOptional.get();
         GridCalculator calculator = new GridCalculator2D();
 
         ResourceBundle messages = ResourceBundle.getBundle("messages");
