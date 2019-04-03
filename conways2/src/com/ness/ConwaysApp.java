@@ -1,6 +1,7 @@
 package com.ness;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ConwaysApp {
@@ -16,6 +17,9 @@ public class ConwaysApp {
         Output output = new ConsoleOutput();
         FileInputParser readFile = new FileInputParser(setupFile, maxGridSize, output);
         Grid2D initialState = readFile.getInitialState();
+        if (initialState == null) {
+            System.exit(0);
+        }
         GridCalculator calculator = new GridCalculator2D();
 
         ResourceBundle messages = ResourceBundle.getBundle("messages");

@@ -39,7 +39,7 @@ class FileInputParser {
             ResourceBundle messages = ResourceBundle.getBundle("messages");
             String invalid = messages.getString("invalid");
             output.print(invalid);
-            System.exit(0);
+            return null;
         }
         numberPairs.remove(0);
         boolean[][] initialState = new boolean[gridSize[0]][gridSize[1]];
@@ -70,19 +70,16 @@ class FileInputParser {
     }
 
     boolean validGridSize(int[] gridSize) {
-        if (gridSize[0] <=0 || gridSize[1] <= 0 || gridSize[0] > maxGridSize || gridSize[1] > maxGridSize) {
-            ResourceBundle messages = ResourceBundle.getBundle("messages");
-            String invalid = messages.getString("invalid");
-            output.print(invalid);
-            System.exit(0);
+        if (gridSize[0] <=0 || gridSize[1] <= 0) {
+            return false;
         }
-        return true;
+        return (gridSize[0] < maxGridSize && gridSize[1] < maxGridSize);
     }
 
     boolean validCellLocation(int[] cellLocation, boolean[][] grid) {
-        if (cellLocation[0] <= 0 || cellLocation[1] <= 0) {
+        if (cellLocation[0] <= 0 || cellLocation[1] <= 0 || cellLocation[1] > grid.length || cellLocation[0] > grid[0].length) {
             return false;
         }
-        return (cellLocation[1] <= grid.length && cellLocation[0] <= grid[0].length);
+        return true;
     }
 }
