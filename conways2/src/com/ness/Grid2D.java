@@ -66,14 +66,13 @@ class Grid2D implements Grid {
         int rowBelow = getNext(row, this.cells.length);
         int columnBefore = getPrevious(column, this.cells[0].length);
         int columnAfter = getNext(column, this.cells[0].length);
-        ArrayList<Boolean> cells = getCellsList(this.cells, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
+        List<Boolean> cells = getCellsList(this.cells, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
         aliveNeighbours = (int) cells.stream().filter(cell -> cell).count();
         return aliveNeighbours;
     }
 
-    private ArrayList<Boolean> getCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
-        return new ArrayList<>(
-                Arrays.asList(initialState[rowAbove][columnBefore], initialState[rowAbove][column], initialState[rowAbove][columnAfter], initialState[row][columnBefore], initialState[row][columnAfter], initialState[rowBelow][columnBefore], initialState[rowBelow][column], initialState[rowBelow][columnAfter]));
+    private List<Boolean> getCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
+        return Arrays.asList(initialState[rowAbove][columnBefore], initialState[rowAbove][column], initialState[rowAbove][columnAfter], initialState[row][columnBefore], initialState[row][columnAfter], initialState[rowBelow][columnBefore], initialState[rowBelow][column], initialState[rowBelow][columnAfter]);
     }
 
     private int getNext(int rowOrColumn, int totalNumber) {
