@@ -69,9 +69,16 @@ class Grid2D implements Grid {
         return (int) cells.stream().filter(cell -> cell).count();
     }
 
-    // TODO This is hard to read: can you make it easier to read?
     private List<Boolean> getCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
-        return Arrays.asList(initialState[rowAbove][columnBefore], initialState[rowAbove][column], initialState[rowAbove][columnAfter], initialState[row][columnBefore], initialState[row][columnAfter], initialState[rowBelow][columnBefore], initialState[rowBelow][column], initialState[rowBelow][columnAfter]);
+        return Arrays.asList(
+                initialState[rowAbove][columnBefore],
+                initialState[rowAbove][column],
+                initialState[rowAbove][columnAfter],
+                initialState[row][columnBefore],
+                initialState[row][columnAfter],
+                initialState[rowBelow][columnBefore],
+                initialState[rowBelow][column],
+                initialState[rowBelow][columnAfter]);
     }
 
     private int getNext(int rowOrColumn, int totalNumber) {
