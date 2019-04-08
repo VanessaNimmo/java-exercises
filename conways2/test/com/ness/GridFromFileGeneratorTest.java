@@ -13,7 +13,7 @@ public class GridFromFileGeneratorTest {
     public void aOneLineFileShouldProduceAOneByOneGridWithOneDeadCell() {
         Output output = new ConsoleOutput();
         File initialGridInfo = new File("test/com/ness/setup1.txt");
-        GridFromFileGenerator reader = new GridFromFileGenerator(initialGridInfo,56, output);
+        GridFromFileGenerator reader = new GridFromFileGenerator(initialGridInfo,56);
 
         Optional<Grid2D> result = reader.getInitialState();
 
@@ -26,7 +26,7 @@ public class GridFromFileGeneratorTest {
     public void aSecondLineInTheFileShouldBeAddedToTheGridAsALiveCellIfValid() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> result = parser.getInitialState();
         boolean[][] liveCells = new boolean[1][1];
@@ -40,7 +40,7 @@ public class GridFromFileGeneratorTest {
     public void aCorrectlyFormattedFileShouldBeParsed() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -51,7 +51,7 @@ public class GridFromFileGeneratorTest {
     public void anIncorrectlyFormattedFirstLineShouldReturnAnEmptyOptional() {
         File initialGridInfo = new File("test/com/ness/incorrectlyFormattedFirstLine.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -62,7 +62,7 @@ public class GridFromFileGeneratorTest {
     public void gridSizesGreaterThanTheSuppliedMaximumShouldReturnAnEmptyOptional() {
         File initialGridInfo = new File("test/com/ness/gridSizeLargerThanMaximum.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -73,7 +73,7 @@ public class GridFromFileGeneratorTest {
     public void shouldAcceptGridSizesSmallerThanMaxGridSize() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -84,7 +84,7 @@ public class GridFromFileGeneratorTest {
     public void gridSizeLessThanZeroShouldReturnEmptyOptional() {
         File initialGridInfo = new File("test/com/ness/gridSizeLessThanZero.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -95,7 +95,7 @@ public class GridFromFileGeneratorTest {
     public void shouldAcceptCellPlacementsInsideAGivenGrid() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         Optional<Grid2D> grid = parser.getInitialState();
 
@@ -107,7 +107,7 @@ public class GridFromFileGeneratorTest {
     public void shouldIgnoreCellPlacementOutsideTheGivenGridAndContinueToPlaceLiveCells() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
         boolean[][] emptyGrid = new boolean[10][10];
         int[] cellLocation = {11, 3};
 
@@ -118,7 +118,7 @@ public class GridFromFileGeneratorTest {
     public void shouldIgnoreCellPlacementsBelow0() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56);
 
         // TODO Create an appropriate test file that shows it will ignore numbers below zero
 

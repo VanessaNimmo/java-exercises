@@ -13,12 +13,10 @@ class GridFromFileGenerator {
 
     private final File initialGridInfo;
     private final int maxGridSize;
-    private final Output output;
 
-    GridFromFileGenerator(File initialGridInfo, int maxGridSize, Output output) {
+    GridFromFileGenerator(File initialGridInfo, int maxGridSize) {
         this.initialGridInfo = initialGridInfo;
         this.maxGridSize = maxGridSize;
-        this.output = output;
     }
 
     Optional<Grid2D> getInitialState() {
