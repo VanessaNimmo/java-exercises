@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Optional;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 
 public class FileInputParserTest {
