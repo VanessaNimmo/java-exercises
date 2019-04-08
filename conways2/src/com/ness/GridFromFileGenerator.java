@@ -6,20 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class FileInputParser {
+class GridFromFileGenerator {
 
     private final File initialGridInfo;
     private final int maxGridSize;
-    private final Output output;
 
-    FileInputParser(File initialGridInfo, int maxGridSize, Output output) {
+    GridFromFileGenerator(File initialGridInfo, int maxGridSize) {
         this.initialGridInfo = initialGridInfo;
         this.maxGridSize = maxGridSize;
-        this.output = output;
     }
 
     Optional<Grid2D> getInitialState() {
@@ -35,11 +32,11 @@ class FileInputParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (numberPairs.isEmpty()) {
+            return Optional.empty();
+        }
         int[] gridSize = numberPairs.get(0);
         if (!validGridSize(gridSize)) {
-            ResourceBundle messages = ResourceBundle.getBundle("messages");
-            String invalid = messages.getString("invalid");
-            output.print(invalid);
             return Optional.empty();
         }
         numberPairs.remove(0);
@@ -65,20 +62,20 @@ class FileInputParser {
         return integerPair;
     }
 
-    boolean validInputString(String s) {
+    private boolean validInputString(String s) {
         Pattern numberPair = Pattern.compile("\\d*\\s\\d*");
         Matcher matcher = numberPair.matcher(s);
         return matcher.matches();
     }
 
-    boolean validGridSize(int[] gridSize) {
+    private boolean validGridSize(int[] gridSize) {
         if (gridSize[0] <=0 || gridSize[1] <= 0) {
             return false;
         }
         return (gridSize[0] < maxGridSize && gridSize[1] < maxGridSize);
     }
 
-    boolean validCellLocation(int[] cellLocation, boolean[][] grid) {
+    private boolean validCellLocation(int[] cellLocation, boolean[][] grid) {
         if (cellLocation[0] <= 0 || cellLocation[1] <= 0 || cellLocation[1] > grid.length || cellLocation[0] > grid[0].length) {
             return false;
         }

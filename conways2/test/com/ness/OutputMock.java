@@ -1,6 +1,6 @@
 package com.ness;
 
-class OutputStub implements Output {
+class OutputMock implements Output {
 
     boolean displayCellGridWasCalled;
     int printCount = 0;

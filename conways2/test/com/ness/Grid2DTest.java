@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 public class Grid2DTest {
 
+    // TODO Need to test both cases of the one cell option, as well as both the true and false versions of the aliveNeighbours one. Find the edge cases and test those (esp. on aliveNeighbours)
     @Test
     public void cellIsAliveShouldReturnTrueForAOneByOneGridOfALiveCell() {
         boolean[][] liveCells = {{true}};
