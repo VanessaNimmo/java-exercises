@@ -7,13 +7,13 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-public class FileInputParserTest {
+public class GridFromFileGeneratorTest {
 
     @Test
     public void aOneLineFileShouldProduceAOneByOneGridWithOneDeadCell() {
         Output output = new ConsoleOutput();
         File initialGridInfo = new File("test/com/ness/setup1.txt");
-        FileInputParser reader = new FileInputParser(initialGridInfo,56, output);
+        GridFromFileGenerator reader = new GridFromFileGenerator(initialGridInfo,56, output);
 
         Optional<Grid2D> result = reader.getInitialState();
 
@@ -26,7 +26,7 @@ public class FileInputParserTest {
     public void aSecondLineInTheFileShouldBeAddedToTheGridAsALiveCellIfValid() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
         Optional<Grid2D> result = parser.getInitialState();
         boolean[][] liveCells = new boolean[1][1];
@@ -37,96 +37,90 @@ public class FileInputParserTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenAStringInPutMatchesTheRequiredPattern() {
+    public void aCorrectlyFormattedFileShouldBeParsed() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        boolean result = parser.validInputString("5 5");
+        Optional<Grid2D> grid = parser.getInitialState();
 
-        assertTrue(result);
+        assertTrue(grid.isPresent());
     }
 
     @Test
-    public void shouldReturnFalseWhenAStringInputDoesNotMatchTheRequiredPattern() {
-        File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
+    public void anIncorrectlyFormattedFirstLineShouldReturnAnEmptyOptional() {
+        File initialGridInfo = new File("test/com/ness/incorrectlyFormattedFirstLine.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        boolean result = parser.validInputString("rtg 6");
+        Optional<Grid2D> grid = parser.getInitialState();
 
-        assertFalse(result);
+        assertTrue(grid.isEmpty());
     }
 
     @Test
-    public void shouldRejectGridSizesGreaterThanSuppliedMaximumAndExitProgram() {
-        File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
+    public void gridSizesGreaterThanTheSuppliedMaximumShouldReturnAnEmptyOptional() {
+        File initialGridInfo = new File("test/com/ness/gridSizeLargerThanMaximum.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
-        int[] gridSize = {57, 34};
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        parser.validGridSize(gridSize);
+        Optional<Grid2D> grid = parser.getInitialState();
+
+        assertTrue(grid.isEmpty());
     }
 
     @Test
     public void shouldAcceptGridSizesSmallerThanMaxGridSize() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        int[] gridSize = {25, 34};
+        Optional<Grid2D> grid = parser.getInitialState();
 
-        boolean result = parser.validGridSize(gridSize);
-
-        assertTrue(result);
+        assertTrue(grid.isPresent());
     }
 
     @Test
-    public void shouldExitProgramIfSuppliedGridSizeIsLessThanZero() {
-        File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
+    public void gridSizeLessThanZeroShouldReturnEmptyOptional() {
+        File initialGridInfo = new File("test/com/ness/gridSizeLessThanZero.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
-        int[] gridSize = {-3, 34};
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        parser.validGridSize(gridSize);
+        Optional<Grid2D> grid = parser.getInitialState();
+
+        assertTrue(grid.isEmpty());
     }
 
     @Test
     public void shouldAcceptCellPlacementsInsideAGivenGrid() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
-        boolean[][] emptyGrid = new boolean[10][10];
-        int[] cellLocation = {3, 3};
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        boolean result = parser.validCellLocation(cellLocation, emptyGrid);
+        Optional<Grid2D> grid = parser.getInitialState();
 
-        assertTrue(result);
+        // TODO Need to check that the cellList contains a cell at 1,1 that is alive
+
     }
 
     @Test
-    public void shouldRejectCellPlacementOutsideAGivenGrid() {
+    public void shouldIgnoreCellPlacementOutsideTheGivenGridAndContinueToPlaceLiveCells() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
         boolean[][] emptyGrid = new boolean[10][10];
         int[] cellLocation = {11, 3};
 
-        boolean result = parser.validCellLocation(cellLocation, emptyGrid);
-
-        assertFalse(result);
+        // TODO Create an appropriate test file that shows it will ignore numbers outside the given grid
     }
 
     @Test
-    public void shouldRejectCellPlacementsBelow0() {
+    public void shouldIgnoreCellPlacementsBelow0() {
         File initialGridInfo = new File("test/com/ness/setup1livecell.txt");
         Output output = new ConsoleOutput();
-        FileInputParser parser = new FileInputParser(initialGridInfo, 56, output);
-        boolean[][] emptyGrid = new boolean[10][10];
-        int[] cellLocation = {0, 3};
+        GridFromFileGenerator parser = new GridFromFileGenerator(initialGridInfo, 56, output);
 
-        boolean result = parser.validCellLocation(cellLocation, emptyGrid);
+        // TODO Create an appropriate test file that shows it will ignore numbers below zero
 
-        assertFalse(result);
     }
 }

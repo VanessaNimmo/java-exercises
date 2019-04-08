@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 
 public class GridCalculator2DTest {
 
-    // TODO Rewrite these tests to reflect the new file structure but implementing the same behaviour, and add the functionality to the GridCalculator2D as you go. Consider iterator options.
     @Test
     public void shouldCalculateANewLiveCellCollectionFromOldCellCollection() {
         boolean[][] initialState = {{false, true, false, false}, {true, true, true, false}, {false, false, false, true}, {true, false, true, false}};

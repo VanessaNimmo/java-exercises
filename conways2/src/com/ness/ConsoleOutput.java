@@ -7,6 +7,7 @@ public class ConsoleOutput implements Output {
         System.out.print(message);
     }
 
+    // TODO Make this deal with the flattened representation rather than the internal representation
     @Override
     public void displayCellGrid(boolean[][] cells) {
         StringBuilder stringRepresentation = new StringBuilder();
