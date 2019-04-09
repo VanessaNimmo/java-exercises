@@ -1,5 +1,7 @@
 package com.ness;
 
+import java.util.ArrayList;
+
 class OutputMock implements Output {
 
     boolean displayCellGridWasCalled;
@@ -11,7 +13,7 @@ class OutputMock implements Output {
     }
 
     @Override
-    public void displayCellGrid(boolean[][] cells) {
+    public void displayCellGrid(ArrayList<Cell> cellList, int gridWidth) {
         this.displayCellGridWasCalled = true;
         printCount++;
     }

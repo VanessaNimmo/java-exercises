@@ -46,8 +46,9 @@ public class ConsoleOutputTest {
         boolean[][] grid = {{true}};
         Grid2D oneLiveCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
+        int gridWidth = 1;
 
-        consoleDisplay.displayCellGrid(oneLiveCell.getCells());
+        consoleDisplay.displayCellGrid(oneLiveCell.getCellList(), gridWidth);
 
         assertThat(outContent.toString(), containsString("\uD83D\uDE01"));
     }
@@ -58,7 +59,9 @@ public class ConsoleOutputTest {
         Grid2D oneDeadCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
-        consoleDisplay.displayCellGrid(oneDeadCell.getCells());
+        int gridWidth = 1;
+
+        consoleDisplay.displayCellGrid(oneDeadCell.getCellList(), gridWidth);
 
         assertThat(outContent.toString(), containsString("\uD83D\uDC7B"));
     }
@@ -68,10 +71,11 @@ public class ConsoleOutputTest {
         boolean[][] grid = {{false}, {true}, {false}};
         Grid2D oneSmallWorld = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
+        int gridWidth = 1;
 
-        consoleDisplay.displayCellGrid(oneSmallWorld.getCells());
+        consoleDisplay.displayCellGrid(oneSmallWorld.getCellList(), gridWidth);
 
-        assertThat(outContent.toString(), containsString(String.format("\uD83D\uDC7B%n\uD83D\uDE01%n\uD83D\uDC7B%n")));
+        assertThat(outContent.toString(), containsString(String.format("%n\uD83D\uDC7B%n\uD83D\uDE01%n\uD83D\uDC7B%n")));
     }
 
     @Test
@@ -79,9 +83,22 @@ public class ConsoleOutputTest {
         boolean[][] grid = {{false}};
         Grid2D oneDeadCell = new Grid2D(grid);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
+        int gridWidth = 1;
 
-        consoleDisplay.displayCellGrid(oneDeadCell.getCells());
+        consoleDisplay.displayCellGrid(oneDeadCell.getCellList(), gridWidth);
 
         assertThat(outContent.toString(), startsWith("\n"));
+    }
+
+    @Test
+    public void displayShouldMoveToANewLineAtEndOfEachRow() {
+        boolean[][] grid = {{false, true}, {true, false}};
+        Grid2D oneDeadCell = new Grid2D(grid);
+        ConsoleOutput consoleDisplay = new ConsoleOutput();
+        int gridWidth = 2;
+
+        consoleDisplay.displayCellGrid(oneDeadCell.getCellList(), gridWidth);
+
+        assertThat(outContent.toString(), containsString("\n\uD83D\uDC7B\uD83D\uDE01\n\uD83D\uDE01\uD83D\uDC7B\n"));
     }
 }

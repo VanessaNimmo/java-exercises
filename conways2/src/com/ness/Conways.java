@@ -1,7 +1,6 @@
 package com.ness;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 class Conways {
 
@@ -9,6 +8,7 @@ class Conways {
     private ArrayList<Grid2D> history;
     private final Output output;
     private final GridCalculator calculator;
+    private final int gridWidth;
 
     Conways(Grid2D initialState, int numberOfTicks, int sleepTimeInMs, Output output, GridCalculator calculator) {
         history = new ArrayList<>();
@@ -17,12 +17,13 @@ class Conways {
         this.sleepTimeInMs = sleepTimeInMs;
         this.output = output;
         this.calculator = calculator;
+        this.gridWidth = initialState.getGridWidth();
     }
 
     void run() {
         int count = 0;
         do {
-            output.displayCellGrid(history.get(count).getCells());
+            output.displayCellGrid(history.get(count).getCellList(), gridWidth);
             Grid2D nextTick = calculator.getNextTick(history.get(count));
             history.add(nextTick);
             count++;
