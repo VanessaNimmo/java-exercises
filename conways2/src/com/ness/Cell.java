@@ -2,16 +2,14 @@ package com.ness;
 
 public class Cell {
 
-    private int row, column;
+    private Location location;
     private boolean alive;
 
-    Cell(int row, int column, boolean alive){
-        this.row = row;
-        this.column = column;
+    Cell(Location location, boolean alive){
+        this.location = location;
         this.alive = alive;
     }
 
-    int getRow() { return this.row; }
-    int getColumn() { return this.column; }
+    Location getLocation() { return this.location; }
     boolean getAlive() { return this.alive; }
 }

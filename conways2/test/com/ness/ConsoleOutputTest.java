@@ -45,7 +45,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldPrintSunnyEmojiForLiveCell() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(0, 0, true));
+        initialCellList.add(new Cell(new Location(0, 0), true));
         Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
@@ -58,7 +58,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldPrintCloudyEmojiForDeadCell() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(0, 0, false));
+        initialCellList.add(new Cell(new Location(0, 0), false));
         Grid2D oneDeadCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
@@ -72,9 +72,9 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldMoveToNewLineForEachRowOfGrid() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(0, 0, false));
-        initialCellList.add(new Cell(1, 0, true));
-        initialCellList.add(new Cell(2, 0, false));
+        initialCellList.add(new Cell(new Location(0, 0), false));
+        initialCellList.add(new Cell(new Location(1, 0), true));
+        initialCellList.add(new Cell(new Location(2, 0), false));
         Grid2D oneSmallWorld = new Grid2D(initialCellList, 3, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
@@ -87,7 +87,7 @@ public class ConsoleOutputTest {
     @Test
     public void displayOutPutShouldStartWithANewLine() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(0, 0, false));
+        initialCellList.add(new Cell(new Location(0, 0), false));
         Grid2D oneDeadCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
@@ -100,10 +100,10 @@ public class ConsoleOutputTest {
     @Test
     public void displayShouldMoveToANewLineAtEndOfEachRow() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(0, 0, false));
-        initialCellList.add(new Cell(0, 1, true));
-        initialCellList.add(new Cell(1, 0, true));
-        initialCellList.add(new Cell(1, 1, false));
+        initialCellList.add(new Cell(new Location(0, 0), false));
+        initialCellList.add(new Cell(new Location(0, 1), true));
+        initialCellList.add(new Cell(new Location(1, 0), true));
+        initialCellList.add(new Cell(new Location(1, 1), false));
         Grid2D twoByTwoGrid = new Grid2D(initialCellList, 2, 2);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 2;

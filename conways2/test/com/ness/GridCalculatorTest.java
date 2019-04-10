@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GridCalculator2DTest {
+public class GridCalculatorTest {
 
     @Test
     public void aLiveCellWithThreeNeighboursShouldBeAliveInNextTick() {

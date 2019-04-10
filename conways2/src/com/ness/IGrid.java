@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IGrid {
 
-    int getAliveNeighbours(int row, int column);
+    int getAliveNeighbours(Location location);
 
     int getGridWidth();
 
