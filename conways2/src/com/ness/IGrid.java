@@ -2,7 +2,7 @@ package com.ness;
 
 import java.util.ArrayList;
 
-public interface Grid {
+public interface IGrid {
 
     int getAliveNeighbours(int row, int column);
 

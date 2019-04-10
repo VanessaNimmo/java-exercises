@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -33,18 +34,19 @@ public class ConsoleOutputTest {
 
     @Test
     public void printShouldPrintReceivedInformationToConsole() {
-        String message = "Welcome to Conways Game of Life";
+        String message = "Welcome to World Game of Life";
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         consoleDisplay.print(message);
 
-        assertThat(outContent.toString(), containsString("Welcome to Conways Game of Life"));
+        assertThat(outContent.toString(), containsString("Welcome to World Game of Life"));
     }
 
     @Test
     public void displayShouldPrintSunnyEmojiForLiveCell() {
-        boolean[][] grid = {{true}};
-        Grid2D oneLiveCell = new Grid2D(grid);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, true));
+        Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
 
@@ -55,8 +57,9 @@ public class ConsoleOutputTest {
 
     @Test
     public void displayShouldPrintCloudyEmojiForDeadCell() {
-        boolean[][] grid = {{false}};
-        Grid2D oneDeadCell = new Grid2D(grid);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, false));
+        Grid2D oneDeadCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
 
         int gridWidth = 1;
@@ -68,8 +71,11 @@ public class ConsoleOutputTest {
 
     @Test
     public void displayShouldMoveToNewLineForEachRowOfGrid() {
-        boolean[][] grid = {{false}, {true}, {false}};
-        Grid2D oneSmallWorld = new Grid2D(grid);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, false));
+        initialCellList.add(new Cell(1, 0, true));
+        initialCellList.add(new Cell(2, 0, false));
+        Grid2D oneSmallWorld = new Grid2D(initialCellList, 3, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
 
@@ -80,8 +86,9 @@ public class ConsoleOutputTest {
 
     @Test
     public void displayOutPutShouldStartWithANewLine() {
-        boolean[][] grid = {{false}};
-        Grid2D oneDeadCell = new Grid2D(grid);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, false));
+        Grid2D oneDeadCell = new Grid2D(initialCellList, 1, 1);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 1;
 
@@ -92,12 +99,16 @@ public class ConsoleOutputTest {
 
     @Test
     public void displayShouldMoveToANewLineAtEndOfEachRow() {
-        boolean[][] grid = {{false, true}, {true, false}};
-        Grid2D oneDeadCell = new Grid2D(grid);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, false));
+        initialCellList.add(new Cell(0, 1, true));
+        initialCellList.add(new Cell(1, 0, true));
+        initialCellList.add(new Cell(1, 1, false));
+        Grid2D twoByTwoGrid = new Grid2D(initialCellList, 2, 2);
         ConsoleOutput consoleDisplay = new ConsoleOutput();
         int gridWidth = 2;
 
-        consoleDisplay.displayCellGrid(oneDeadCell.getCellList(), gridWidth);
+        consoleDisplay.displayCellGrid(twoByTwoGrid.getCellList(), gridWidth);
 
         assertThat(outContent.toString(), containsString("\n\uD83D\uDC7B\uD83D\uDE01\n\uD83D\uDE01\uD83D\uDC7B\n"));
     }

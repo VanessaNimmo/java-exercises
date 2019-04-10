@@ -1,5 +1,7 @@
 package com.ness;
 
+import com.ness.input.Coordinates;
+import com.ness.input.FileParser;
 import org.junit.Test;
 
 import java.io.File;

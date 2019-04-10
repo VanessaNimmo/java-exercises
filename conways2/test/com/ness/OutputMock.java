@@ -2,14 +2,13 @@ package com.ness;
 
 import java.util.ArrayList;
 
-class OutputMock implements Output {
+class OutputMock implements IOutput {
 
     boolean displayCellGridWasCalled;
     int printCount = 0;
 
     @Override
     public void print(String message) {
-
     }
 
     @Override
@@ -17,5 +16,4 @@ class OutputMock implements Output {
         this.displayCellGridWasCalled = true;
         printCount++;
     }
-
 }

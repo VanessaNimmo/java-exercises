@@ -1,29 +1,27 @@
 package com.ness;
 
-import java.util.ArrayList;
-
-class Conways {
+class World {
 
     private final int numberOfTicks, sleepTimeInMs;
-    private Grid currentGrid;
-    private final Output output;
-    private final GridCalculator calculator;
+    private IGrid currentGrid;
+    private final IOutput output;
+    private final IGridCalculator calculator;
     private final int gridWidth;
 
-    Conways(Grid initialState, int numberOfTicks, int sleepTimeInMs, Output output, GridCalculator calculator) {
-        this.currentGrid = initialState;
+    World(IGrid initialGrid, int numberOfTicks, int sleepTimeInMs, IOutput output, IGridCalculator calculator) {
+        this.currentGrid = initialGrid;
         this.numberOfTicks = numberOfTicks;
         this.sleepTimeInMs = sleepTimeInMs;
         this.output = output;
         this.calculator = calculator;
-        this.gridWidth = initialState.getGridWidth();
+        this.gridWidth = initialGrid.getGridWidth();
     }
 
     void run() {
         int count = 0;
         do {
             output.displayCellGrid(currentGrid.getCellList(), gridWidth);
-            Grid nextTick = calculator.getNextTick(currentGrid);
+            IGrid nextTick = calculator.getNextTick(currentGrid);
             currentGrid = nextTick;
             count++;
             try {

@@ -1,5 +1,7 @@
 package com.ness;
 
+import com.ness.input.Coordinates;
+import com.ness.input.InputDataSanitizer;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,9 +15,9 @@ public class InputDataSanitizerTest {
         int maxGridSize = 56;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();
         coordinatesList.add(new Coordinates(10,10));
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
-        boolean result = validator.check();
+        boolean result = validator.checkGridSize(coordinatesList);
 
         assertTrue(result);
     }
@@ -25,9 +27,9 @@ public class InputDataSanitizerTest {
         int maxGridSize = 56;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();
         coordinatesList.add(new Coordinates(100,10));
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
-        boolean result = validator.check();
+        boolean result = validator.checkGridSize(coordinatesList);
 
         assertFalse(result);
     }
@@ -37,9 +39,9 @@ public class InputDataSanitizerTest {
         int maxGridSize = 56;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();
         coordinatesList.add(new Coordinates(-1,10));
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
-        boolean result = validator.check();
+        boolean result = validator.checkGridSize(coordinatesList);
 
         assertFalse(result);
 
@@ -50,9 +52,9 @@ public class InputDataSanitizerTest {
         int maxGridSize = 56;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();
         coordinatesList.add(new Coordinates(10,-10));
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
-        boolean result = validator.check();
+        boolean result = validator.checkGridSize(coordinatesList);
 
         assertFalse(result);
     }
@@ -64,7 +66,7 @@ public class InputDataSanitizerTest {
         coordinatesList.add(new Coordinates(10,10));
         coordinatesList.add(new Coordinates(5,10));
 
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 
@@ -78,7 +80,7 @@ public class InputDataSanitizerTest {
         coordinatesList.add(new Coordinates(10,10));
         coordinatesList.add(new Coordinates(11,10));
 
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 
@@ -92,7 +94,7 @@ public class InputDataSanitizerTest {
         coordinatesList.add(new Coordinates(10,10));
         coordinatesList.add(new Coordinates(-1,10));
 
-        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize, coordinatesList);
+        InputDataSanitizer validator = new InputDataSanitizer(maxGridSize);
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 

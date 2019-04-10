@@ -1,4 +1,4 @@
-package com.ness;
+package com.ness.input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class InputDataSanitizer {
 
     private int maxGridSize;
 
-    InputDataSanitizer(int maxGridSize) {
+    public InputDataSanitizer(int maxGridSize) {
         this.maxGridSize = maxGridSize;
     }
 

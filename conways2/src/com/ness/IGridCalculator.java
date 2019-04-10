@@ -1,6 +1,6 @@
 package com.ness;
 
-interface GridCalculator {
+interface IGridCalculator {
 
-    Grid2D getNextTick(Grid initialState);
+    Grid2D getNextTick(IGrid initialState);
 }

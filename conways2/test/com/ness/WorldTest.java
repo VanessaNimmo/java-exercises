@@ -6,18 +6,19 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class ConwaysTest {
+public class WorldTest {
 
     @Test
     public void shouldOutputGridAsManyTimesAsNumberOfTicks() {
-        boolean[][] startingCells = {{false}};
-        Grid2D initialState = new Grid2D(startingCells);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(1, 1, false));
+        Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
-        Output output = new OutputMock();
-        GridCalculator calculator = new GridCalculatorStub();
+        IOutput output = new OutputMock();
+        IGridCalculator calculator = new GridCalculatorStub();
 
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
+        World game = new World(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
@@ -28,14 +29,15 @@ public class ConwaysTest {
 
     @Test
     public void shouldCalculateANewGridOnEachTick() {
-        boolean[][] startingCells = {{false}};
-        Grid2D initialState = new Grid2D(startingCells);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(1, 1, false));
+        Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 1;
         int sleepTimeInMs = 500;
-        Output output = new OutputMock();
-        GridCalculator calculator = new GridCalculatorStub();
+        IOutput output = new OutputMock();
+        IGridCalculator calculator = new GridCalculatorStub();
 
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
+        World game = new World(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
@@ -46,14 +48,15 @@ public class ConwaysTest {
 
     @Test
     public void shouldWaitForLengthOfSleepTimeBetweenEachIteration() {
-        boolean[][] startingCells = {{false}};
-        Grid2D initialState = new Grid2D(startingCells);
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(1, 1, false));
+        Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
-        Output output = new OutputMock();
-        GridCalculator calculator = new GridCalculatorStub();
+        IOutput output = new OutputMock();
+        IGridCalculator calculator = new GridCalculatorStub();
 
-        Conways game = new Conways(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
+        World game = new World(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
         long startTime = System.currentTimeMillis();
         game.run();
         long endTime = System.currentTimeMillis();

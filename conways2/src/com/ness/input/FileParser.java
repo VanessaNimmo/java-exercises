@@ -1,4 +1,4 @@
-package com.ness;
+package com.ness.input;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,15 +9,15 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class FileParser {
+public class FileParser {
 
     private final File initialGridInfo;
 
-    FileParser(File initialGridInfo) {
+    public FileParser(File initialGridInfo) {
         this.initialGridInfo = initialGridInfo;
     }
 
-    Optional<ArrayList<Coordinates>> getCoordinatesList() {
+    public Optional<ArrayList<Coordinates>> getCoordinatesList() {
         String line = null;
         int[] numberPair;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();

@@ -2,7 +2,7 @@ package com.ness;
 
 import java.util.ArrayList;
 
-interface Output {
+interface IOutput {
 
     void print(String message);
 

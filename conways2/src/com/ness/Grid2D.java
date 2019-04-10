@@ -4,18 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Grid2D implements Grid {
+class Grid2D implements IGrid {
 
     private final boolean[][] cells;
     private final ArrayList<Cell> cellList;
     private int gridHeight, gridWidth;
-
-    Grid2D(boolean[][] state) {
-        this.cells = state;
-        this.gridHeight = this.cells.length;
-        this.gridWidth = this.cells[0].length;
-        this.cellList = makeCellList();
-    }
 
     Grid2D(List<Cell> cells, int gridHeight, int gridWidth) {
         this.gridHeight = gridHeight;
@@ -44,23 +37,21 @@ class Grid2D implements Grid {
         return cellsList;
     }
 
-    boolean[][] getCells() { return this.cells; }
-    int getGridHeight() { return this.gridHeight; }
-    int getGridWidth() { return this.gridWidth; }
-
-    ArrayList<Cell> getCellList() { return this.cellList; }
+    @Override
+    public int getGridHeight() { return this.gridHeight; }
 
     @Override
-    public boolean cellIsAlive(int row, int column) {
-        return this.cells[row-1][column-1];
-    }
+    public int getGridWidth() { return this.gridWidth; }
 
     @Override
-    public int aliveNeighbours(int row, int column) {
-        return getAliveNeighbours(row-1, column-1);
+    public ArrayList<Cell> getCellList() { return this.cellList; }
+
+    @Override
+    public int getAliveNeighbours(int row, int column) {
+        return calculateAliveNeighbours(row, column);
     }
 
-    int getAliveNeighbours(int row, int column) {
+    private int calculateAliveNeighbours(int row, int column) {
         int rowAbove = getPrevious(row, this.cells.length);
         int rowBelow = getNext(row, this.cells.length);
         int columnBefore = getPrevious(column, this.cells[0].length);
