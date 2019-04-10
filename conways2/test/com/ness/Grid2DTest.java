@@ -2,29 +2,127 @@ package com.ness;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class Grid2DTest {
 
-    // TODO Need to test both cases of the one cell option, as well as both the true and false versions of the aliveNeighbours one. Find the edge cases and test those (esp. on aliveNeighbours)
     @Test
-    public void cellIsAliveShouldReturnTrueForAOneByOneGridOfALiveCell() {
-        boolean[][] liveCells = {{true}};
-        Grid2D grid = new Grid2D(liveCells);
+    public void cellShouldBeAliveInAOneByOneGridOfALiveCell() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,true));
+        Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
 
-        boolean result = grid.cellIsAlive(1, 1);
+        boolean result = oneLiveCell.getCellList().get(0).getAlive();
 
         assertTrue(result);
     }
 
     @Test
-    public void aliveNeighboursShouldReturnNumberOfAliveNeighbours() {
-        boolean[][] liveCells = {{true, true}, {false, false}};
-        Grid2D grid = new Grid2D(liveCells);
+    public void cellShouldBeDeadInAOneByOneGridOfADeadCell() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,false));
+        Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
 
-        int result = grid.aliveNeighbours(1, 1);
+        boolean result = oneLiveCell.getCellList().get(0).getAlive();
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void aliveNeighboursShouldReturn8ForAOneByOneGridOfALiveCell() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,true));
+        Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
+
+        int result = oneLiveCell.getAliveNeighbours(0, 0);
+
+        assertEquals(8, result);
+    }
+
+    @Test
+    public void aliveNeighboursShouldReturn0ForAOneByOneGridOfADeadCell() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,false));
+        Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
+
+        int result = oneLiveCell.getAliveNeighbours(0, 0);
+
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void aliveNeighboursShouldReturn0ForALiveCellSurroundedByDeadCells() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,false));
+        initialCellList.add(new Cell(0, 1, false));
+        initialCellList.add(new Cell(0, 2, false));
+        initialCellList.add(new Cell(1, 0, false));
+        initialCellList.add(new Cell(1, 1, true));
+        initialCellList.add(new Cell(1, 2, false));
+        initialCellList.add(new Cell(2, 0, false));
+        initialCellList.add(new Cell(2, 1, false));
+        initialCellList.add(new Cell(2, 2, false));
+
+        Grid2D anIsolatedCell = new Grid2D(initialCellList, 3, 3);
+
+        int result = anIsolatedCell.getAliveNeighbours(1, 1);
+
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void aliveNeighboursShouldReturn1ForALiveCellWithOneLiveNeighbour() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,false));
+        initialCellList.add(new Cell(0, 1, false));
+        initialCellList.add(new Cell(0, 2, false));
+        initialCellList.add(new Cell(1, 0, false));
+        initialCellList.add(new Cell(1, 1, true));
+        initialCellList.add(new Cell(1, 2, true));
+        initialCellList.add(new Cell(2, 0, false));
+        initialCellList.add(new Cell(2, 1, false));
+        initialCellList.add(new Cell(2, 2, false));
+
+        Grid2D anIsolatedCell = new Grid2D(initialCellList, 3, 3);
+
+        int result = anIsolatedCell.getAliveNeighbours(1, 1);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void liveCellsOnEdgesShouldBeCountedAsWrappedForTheOppositeSideOfTheGrid() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0,0,false));
+        initialCellList.add(new Cell(0, 1, false));
+        initialCellList.add(new Cell(0, 2, false));
+        initialCellList.add(new Cell(1, 0, true));
+        initialCellList.add(new Cell(1, 1, false));
+        initialCellList.add(new Cell(1, 2, true));
+        initialCellList.add(new Cell(2, 0, false));
+        initialCellList.add(new Cell(2, 1, false));
+        initialCellList.add(new Cell(2, 2, false));
+
+        Grid2D anIsolatedCell = new Grid2D(initialCellList, 3, 3);
+
+        int result = anIsolatedCell.getAliveNeighbours(1, 0);
+
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void liveCellsOnCornersShouldWrapToOppositeDiagonalsToBeCountedAsNeighbours() {
+        ArrayList<Cell> initialCellList = new ArrayList<>();
+        initialCellList.add(new Cell(0, 0, true));
+        initialCellList.add(new Cell(0, 1, true));
+        initialCellList.add(new Cell(1, 0, false));
+        initialCellList.add(new Cell(1, 1, false));
+        Grid2D twoByTwoGrid = new Grid2D(initialCellList, 2, 2);
+
+        int result = twoByTwoGrid.getAliveNeighbours(0, 0);
 
         assertEquals(2, result);
     }
-
 }

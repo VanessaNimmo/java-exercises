@@ -26,9 +26,8 @@ public class ConwaysTest {
         assertEquals(5, result);
     }
 
-    // TODO Needs a test to check that it is calculating a new grid, and THEN a test to check that it goes into history - could check if it is calling a calculator, or could check a canned response from the grid calculator. This test would keep passing even if the app was broken
     @Test
-    public void shouldCalculateANewGridOnEachTickAndStoreItInHistory() {
+    public void shouldCalculateANewGridOnEachTick() {
         boolean[][] startingCells = {{false}};
         Grid2D initialState = new Grid2D(startingCells);
         int numberOfTicks = 1;
@@ -40,9 +39,9 @@ public class ConwaysTest {
 
         game.run();
 
-        ArrayList<Grid2D> result = game.getHistory();
+        boolean result = ((GridCalculatorStub) calculator).calculatorWasCalled;
 
-        assertTrue(result.size()==2);
+        assertTrue(result);
     }
 
     @Test

@@ -7,14 +7,12 @@ import java.util.stream.Collectors;
 public class InputDataSanitizer {
 
     private int maxGridSize;
-    private ArrayList<Coordinates> coordinatesList;
-    
-    InputDataSanitizer(int maxGridSize, ArrayList<Coordinates> coordinatesList) {
+
+    InputDataSanitizer(int maxGridSize) {
         this.maxGridSize = maxGridSize;
-        this.coordinatesList = coordinatesList;
     }
 
-    public boolean check() {
+    public boolean checkGridSize(ArrayList<Coordinates> coordinatesList) {
         return validGridSize(coordinatesList.get(0).getX(), coordinatesList.get(0).getY());
     }
 
