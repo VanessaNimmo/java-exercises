@@ -37,23 +37,8 @@ class FileParser {
         if (coordinatesList.isEmpty()) {
             return Optional.empty();
         }
-//        int[] gridSize = numberPairs.get(0);
-//        if (!validGridSize(gridSize)) {
-//            return Optional.empty();
-//        }
-        ;
-//        boolean[][] initialState = new boolean[gridSize[0]][gridSize[1]];
-//        if(numberPairs.size() >= 1) {
-//            initialState = addLiveCells(numberPairs, initialState);
-//        }
-
         return Optional.of(coordinatesList);
     }
-
-//    private boolean[][] addLiveCells(ArrayList<int[]> numberPairs, boolean[][] initialState) {
-//        numberPairs.stream().filter(pair -> validCellLocation(pair, initialState[0].length, initialState.length)).forEach(pair -> initialState[pair[1] - 1][pair[0] - 1] = true);
-//        return initialState;
-//    }
 
     private static int[] parseIntegerPair(String expression) {
         String[] splitInput = expression.split(" ");
@@ -69,18 +54,4 @@ class FileParser {
         Matcher matcher = numberPair.matcher(s);
         return matcher.matches();
     }
-
-//    private boolean validGridSize(int[] gridSize) {
-//        if (gridSize[0] <=0 || gridSize[1] <= 0) {
-//            return false;
-//        }
-//        return (gridSize[0] < maxGridSize && gridSize[1] < maxGridSize);
-//    }
-
-//    private boolean validCellLocation(int[] cellLocation, int gridWidth, int gridHeight) {
-//        if (cellLocation[0] <= 0 || cellLocation[1] <= 0 || cellLocation[0] > gridWidth || cellLocation[1] > gridHeight) {
-//            return false;
-//        }
-//        return true;
-//    }
 }
