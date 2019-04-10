@@ -6,35 +6,13 @@ import java.util.List;
 
 class Grid2D implements IGrid {
 
-    private final boolean[][] cells;
     private final ArrayList<Cell> cellList;
-    private int gridHeight, gridWidth;
+    private final int gridHeight, gridWidth;
 
-    Grid2D(List<Cell> cells, int gridHeight, int gridWidth) {
+    Grid2D(ArrayList<Cell> cells, int gridHeight, int gridWidth) {
         this.gridHeight = gridHeight;
         this.gridWidth = gridWidth;
-        this.cells = extractGrid(cells);
-        this.cellList = makeCellList();
-    }
-
-    private boolean[][] extractGrid(List<Cell> cells) {
-        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
-        for (Cell cell : cells) {
-            cellRepresentation[cell.getRow()][cell.getColumn()] = cell.getAlive();
-        }
-        return cellRepresentation;
-    }
-
-    private ArrayList<Cell> makeCellList() {
-        int gridHeight = this.cells.length;
-        int gridWidth = this.cells[0].length;
-        ArrayList<Cell> cellsList = new ArrayList<>();
-        for (int row = 0; row < gridHeight; row++) {
-            for (int column = 0; column < gridWidth; column++) {
-                cellsList.add(new Cell(row, column, this.cells[row][column]));
-            }
-        }
-        return cellsList;
+        this.cellList = cells;
     }
 
     @Override
@@ -52,12 +30,21 @@ class Grid2D implements IGrid {
     }
 
     private int calculateAliveNeighbours(int row, int column) {
-        int rowAbove = getPrevious(row, this.cells.length);
-        int rowBelow = getNext(row, this.cells.length);
-        int columnBefore = getPrevious(column, this.cells[0].length);
-        int columnAfter = getNext(column, this.cells[0].length);
-        List<Boolean> cells = getCellsList(this.cells, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
+        int rowAbove = getPrevious(row, this.gridHeight);
+        int rowBelow = getNext(row, this.gridHeight);
+        int columnBefore = getPrevious(column, this.gridWidth);
+        int columnAfter = getNext(column, this.gridWidth);
+        boolean[][] gridRepresentation = constructGridRepresentation();
+        List<Boolean> cells = getCellsList(gridRepresentation, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
         return (int) cells.stream().filter(cell -> cell).count();
+    }
+
+    private boolean[][] constructGridRepresentation() {
+        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
+        for (Cell cell : this.cellList) {
+            cellRepresentation[cell.getRow()][cell.getColumn()] = cell.getAlive();
+        }
+        return cellRepresentation;
     }
 
     private List<Boolean> getCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {

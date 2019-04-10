@@ -15,7 +15,7 @@ public class GridCalculator2D implements IGridCalculator {
     private Grid2D evolve(IGrid initialState) {
         ArrayList<Cell> cellList = initialState.getCellList();
         List<Cell> nextTickCellList = cellList.stream().map(cell -> isCellAlive(cell, initialState)).collect(Collectors.toList());
-        return new Grid2D(nextTickCellList, initialState.getGridHeight(), initialState.getGridWidth());
+        return new Grid2D((ArrayList<Cell>) nextTickCellList, initialState.getGridHeight(), initialState.getGridWidth());
     }
 
     private Cell isCellAlive(Cell cell, IGrid initialState) {
