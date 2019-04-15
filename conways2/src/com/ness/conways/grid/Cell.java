@@ -10,6 +10,6 @@ public class Cell {
         this.alive = alive;
     }
 
-    Location getLocation() { return this.location; }
+    public Location getLocation() { return this.location; }
     public boolean getAlive() { return this.alive; }
 }

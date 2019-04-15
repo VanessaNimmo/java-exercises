@@ -9,7 +9,7 @@ public class Location {
         this.column = column;
     }
 
-    int getRow() { return this.row; }
+    public int getRow() { return this.row; }
 
-    int getColumn() {return this.column; }
+    public int getColumn() {return this.column; }
 }
