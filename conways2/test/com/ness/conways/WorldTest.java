@@ -1,5 +1,10 @@
-package com.ness;
+package com.ness.conways;
 
+import com.ness.conways.grid.Cell;
+import com.ness.conways.grid.IGridCalculator;
+import com.ness.conways.grid.Location;
+import com.ness.conways.output.IOutput;
+import com.ness.conways.grid.Grid2D;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,14 +20,14 @@ public class WorldTest {
         Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
-        IOutput output = new OutputMock();
+        OutputMock output = new OutputMock();
         IGridCalculator calculator = new GridCalculatorStub();
 
         World game = new World(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
-        int result = ((OutputMock) output).printCount;
+        int result = output.printCount;
 
         assertEquals(5, result);
     }
@@ -35,13 +40,13 @@ public class WorldTest {
         int numberOfTicks = 1;
         int sleepTimeInMs = 500;
         IOutput output = new OutputMock();
-        IGridCalculator calculator = new GridCalculatorStub();
+        GridCalculatorStub calculator = new GridCalculatorStub();
 
         World game = new World(initialState, numberOfTicks, sleepTimeInMs, output, calculator);
 
         game.run();
 
-        boolean result = ((GridCalculatorStub) calculator).calculatorWasCalled;
+        boolean result = calculator.calculatorWasCalled;
 
         assertTrue(result);
     }

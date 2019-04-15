@@ -1,5 +1,8 @@
-package com.ness;
+package com.ness.conways;
 
+import com.ness.conways.grid.Location;
+import com.ness.conways.grid.Cell;
+import com.ness.conways.grid.Grid2D;
 import org.junit.Test;
 
 import java.util.ArrayList;

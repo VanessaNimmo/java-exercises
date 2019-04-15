@@ -1,4 +1,4 @@
-package com.ness.input;
+package com.ness.conways.input;
 
 public class Coordinates {
 

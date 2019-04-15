@@ -1,5 +1,7 @@
-package com.ness;
+package com.ness.conways;
 
+import com.ness.conways.grid.*;
+import com.ness.conways.output.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

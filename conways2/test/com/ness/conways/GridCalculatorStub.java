@@ -1,4 +1,8 @@
-package com.ness;
+package com.ness.conways;
+
+import com.ness.conways.grid.IGrid;
+import com.ness.conways.grid.IGridCalculator;
+import com.ness.conways.grid.Grid2D;
 
 class GridCalculatorStub implements IGridCalculator {
 
@@ -7,5 +11,5 @@ class GridCalculatorStub implements IGridCalculator {
     public Grid2D getNextTick(IGrid currentState){
         calculatorWasCalled = true;
         return (Grid2D) currentState;
-    };
+    }
 }

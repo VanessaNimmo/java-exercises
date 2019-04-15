@@ -1,19 +1,27 @@
-package com.ness;
+package com.ness.conways.grid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Grid2D implements IGrid {
+public class Grid2D implements IGrid {
 
     private final ArrayList<Cell> cellList;
     private final int gridHeight, gridWidth;
 
-    Grid2D(ArrayList<Cell> aliveCellsList, int gridHeight, int gridWidth) {
+    public Grid2D(ArrayList<Cell> aliveCellsList, int gridHeight, int gridWidth) {
         this.gridHeight = gridHeight;
         this.gridWidth = gridWidth;
         boolean[][] gridRepresentation = constructGridRepresentation(aliveCellsList);
         this.cellList = makeAllCellsList(gridRepresentation);
+    }
+
+    private boolean[][] constructGridRepresentation(ArrayList<Cell> cells) {
+        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
+        for (Cell cell : cells) {
+            cellRepresentation[cell.getLocation().getRow()][cell.getLocation().getColumn()] = cell.getAlive();
+        }
+        return cellRepresentation;
     }
 
     private ArrayList<Cell> makeAllCellsList(boolean[][] gridRepresentation) {
@@ -41,21 +49,13 @@ class Grid2D implements IGrid {
     }
 
     private int calculateAliveNeighbours(int row, int column) {
-        int rowAbove = getPrevious(row, this.gridHeight);
-        int rowBelow = getNext(row, this.gridHeight);
-        int columnBefore = getPrevious(column, this.gridWidth);
-        int columnAfter = getNext(column, this.gridWidth);
+        int rowAbove = getPreviousRowOrColumn(row, this.gridHeight);
+        int rowBelow = getNextRowOrColumn(row, this.gridHeight);
+        int columnBefore = getPreviousRowOrColumn(column, this.gridWidth);
+        int columnAfter = getNextRowOrColumn(column, this.gridWidth);
         boolean[][] gridRepresentation = constructGridRepresentation(this.cellList);
         List<Boolean> cells = getNeighbouringCellsList(gridRepresentation, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
         return (int) cells.stream().filter(cell -> cell).count();
-    }
-
-    private boolean[][] constructGridRepresentation(ArrayList<Cell> cells) {
-        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
-        for (Cell cell : cells) {
-            cellRepresentation[cell.getLocation().getRow()][cell.getLocation().getColumn()] = cell.getAlive();
-        }
-        return cellRepresentation;
     }
 
     private List<Boolean> getNeighbouringCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
@@ -70,11 +70,11 @@ class Grid2D implements IGrid {
                 initialState[rowBelow][columnAfter]);
     }
 
-    private int getNext(int rowOrColumn, int totalNumber) {
-        return rowOrColumn + 1 == totalNumber ? 0 : rowOrColumn + 1;
+    private int getNextRowOrColumn(int rowOrColumn, int lengthOfRowOrColumn) {
+        return rowOrColumn + 1 == lengthOfRowOrColumn ? 0 : rowOrColumn + 1;
     }
 
-    private int getPrevious(int rowOrColumn, int totalNumber) {
-        return rowOrColumn - 1 < 0 ? totalNumber - 1 : rowOrColumn - 1;
+    private int getPreviousRowOrColumn(int rowOrColumn, int lengthOfRowOrColumn) {
+        return rowOrColumn - 1 < 0 ? lengthOfRowOrColumn - 1 : rowOrColumn - 1;
     }
 }

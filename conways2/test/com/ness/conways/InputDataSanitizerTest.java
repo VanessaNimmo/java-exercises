@@ -1,7 +1,7 @@
-package com.ness;
+package com.ness.conways;
 
-import com.ness.input.Coordinates;
-import com.ness.input.InputDataSanitizer;
+import com.ness.conways.input.Coordinates;
+import com.ness.conways.input.InputDataSanitizer;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -70,7 +70,7 @@ public class InputDataSanitizerTest {
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 
-        assertTrue(result.size() == 1);
+        assertEquals(1, result.size());
     }
 
     @Test
@@ -84,7 +84,7 @@ public class InputDataSanitizerTest {
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 
-        assertTrue(result.size() == 0);
+        assertEquals(0, result.size());
     }
 
     @Test
@@ -98,7 +98,7 @@ public class InputDataSanitizerTest {
 
         ArrayList<Coordinates> result = (ArrayList<Coordinates>) validator.removeInvalidCoordinatePairs(coordinatesList);
 
-        assertTrue(result.size() == 0);
+        assertEquals(0, result.size());
     }
 
 }

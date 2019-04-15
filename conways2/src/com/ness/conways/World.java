@@ -1,4 +1,10 @@
-package com.ness;
+package com.ness.conways;
+
+import com.ness.conways.grid.IGrid;
+import com.ness.conways.grid.IGridCalculator;
+import com.ness.conways.output.IOutput;
+
+import java.util.ResourceBundle;
 
 class World {
 
@@ -19,6 +25,9 @@ class World {
 
     void run() {
         int count = 0;
+        ResourceBundle messages = ResourceBundle.getBundle("messages");
+        String welcome = messages.getString("welcome");
+        output.print(welcome);
         do {
             output.displayCellGrid(currentGrid.getCellList(), gridWidth);
             IGrid nextTick = calculator.getNextTick(currentGrid);

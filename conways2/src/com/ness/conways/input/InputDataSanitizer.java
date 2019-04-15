@@ -1,4 +1,6 @@
-package com.ness.input;
+package com.ness.conways.input;
+
+import com.ness.conways.input.Coordinates;
 
 import java.util.ArrayList;
 import java.util.List;

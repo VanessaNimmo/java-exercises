@@ -1,4 +1,4 @@
-package com.ness;
+package com.ness.conways.grid;
 
 import java.util.ArrayList;
 

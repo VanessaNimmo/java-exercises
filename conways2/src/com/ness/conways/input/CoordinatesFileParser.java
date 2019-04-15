@@ -1,4 +1,4 @@
-package com.ness.input;
+package com.ness.conways.input;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,27 +6,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class FileParser {
+public class CoordinatesFileParser {
+
+    private static final String COORDINATES_LINE_REGEX = "\\d*\\s\\d*";
 
     private final File initialGridInfo;
 
-    public FileParser(File initialGridInfo) {
+    public CoordinatesFileParser(File initialGridInfo) {
         this.initialGridInfo = initialGridInfo;
     }
 
     public Optional<ArrayList<Coordinates>> getCoordinatesList() {
-        String line = null;
-        int[] numberPair;
+        String line;
         ArrayList<Coordinates> coordinatesList = new ArrayList<>();
         try (FileReader fileReader = new FileReader(initialGridInfo);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             while ((line = bufferedReader.readLine()) != null) {
-                if (validInputString(line)) {
-                    numberPair = parseIntegerPair(line);
-                    coordinatesList.add(new Coordinates(numberPair[0], numberPair[1]));
+                if (isCoordinateLineValid(line)) {
+                    coordinatesList.add(getCoordinatesFromLine(line));
                 } else {
                     return Optional.empty();
                 }
@@ -40,18 +38,16 @@ public class FileParser {
         return Optional.of(coordinatesList);
     }
 
-    private static int[] parseIntegerPair(String expression) {
-        String[] splitInput = expression.split(" ");
+    private static Coordinates getCoordinatesFromLine(String line) {
+        String[] splitInput = line.split(" ");
         int[] integerPair = new int[2];
         for (int i=0; i < 2; i++) {
             integerPair[i] = Integer.parseInt(splitInput[i]);
         }
-        return integerPair;
+        return new Coordinates(integerPair[0], integerPair[1]);
     }
 
-    private boolean validInputString(String s) {
-        Pattern numberPair = Pattern.compile("\\d*\\s\\d*");
-        Matcher matcher = numberPair.matcher(s);
-        return matcher.matches();
+    private boolean isCoordinateLineValid(String line) {
+        return line.matches(COORDINATES_LINE_REGEX);
     }
 }

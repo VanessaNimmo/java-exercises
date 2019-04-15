@@ -1,8 +1,10 @@
-package com.ness;
+package com.ness.conways.output;
+
+import com.ness.conways.grid.Cell;
 
 import java.util.ArrayList;
 
-interface IOutput {
+public interface IOutput {
 
     void print(String message);
 

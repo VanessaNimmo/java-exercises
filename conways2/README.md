@@ -14,7 +14,8 @@ First line defines width and height of the world.
 Subsequent lines define x and y coordinates for the world, as taken from the top left corner.
 
 width height
-x y
-x y
-x y
-x y
+
+x y<br>
+x y<br>
+x y<br>
+x y<br>

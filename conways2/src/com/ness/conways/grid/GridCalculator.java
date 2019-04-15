@@ -1,5 +1,4 @@
-package com.ness;
-
+package com.ness.conways.grid;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ public class GridCalculator implements IGridCalculator {
     }
 
     private Cell isCellAlive(Cell cell, IGrid initialState) {
-            if (initialState.getAliveNeighbours(cell.getLocation())==3) {
+            if (initialState.getAliveNeighbours(cell.getLocation()) == 3) {
                 return new Cell(cell.getLocation(), true);
             }
             if (initialState.getAliveNeighbours(cell.getLocation()) == 2 && cell.getAlive()) {

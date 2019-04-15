@@ -1,8 +1,9 @@
-package com.ness;
+package com.ness.conways;
 
-import com.ness.input.Coordinates;
-import com.ness.input.FileParser;
-import com.ness.input.InputDataSanitizer;
+import com.ness.conways.grid.*;
+import com.ness.conways.input.*;
+import com.ness.conways.output.*;
+import com.ness.conways.input.CoordinatesFileParser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,21 +15,33 @@ public class ConwaysApp {
 
     public static void main(String[] args) {
 
-        int maxGridSize = Integer.parseInt(args[0]);
+        int maxGridSizeForOutput = Integer.parseInt(args[0]);
         int numberOfTicks = Integer.parseInt(args[1]);
         int sleepTime = Integer.parseInt(args[2]);
         String filePath = args[3];
 
-        File setupFile = new File(filePath);
         IOutput output = new ConsoleOutput();
-        FileParser readFile = new FileParser(setupFile);
+        File setupFile = new File(filePath);
+        ArrayList<Coordinates> coordinatesList = extractCoordinatesList(setupFile, output);
+        InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSizeForOutput);
+
+        IGrid initialGrid = makeInitialGrid(sanitizer, coordinatesList, output);
+        IGridCalculator calculator = new GridCalculator();
+
+        World game = new World(initialGrid, numberOfTicks, sleepTime, output, calculator);
+        game.run();
+    }
+
+    private static ArrayList<Coordinates> extractCoordinatesList(File setupFile, IOutput output) {
+        CoordinatesFileParser readFile = new CoordinatesFileParser(setupFile);
         Optional<ArrayList<Coordinates>> initialStateOptional = readFile.getCoordinatesList();
         if (initialStateOptional.isEmpty()) {
             exitWithErrors(output);
         }
-        ArrayList<Coordinates> coordinatesList = initialStateOptional.get();
+        return initialStateOptional.get();
+    }
 
-        InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSize);
+    private static IGrid makeInitialGrid(InputDataSanitizer sanitizer, ArrayList<Coordinates> coordinatesList, IOutput output) {
         int gridWidth = 0, gridHeight = 0;
         if (sanitizer.checkGridSize(coordinatesList)) {
             gridWidth = coordinatesList.get(0).getX();
@@ -37,22 +50,13 @@ public class ConwaysApp {
         } else {
             exitWithErrors(output);
         }
-        ArrayList<Cell> initialCellList = getCellList(coordinatesList);
-
-        IGrid initialGrid = new Grid2D(initialCellList, gridHeight, gridWidth);
-        IGridCalculator calculator = new GridCalculator();
-
-        ResourceBundle messages = ResourceBundle.getBundle("messages");
-        String welcome = messages.getString("welcome");
-        output.print(welcome);
-
-        World game = new World(initialGrid, numberOfTicks, sleepTime, output, calculator);
-        game.run();
+        ArrayList<Cell> initialLiveCellList = convertCoordinatesToLiveCells(coordinatesList);
+        return new Grid2D(initialLiveCellList, gridHeight, gridWidth);
     }
 
-    private static ArrayList<Cell> getCellList(ArrayList<Coordinates> coordinatesList) {
+    private static ArrayList<Cell> convertCoordinatesToLiveCells(ArrayList<Coordinates> coordinatesList) {
         return coordinatesList.stream().map(coordinate -> new Cell(new Location(coordinate.getY() - 1, coordinate.getX() - 1), true)).collect(Collectors.toCollection(ArrayList::new));
-    };
+    }
 
     private static void exitWithErrors(IOutput output) {
         ResourceBundle messages = ResourceBundle.getBundle("messages");
