@@ -1,4 +1,4 @@
-package com.ness.conways;
+package com.ness.conways.input;
 
 import com.ness.conways.input.Coordinates;
 import com.ness.conways.input.CoordinatesFileParser;
@@ -14,7 +14,7 @@ public class CoordinatesFileParserTest {
 
     @Test
     public void aCorrectlyFormattedFileShouldBeParsed() {
-        File initialGridInfo = new File("test/com/ness/conways/setup1livecell.txt");
+        File initialGridInfo = new File("test/com/ness/conways/input/setup1livecell.txt");
         CoordinatesFileParser parser = new CoordinatesFileParser(initialGridInfo);
 
         Optional<ArrayList<Coordinates>> result = parser.getCoordinatesList();
@@ -24,7 +24,7 @@ public class CoordinatesFileParserTest {
 
     @Test
     public void anIncorrectlyFormattedFirstLineShouldReturnAnEmptyOptional() {
-        File initialGridInfo = new File("test/com/ness/conways/incorrectlyFormattedFirstLine.txt");
+        File initialGridInfo = new File("test/com/ness/conways/input/incorrectlyFormattedFirstLine.txt");
         CoordinatesFileParser parser = new CoordinatesFileParser(initialGridInfo);
 
         Optional<ArrayList<Coordinates>> result = parser.getCoordinatesList();
@@ -34,7 +34,7 @@ public class CoordinatesFileParserTest {
 
     @Test
     public void incorrectFormattingAtAnyStageShouldReturnAnEmptyOptional() {
-        File initialGridInfo = new File("test/com/ness/conways/incorrectlyFormattedSecondLine.txt");
+        File initialGridInfo = new File("test/com/ness/conways/input/incorrectlyFormattedSecondLine.txt");
         CoordinatesFileParser parser = new CoordinatesFileParser(initialGridInfo);
 
         Optional<ArrayList<Coordinates>> result = parser.getCoordinatesList();

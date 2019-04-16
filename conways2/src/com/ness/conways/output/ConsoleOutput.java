@@ -1,7 +1,6 @@
 package com.ness.conways.output;
 
 import com.ness.conways.grid.Cell;
-import com.ness.conways.output.IOutput;
 
 import java.util.ArrayList;
 

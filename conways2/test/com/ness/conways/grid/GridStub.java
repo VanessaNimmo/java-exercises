@@ -1,8 +1,4 @@
-package com.ness.conways;
-
-import com.ness.conways.grid.IGrid;
-import com.ness.conways.grid.Location;
-import com.ness.conways.grid.Cell;
+package com.ness.conways.grid;
 
 import java.util.ArrayList;
 

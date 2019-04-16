@@ -1,4 +1,4 @@
-package com.ness.conways;
+package com.ness.conways.output;
 
 import com.ness.conways.grid.*;
 import com.ness.conways.output.*;

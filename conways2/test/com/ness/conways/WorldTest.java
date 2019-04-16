@@ -1,10 +1,8 @@
 package com.ness.conways;
 
-import com.ness.conways.grid.Cell;
-import com.ness.conways.grid.IGridCalculator;
-import com.ness.conways.grid.Location;
+import com.ness.conways.grid.*;
 import com.ness.conways.output.IOutput;
-import com.ness.conways.grid.Grid2D;
+import com.ness.conways.output.OutputMock;
 import org.junit.Test;
 
 import java.util.ArrayList;

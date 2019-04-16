@@ -25,9 +25,7 @@ class World {
 
     void run() {
         int count = 0;
-        ResourceBundle messages = ResourceBundle.getBundle("messages");
-        String welcome = messages.getString("welcome");
-        output.print(welcome);
+
         do {
             output.displayCellGrid(currentGrid.getCellList(), gridWidth);
             IGrid nextTick = calculator.getNextTick(currentGrid);

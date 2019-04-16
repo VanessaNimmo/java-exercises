@@ -1,14 +1,13 @@
-package com.ness.conways;
+package com.ness.conways.output;
 
-import com.ness.conways.output.IOutput;
 import com.ness.conways.grid.Cell;
 
 import java.util.ArrayList;
 
-class OutputMock implements IOutput {
+public class OutputMock implements IOutput {
 
-    private boolean displayCellGridWasCalled;
-    int printCount = 0;
+    public boolean displayCellGridWasCalled;
+    public int printCount = 0;
 
     @Override
     public void print(String message) {

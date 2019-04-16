@@ -1,4 +1,4 @@
-package com.ness.conways;
+package com.ness.conways.input;
 
 import com.ness.conways.input.Coordinates;
 import com.ness.conways.input.InputDataSanitizer;
