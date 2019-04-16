@@ -7,11 +7,14 @@ import com.ness.conways.input.CoordinatesFileParser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class ConwaysApp {
+
+    private static final String MESSAGES_FILE_PATH = "com/ness/conways/messages";
 
     public static void main(String[] args) {
 
@@ -21,6 +24,9 @@ public class ConwaysApp {
         String filePath = args[3];
 
         IOutput output = new ConsoleOutput();
+        ResourceBundle messages = ResourceBundle.getBundle(MESSAGES_FILE_PATH);
+        String welcome = messages.getString("welcome");
+        output.print(welcome);
         File setupFile = new File(filePath);
         ArrayList<Coordinates> coordinatesList = extractCoordinatesList(setupFile, output);
         InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSizeForOutput);
@@ -59,7 +65,7 @@ public class ConwaysApp {
     }
 
     private static void exitWithErrors(IOutput output) {
-        ResourceBundle messages = ResourceBundle.getBundle("messages");
+        ResourceBundle messages = ResourceBundle.getBundle(MESSAGES_FILE_PATH);
         String invalid = messages.getString("invalid");
         output.print(invalid);
         System.exit(0);
