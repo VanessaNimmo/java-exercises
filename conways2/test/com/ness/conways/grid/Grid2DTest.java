@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 public class Grid2DTest {
 
+    // TODO: Add tests for the constructor as it contains logic (or be able to discuss why that logic is covered by the existing tests, or remove that logic)
     @Test
     public void cellShouldBeAliveInAOneByOneGridOfALiveCell() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
