@@ -67,4 +67,5 @@ public class WorldTest {
 
         assertTrue(runningTime > 2500);
     }
+    // TODO: Testing whole world by checking all the outputs rather than checking how long it has waited
 }

@@ -11,6 +11,7 @@ public class Grid2DTest {
     @Test
     public void cellShouldBeAliveInAOneByOneGridOfALiveCell() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
+        // TODO: pull out the Cell creation into a helper method
         initialCellList.add(new Cell(new Location(0, 0),true));
         Grid2D oneLiveCell = new Grid2D(initialCellList, 1, 1);
 

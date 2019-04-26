@@ -28,9 +28,10 @@ public class ConwaysApp {
         String welcome = messages.getString("welcome");
         output.print(welcome);
         File setupFile = new File(filePath);
+        // TODO: This is size and live cells - make this clearer
         ArrayList<Coordinates> coordinatesList = extractCoordinatesList(setupFile, output);
         InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSizeForOutput);
-
+        // TODO: since you already have the live cells, add dead cells where required
         IGrid initialGrid = makeInitialGrid(sanitizer, coordinatesList, output);
         IGridCalculator calculator = new GridCalculator();
 
@@ -57,7 +58,26 @@ public class ConwaysApp {
             exitWithErrors(output);
         }
         ArrayList<Cell> initialLiveCellList = convertCoordinatesToLiveCells(coordinatesList);
-        return new Grid2D(initialLiveCellList, gridHeight, gridWidth);
+        ArrayList<Cell> fullCellList = addDeadCells(initialLiveCellList, gridHeight, gridWidth);
+        return new Grid2D(fullCellList, gridHeight, gridWidth);
+    }
+
+    private static ArrayList<Cell> addDeadCells(ArrayList<Cell> initialLiveCellList, int gridHeight, int gridWidth) {
+        ArrayList<Cell> allCellsList = new ArrayList<>();
+        for (int row = 0; row < gridHeight; row ++) {
+            for (int column = 0; column < gridWidth; column++) {
+                if (cellIsInList(initialLiveCellList, row, column)) {
+                    allCellsList.add(new Cell(new Location(row, column), true));
+                } else {
+                    allCellsList.add(new Cell(new Location(row, column), false));
+                }
+            }
+        }
+        return allCellsList;
+    }
+
+    private static boolean cellIsInList(ArrayList<Cell> initialLiveCellList, int row, int column) {
+        return initialLiveCellList.stream().anyMatch(cell -> cell.getLocation().getRow() == row && cell.getLocation().getColumn() == column);
     }
 
     private static ArrayList<Cell> convertCoordinatesToLiveCells(ArrayList<Coordinates> coordinatesList) {

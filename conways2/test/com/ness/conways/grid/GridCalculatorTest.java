@@ -28,7 +28,7 @@ public class GridCalculatorTest {
         IGrid initialState = new Grid2D(initialCellList, 3, 3);
 
         Grid2D nextTick = calculator.getNextTick(initialState);
-        // Looking for cell at location 1,1
+        // Next line is way too long
         boolean result = nextTick.getCellList().stream().filter(cell -> cell.getLocation().getRow() == 1 && cell.getLocation().getColumn() == 1).collect(Collectors.toList()).get(0).getAlive();
 
         assertTrue(result);
