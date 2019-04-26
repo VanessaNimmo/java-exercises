@@ -67,9 +67,9 @@ public class ConwaysApp {
         for (int row = 0; row < gridHeight; row ++) {
             for (int column = 0; column < gridWidth; column++) {
                 if (cellIsInList(initialLiveCellList, row, column)) {
-                    allCellsList.add(new Cell(new Location(row, column), true));
+                    allCellsList.add(new Cell(new Location(row, column), LifeType.ALIVE));
                 } else {
-                    allCellsList.add(new Cell(new Location(row, column), false));
+                    allCellsList.add(new Cell(new Location(row, column), LifeType.DEAD));
                 }
             }
         }
@@ -81,7 +81,7 @@ public class ConwaysApp {
     }
 
     private static ArrayList<Cell> convertCoordinatesToLiveCells(ArrayList<Coordinates> coordinatesList) {
-        return coordinatesList.stream().map(coordinate -> new Cell(new Location(coordinate.getY() - 1, coordinate.getX() - 1), true)).collect(Collectors.toCollection(ArrayList::new));
+        return coordinatesList.stream().map(coordinate -> new Cell(new Location(coordinate.getY() - 1, coordinate.getX() - 1), LifeType.ALIVE)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private static void exitWithErrors(IOutput output) {

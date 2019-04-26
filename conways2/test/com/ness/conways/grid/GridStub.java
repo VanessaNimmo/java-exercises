@@ -11,7 +11,7 @@ public class GridStub implements IGrid {
     }
 
     @Override
-    public int getAliveNeighbours(Location location) {
+    public int getNeighboursOfType(Location location, LifeType lifeType) {
         return this.aliveNeighbours;
     }
 

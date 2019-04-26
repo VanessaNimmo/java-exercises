@@ -14,7 +14,7 @@ public class WorldTest {
     @Test
     public void shouldOutputGridAsManyTimesAsNumberOfTicks() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(new Location(0, 0), false));
+        initialCellList.add(new Cell(new Location(0, 0), LifeType.DEAD));
         Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
@@ -33,7 +33,7 @@ public class WorldTest {
     @Test
     public void shouldCalculateANewGridOnEachTick() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(new Location(0, 0), false));
+        initialCellList.add(new Cell(new Location(0, 0), LifeType.DEAD));
         Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 1;
         int sleepTimeInMs = 500;
@@ -52,7 +52,7 @@ public class WorldTest {
     @Test
     public void shouldWaitForLengthOfSleepTimeBetweenEachIteration() {
         ArrayList<Cell> initialCellList = new ArrayList<>();
-        initialCellList.add(new Cell(new Location(0, 0), false));
+        initialCellList.add(new Cell(new Location(0, 0), LifeType.DEAD));
         Grid2D initialState = new Grid2D(initialCellList, 1, 1);
         int numberOfTicks = 5;
         int sleepTimeInMs = 500;
