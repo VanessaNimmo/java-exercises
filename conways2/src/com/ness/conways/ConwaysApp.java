@@ -7,7 +7,6 @@ import com.ness.conways.input.CoordinatesFileParser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -28,10 +27,8 @@ public class ConwaysApp {
         String welcome = messages.getString("welcome");
         output.print(welcome);
         File setupFile = new File(filePath);
-        // TODO: This is size and live cells - make this clearer
         ArrayList<Coordinates> coordinatesList = extractCoordinatesList(setupFile, output);
         InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSizeForOutput);
-        // TODO: since you already have the live cells, add dead cells where required
         IGrid initialGrid = makeInitialGrid(sanitizer, coordinatesList, output);
         IGridCalculator calculator = new GridCalculator();
 
