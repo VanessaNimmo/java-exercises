@@ -17,12 +17,12 @@ public class GridCalculator implements IGridCalculator {
     }
 
     private Cell isCellAlive(Cell cell, IGrid initialState) {
-            if (initialState.getAliveNeighbours(cell.getLocation()) == 3) {
-                return new Cell(cell.getLocation(), true);
+            if (initialState.getNeighboursOfType(cell.getLocation(), LifeType.ALIVE) == 3) {
+                return new Cell(cell.getLocation(), LifeType.ALIVE);
             }
-            if (initialState.getAliveNeighbours(cell.getLocation()) == 2 && cell.getAlive()) {
-                return new Cell(cell.getLocation(), true);
+            if (initialState.getNeighboursOfType(cell.getLocation(), LifeType.ALIVE) == 2 && cell.getLifeType()==LifeType.ALIVE) {
+                return new Cell(cell.getLocation(), LifeType.ALIVE);
             }
-            return new Cell(cell.getLocation(), false);
+            return new Cell(cell.getLocation(), LifeType.DEAD);
         }
 }

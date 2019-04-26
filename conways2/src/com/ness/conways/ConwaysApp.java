@@ -7,7 +7,6 @@ import com.ness.conways.input.CoordinatesFileParser;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -30,7 +29,6 @@ public class ConwaysApp {
         File setupFile = new File(filePath);
         ArrayList<Coordinates> coordinatesList = extractCoordinatesList(setupFile, output);
         InputDataSanitizer sanitizer = new InputDataSanitizer(maxGridSizeForOutput);
-
         IGrid initialGrid = makeInitialGrid(sanitizer, coordinatesList, output);
         IGridCalculator calculator = new GridCalculator();
 
@@ -57,11 +55,30 @@ public class ConwaysApp {
             exitWithErrors(output);
         }
         ArrayList<Cell> initialLiveCellList = convertCoordinatesToLiveCells(coordinatesList);
-        return new Grid2D(initialLiveCellList, gridHeight, gridWidth);
+        ArrayList<Cell> fullCellList = addDeadCells(initialLiveCellList, gridHeight, gridWidth);
+        return new Grid2D(fullCellList, gridHeight, gridWidth);
+    }
+
+    private static ArrayList<Cell> addDeadCells(ArrayList<Cell> initialLiveCellList, int gridHeight, int gridWidth) {
+        ArrayList<Cell> allCellsList = new ArrayList<>();
+        for (int row = 0; row < gridHeight; row ++) {
+            for (int column = 0; column < gridWidth; column++) {
+                if (cellIsInList(initialLiveCellList, row, column)) {
+                    allCellsList.add(new Cell(new Location(row, column), LifeType.ALIVE));
+                } else {
+                    allCellsList.add(new Cell(new Location(row, column), LifeType.DEAD));
+                }
+            }
+        }
+        return allCellsList;
+    }
+
+    private static boolean cellIsInList(ArrayList<Cell> initialLiveCellList, int row, int column) {
+        return initialLiveCellList.stream().anyMatch(cell -> cell.getLocation().getRow() == row && cell.getLocation().getColumn() == column);
     }
 
     private static ArrayList<Cell> convertCoordinatesToLiveCells(ArrayList<Coordinates> coordinatesList) {
-        return coordinatesList.stream().map(coordinate -> new Cell(new Location(coordinate.getY() - 1, coordinate.getX() - 1), true)).collect(Collectors.toCollection(ArrayList::new));
+        return coordinatesList.stream().map(coordinate -> new Cell(new Location(coordinate.getY() - 1, coordinate.getX() - 1), LifeType.ALIVE)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private static void exitWithErrors(IOutput output) {

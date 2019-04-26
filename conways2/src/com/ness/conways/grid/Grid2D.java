@@ -1,37 +1,18 @@
 package com.ness.conways.grid;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Grid2D implements IGrid {
 
     private final ArrayList<Cell> cellList;
     private final int gridHeight, gridWidth;
 
-    public Grid2D(ArrayList<Cell> aliveCellsList, int gridHeight, int gridWidth) {
+    public Grid2D(ArrayList<Cell> cellList, int gridHeight, int gridWidth) {
         this.gridHeight = gridHeight;
         this.gridWidth = gridWidth;
-        boolean[][] gridRepresentation = constructGridRepresentation(aliveCellsList);
-        this.cellList = makeAllCellsList(gridRepresentation);
-    }
-
-    private boolean[][] constructGridRepresentation(ArrayList<Cell> cells) {
-        boolean[][] cellRepresentation = new boolean[this.gridHeight][this.gridWidth];
-        for (Cell cell : cells) {
-            cellRepresentation[cell.getLocation().getRow()][cell.getLocation().getColumn()] = cell.getAlive();
-        }
-        return cellRepresentation;
-    }
-
-    private ArrayList<Cell> makeAllCellsList(boolean[][] gridRepresentation) {
-        ArrayList<Cell> allCellsList = new ArrayList<>();
-        for (int row = 0; row < gridHeight; row++) {
-            for (int column = 0; column < gridWidth; column++) {
-                allCellsList.add(new Cell(new Location(row, column), gridRepresentation[row][column]));
-            }
-        }
-        return allCellsList;
+        this.cellList = cellList;
     }
 
     @Override
@@ -44,30 +25,34 @@ public class Grid2D implements IGrid {
     public ArrayList<Cell> getCellList() { return this.cellList; }
 
     @Override
-    public int getAliveNeighbours(Location location) {
-        return calculateAliveNeighbours(location.getRow(), location.getColumn());
+    public int getNeighboursOfType(Location location, LifeType lifeType) {
+        return calculateNeighboursOfType(location.getRow(), location.getColumn(), lifeType);
     }
 
-    private int calculateAliveNeighbours(int row, int column) {
+    private int calculateNeighboursOfType(int row, int column, LifeType lifeType) {
         int rowAbove = getPreviousRowOrColumn(row, this.gridHeight);
         int rowBelow = getNextRowOrColumn(row, this.gridHeight);
         int columnBefore = getPreviousRowOrColumn(column, this.gridWidth);
         int columnAfter = getNextRowOrColumn(column, this.gridWidth);
-        boolean[][] gridRepresentation = constructGridRepresentation(this.cellList);
-        List<Boolean> cells = getNeighbouringCellsList(gridRepresentation, rowAbove, row, rowBelow, columnBefore, column, columnAfter);
-        return (int) cells.stream().filter(cell -> cell).count();
+        List<Cell> cells = getNeighbouringCellsList(rowAbove, row, rowBelow, columnBefore, column, columnAfter);
+        return (int) cells.stream().filter(cell -> cell.getLifeType()==lifeType).count();
     }
 
-    private List<Boolean> getNeighbouringCellsList(boolean[][] initialState, int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
-        return Arrays.asList(
-                initialState[rowAbove][columnBefore],
-                initialState[rowAbove][column],
-                initialState[rowAbove][columnAfter],
-                initialState[row][columnBefore],
-                initialState[row][columnAfter],
-                initialState[rowBelow][columnBefore],
-                initialState[rowBelow][column],
-                initialState[rowBelow][columnAfter]);
+    private List<Cell> getNeighbouringCellsList(int rowAbove, int row, int rowBelow, int columnBefore, int column, int columnAfter) {
+        List<Cell> neighbouringCells = new ArrayList<>();
+        neighbouringCells.add(findCell(rowAbove, columnBefore));
+        neighbouringCells.add(findCell(rowAbove, column));
+        neighbouringCells.add(findCell(rowAbove, columnAfter));
+        neighbouringCells.add(findCell(row, columnBefore));
+        neighbouringCells.add(findCell(row, columnAfter));
+        neighbouringCells.add(findCell(rowBelow, columnBefore));
+        neighbouringCells.add(findCell(rowBelow, column));
+        neighbouringCells.add(findCell(rowBelow, columnAfter));
+        return neighbouringCells;
+    }
+
+    private Cell findCell(int row, int column) {
+        return this.cellList.stream().filter(cell -> cell.getLocation().getRow() == row && cell.getLocation().getColumn()==column).collect(Collectors.toCollection(ArrayList::new)).get(0);
     }
 
     private int getNextRowOrColumn(int rowOrColumn, int lengthOfRowOrColumn) {

@@ -3,13 +3,13 @@ package com.ness.conways.grid;
 public class Cell {
 
     private Location location;
-    private boolean alive;
+    private LifeType lifeType;
 
-    public Cell(Location location, boolean alive){
+    public Cell(Location location, LifeType lifeType){
         this.location = location;
-        this.alive = alive;
+        this.lifeType = lifeType;
     }
 
     public Location getLocation() { return this.location; }
-    public boolean getAlive() { return this.alive; }
+    public LifeType getLifeType() { return this.lifeType; }
 }

@@ -1,6 +1,7 @@
 package com.ness.conways.output;
 
 import com.ness.conways.grid.Cell;
+import com.ness.conways.grid.LifeType;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class ConsoleOutput implements IOutput {
         stringRepresentation.append(NEW_LINE);
         String cellAsString;
         for (int i = 0; i < cellList.size(); i++) {
-            cellAsString = cellList.get(i).getAlive() ? SMILING_FACE_EMOJI : GHOST_EMOJI;
+            cellAsString = cellList.get(i).getLifeType() == LifeType.ALIVE ? SMILING_FACE_EMOJI : GHOST_EMOJI;
             stringRepresentation.append(cellAsString);
             if (isEndOfRow(gridWidth, i)) {
                 stringRepresentation.append(NEW_LINE);
