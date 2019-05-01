@@ -9,9 +9,9 @@ public class HelloWorldServer {
 
     public static void main(String[] args) throws IOException {
 
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
         server.createContext("/", new ResponseHandler());
-
+        server.setExecutor(null);
         server.start();
     }
 }
