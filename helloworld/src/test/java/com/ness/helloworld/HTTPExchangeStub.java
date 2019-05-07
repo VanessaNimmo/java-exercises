@@ -12,6 +12,15 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 
 public class HTTPExchangeStub extends HttpExchange {
+
+    private String requestMethod;
+    private URI requestURI;
+
+    HTTPExchangeStub(String requestMethod, URI requestURI) {
+        this.requestMethod = requestMethod;
+        this.requestURI = requestURI;
+    }
+
     @Override
     public Headers getRequestHeaders() {
         return null;
@@ -24,12 +33,12 @@ public class HTTPExchangeStub extends HttpExchange {
 
     @Override
     public URI getRequestURI() {
-        return null;
+        return this.requestURI;
     }
 
     @Override
     public String getRequestMethod() {
-        return null;
+        return this.requestMethod;
     }
 
     @Override
