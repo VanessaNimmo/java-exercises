@@ -13,9 +13,16 @@ public class NameList {
     NameList() {
         ArrayList<String> list = new ArrayList<>();
         this.list = list;
+        list.add("Vanessa");
     }
 
     void addToNameList(String name) {
         list.add(name);
+    }
+
+    void removeFromList(String name) {
+        if (!name.equalsIgnoreCase("vanessa")) {
+            list.remove(name);
+        }
     }
 }

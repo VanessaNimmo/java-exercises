@@ -2,8 +2,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.containsString;
 
 public class HelloWorldServerTest {
@@ -54,6 +53,13 @@ public class HelloWorldServerTest {
     @Test
     public void aGetOnTheNamesURLReturnsAllNames() {
         get("http://localhost:8080/names").then().body(containsString("Vanessa, Bob"));
+    }
+
+    @Test
+    public void sendingADeleteOnANameRemovesThatName() {
+        delete("http://localhost:8080/Bob").then().body(containsString("Bob"));
+
+//        get("http://localhost:8080/").then().body(containsString("Hello Vanessa - the time on the server is"));
     }
 }
 

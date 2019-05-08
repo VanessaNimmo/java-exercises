@@ -7,11 +7,12 @@ import java.io.OutputStream;
 
 public class ResponseSender {
 
-    void send(String response, HttpExchange exchange) throws IOException {
+    void send(String response, HttpExchange exchange, int statusCode) throws IOException {
         int responseLength = response.length();
-        exchange.sendResponseHeaders(200, responseLength);
+        exchange.sendResponseHeaders(statusCode, responseLength);
         OutputStream outputStream = exchange.getResponseBody();
         outputStream.write(response.getBytes());
         outputStream.close();
     }
+
 }

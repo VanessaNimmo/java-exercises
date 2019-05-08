@@ -13,10 +13,10 @@ public class RequestRouter implements HttpHandler {
     private NameList nameList;
     private ResponseSender responseSender;
 
-    RequestRouter() {
-        greetingFormatter = new GreetingFormatter();
+    RequestRouter(GreetingFormatter formatter, ResponseSender sender) {
+        greetingFormatter = formatter;
         nameList = new NameList();
-        responseSender = new ResponseSender();
+        responseSender = sender;
     }
 
     @Override
@@ -24,7 +24,13 @@ public class RequestRouter implements HttpHandler {
         String requestMethod = exchange.getRequestMethod();
         String requestedPath = exchange.getRequestURI().toString();
         String response = "";
-        if (requestMethod.equals("POST")) {
+        int statusCode = 200;
+        if (requestMethod.equalsIgnoreCase("delete")) {
+            String name = requestedPath.split("=")[1];
+            nameList.removeFromList(name);
+            response = name;
+        }
+        if (requestMethod.equalsIgnoreCase("post")) {
             InputStream requestBodyStream = exchange.getRequestBody();
             String requestBody = new BufferedReader(new InputStreamReader(requestBodyStream))
                     .lines().collect(Collectors.joining("\n"));
@@ -32,10 +38,14 @@ public class RequestRouter implements HttpHandler {
             nameList.addToNameList(name);
             response = name;
         }
-        if (requestMethod.equals("GET") && requestedPath.contains("/names")) {
+        if (requestMethod.equalsIgnoreCase("get") && requestedPath.contains("/names")) {
             response = nameList.getList().stream().collect(Collectors.joining(", "));
+        } else if (requestMethod.equalsIgnoreCase("get")) {
+            response = greetingFormatter.createResponse(LocalDateTime.now(), nameList);
         }
-        responseSender.send(response, exchange);
-
+        responseSender.send(response, exchange, statusCode);
     }
+
+
+
 }

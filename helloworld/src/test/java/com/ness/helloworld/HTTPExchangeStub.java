@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpPrincipal;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +16,8 @@ public class HTTPExchangeStub extends HttpExchange {
 
     private String requestMethod;
     private URI requestURI;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
 
     HTTPExchangeStub(String requestMethod, URI requestURI) {
         this.requestMethod = requestMethod;

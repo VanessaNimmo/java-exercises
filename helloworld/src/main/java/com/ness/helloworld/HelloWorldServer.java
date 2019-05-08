@@ -10,7 +10,7 @@ public class HelloWorldServer {
     public static void main(String[] args) throws IOException {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        server.createContext("/", new RequestRouter());
+        server.createContext("/", new RequestRouter(new GreetingFormatter(), new ResponseSender()));
         server.setExecutor(null);
         server.start();
     }
