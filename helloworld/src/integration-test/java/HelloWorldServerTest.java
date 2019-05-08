@@ -1,6 +1,9 @@
+import com.ness.helloworld.HelloWorldServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.containsString;
@@ -8,12 +11,20 @@ import static org.hamcrest.Matchers.containsString;
 public class HelloWorldServerTest {
 
     // TODO: work out how to make the integration tests start up the server themselves (and stop it). Note that if there is only one thread Java will start the server and then just wait and nothing else will happen
-
     @Before
-    // start the server
+    public void setUp() {
+        String[] args = new String[0];
+        try {
+            HelloWorldServer.main(args);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @After
-    // stop the server
+    public void tearDown() {
+        HelloWorldServer.stop();
+    }
 
     @Test
     public void whenServerIsHitSuccessfullyItRespondsWithA200StatusCode() {
@@ -38,28 +49,39 @@ public class HelloWorldServerTest {
     @Test
     public void afterAPostTheNameSentIsReturnedInASubsequentGet() {
         given().
-            param("name", "Bob").
-        when().
-            post("http://localhost:8080/names").
-        then().
-            body(containsString("Bob"));
-
+                param("name", "Bob").
+                when().
+                post("http://localhost:8080/names").
+                then().
+                body(containsString("Bob"));
         given().
-            get("http://localhost:8080").
+            get("http://localhost:8080/").
         then().
             body(containsString("Hello Vanessa and Bob - the time on the server is "));
     }
 
     @Test
     public void aGetOnTheNamesURLReturnsAllNames() {
+        given().
+                param("name", "Bob").
+                when().
+                post("http://localhost:8080/names").
+                then().
+                body(containsString("Bob"));
         get("http://localhost:8080/names").then().body(containsString("Vanessa, Bob"));
     }
 
     @Test
     public void sendingADeleteOnANameRemovesThatName() {
-        delete("http://localhost:8080/Bob").then().body(containsString("Bob"));
+        given().
+                param("name", "Bob").
+                when().
+                post("http://localhost:8080/names").
+                then().
+                body(containsString("Bob"));
+        delete("http://localhost:8080/names/Bob").then().body(containsString("Bob"));
 
-//        get("http://localhost:8080/").then().body(containsString("Hello Vanessa - the time on the server is"));
+        get("http://localhost:8080/").then().body(containsString("Hello Vanessa - the time on the server is"));
     }
 }
 

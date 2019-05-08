@@ -10,6 +10,7 @@ public class ResponseSender {
     void send(String response, HttpExchange exchange, int statusCode) throws IOException {
         int responseLength = response.length();
         exchange.sendResponseHeaders(statusCode, responseLength);
+        // TODO: This throws IO Exception - need to handle it?
         OutputStream outputStream = exchange.getResponseBody();
         outputStream.write(response.getBytes());
         outputStream.close();
