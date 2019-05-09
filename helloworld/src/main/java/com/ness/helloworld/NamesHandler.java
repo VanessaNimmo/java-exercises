@@ -36,6 +36,6 @@ public class NamesHandler {
         String newName = requestBody.split("=")[1];
         nameList.removeFromList(originalName);
         nameList.addToNameList(newName);
-        return "";
+        return newName;
     }
 }
