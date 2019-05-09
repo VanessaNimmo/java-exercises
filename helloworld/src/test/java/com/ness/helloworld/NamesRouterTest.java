@@ -1,6 +1,7 @@
 package com.ness.helloworld;
 
 import com.sun.net.httpserver.HttpExchange;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,16 +12,19 @@ import static org.mockito.Mockito.*;
 
 public class NamesRouterTest {
 
-    // This is horrible to test - how do I get away from the HttpExchange???
+    private HttpExchange mockedExchange;
+    @Before
+    public void setUp() {
+        HttpExchange mockedExchange = mock(HttpExchange.class);
+    }
+    // TODO: use ArgumentCaptor to capture what is send by the Response Sender in order to test the NameRouter
     @Test
     public void shouldCallNamesRouterPutClassWhenRequestIsAPut() throws IOException, URISyntaxException {
         NamesHandler mockedNamesHandler = mock(NamesHandler.class);
-        HttpExchange mockedExchange = mock(HttpExchange.class);
         NameList nameList = new NameList();
         nameList.addToNameList("Bob");
         when(mockedExchange.getRequestURI()).thenReturn(new URI("http://localhost:8080/names/Bob"));
         when(mockedExchange.getRequestMethod()).thenReturn("PUT");
-        when(mockedNamesHandler.handlePut("/names/Bob", mockedExchange, nameList)).thenReturn("James");
         NamesRouter namesRouter = new NamesRouter(new HttpResponseSender(), new NameList(), mockedNamesHandler);
 
         namesRouter.handle(mockedExchange);

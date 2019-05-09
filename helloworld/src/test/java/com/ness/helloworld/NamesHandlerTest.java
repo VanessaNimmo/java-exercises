@@ -1,13 +1,9 @@
 package com.ness.helloworld;
 
-import com.sun.net.httpserver.HttpExchange;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class NamesHandlerTest {
 
@@ -15,13 +11,9 @@ public class NamesHandlerTest {
     public void postShouldAddNameToList() {
         NamesHandler handler = new NamesHandler();
         NameList nameList = new NameList();
+        String requestBody = "name=Bob";
 
-        HttpExchange mockedExchange = mock(HttpExchange.class);
-        String requestBodyContent = "name=Bob";
-        InputStream requestBodyStream = new ByteArrayInputStream(requestBodyContent.getBytes());
-        when(mockedExchange.getRequestBody()).thenReturn(requestBodyStream);
-
-        handler.handlePost(mockedExchange, nameList);
+        handler.handlePost(nameList, requestBody);
 
         assertTrue(nameList.getList().contains("Bob"));
     }
@@ -37,12 +29,9 @@ public class NamesHandlerTest {
         NamesHandler handler = new NamesHandler();
         NameList nameList = new NameList();
         nameList.addToNameList("Bob");
-        HttpExchange mockedExchange = mock(HttpExchange.class);
-        String requestBodyContent = "name=James";
-        InputStream requestBodyStream = new ByteArrayInputStream(requestBodyContent.getBytes());
-        when(mockedExchange.getRequestBody()).thenReturn(requestBodyStream);
+        String requestBody = "name=James";
 
-        handler.handlePut("/names/Bob", mockedExchange, nameList);
+        handler.handlePut("/names/Bob", nameList, requestBody);
 
         assertFalse(nameList.getList().contains("Bob"));
     }
@@ -52,12 +41,9 @@ public class NamesHandlerTest {
         NamesHandler handler = new NamesHandler();
         NameList nameList = new NameList();
         nameList.addToNameList("Bob");
-        HttpExchange mockedExchange = mock(HttpExchange.class);
-        String requestBodyContent = "name=James";
-        InputStream requestBodyStream = new ByteArrayInputStream(requestBodyContent.getBytes());
-        when(mockedExchange.getRequestBody()).thenReturn(requestBodyStream);
+        String requestBody = "name=James";
 
-        handler.handlePut("/names/Bob", mockedExchange, nameList);
+        handler.handlePut("/names/Bob", nameList, requestBody);
 
         assertTrue(nameList.getList().contains("James"));
     }

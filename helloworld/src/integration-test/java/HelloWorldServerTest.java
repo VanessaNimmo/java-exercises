@@ -38,7 +38,7 @@ public class HelloWorldServerTest {
     @Test
     public void whenPOSTRequestIsSentItAcceptsANameAndRespondsWithNameSent() {
         given().
-            param("name", "Bob").
+            body("name=Bob").
         when().
             post("http://localhost:8080/names").
         then().
@@ -48,7 +48,7 @@ public class HelloWorldServerTest {
     @Test
     public void afterAPostTheNameSentIsReturnedInASubsequentGet() {
         given().
-                param("name", "Bob").
+                body("name=Bob").
                 when().
                 post("http://localhost:8080/names").
                 then().
@@ -62,7 +62,7 @@ public class HelloWorldServerTest {
     @Test
     public void aGetOnTheNamesURLReturnsAllNames() {
         given().
-                param("name", "Bob").
+                body("name=Bob").
                 when().
                 post("http://localhost:8080/names").
                 then().
@@ -73,7 +73,7 @@ public class HelloWorldServerTest {
     @Test
     public void sendingADeleteOnANameRemovesThatName() {
         given().
-                param("name", "Bob").
+                body("name=Bob").
                 when().
                 post("http://localhost:8080/names").
                 then().
@@ -86,12 +86,11 @@ public class HelloWorldServerTest {
     @Test
     public void sendingAPutOnANameReceives201StatusCode() {
         given().
-                param("name", "Bob").
-                when().
-                post("http://localhost:8080/names").
-                then().
-                body(containsString("Bob"));
-        given().param("name", "James").when().put("http://localhost:8080/names/Bob").then().statusCode(201);
+                body("name=Bob").
+            when().
+                post("http://localhost:8080/names");
+
+        given().body("name=James").when().put("http://localhost:8080/names/Bob").then().statusCode(201);
     }
 }
 

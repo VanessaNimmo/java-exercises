@@ -1,41 +1,31 @@
 package com.ness.helloworld;
 
-import com.sun.net.httpserver.HttpExchange;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 public class NamesHandler {
 
-    public String handleGetNames(NameList nameList) {
-       return nameList.getList().stream().collect(Collectors.joining(", "));
+    public HttpResponse handleGetNames(NameList nameList) {
+       String reponse = nameList.getList().stream().collect(Collectors.joining(", "));
+       return new HttpResponse(reponse, 200);
     }
 
-    public String handleDelete(String requestedPath, NameList nameList) {
+    public HttpResponse handleDelete(String requestedPath, NameList nameList) {
         String name = requestedPath.split("/names/")[1];
         nameList.removeFromList(name);
-        return name;
+        return new HttpResponse(name, 200);
     }
 
-    public String handlePost(HttpExchange exchange, NameList nameList) {
-        InputStream requestBodyStream = exchange.getRequestBody();
-        String requestBody = new BufferedReader(new InputStreamReader(requestBodyStream))
-                .lines().collect(Collectors.joining("\n"));
+    public HttpResponse handlePost(NameList nameList, String requestBody) {
         String name = requestBody.split("=")[1];
         nameList.addToNameList(name);
-        return name;
+        return new HttpResponse(name, 200);
     }
 
-    public String handlePut(String requestedPath, HttpExchange exchange, NameList nameList) {
+    public HttpResponse handlePut(String requestedPath, NameList nameList, String requestBody) {
         String originalName = requestedPath.split("/names/")[1];
-        InputStream requestBodyStream = exchange.getRequestBody();
-        String requestBody = new BufferedReader(new InputStreamReader(requestBodyStream))
-                .lines().collect(Collectors.joining("\n"));
         String newName = requestBody.split("=")[1];
         nameList.removeFromList(originalName);
         nameList.addToNameList(newName);
-        return newName;
+        return new HttpResponse(newName, 201);
     }
 }
