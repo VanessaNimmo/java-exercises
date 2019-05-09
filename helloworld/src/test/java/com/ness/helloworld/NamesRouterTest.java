@@ -1,25 +1,29 @@
 package com.ness.helloworld;
 
+import com.sun.net.httpserver.HttpExchange;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static org.mockito.Mockito.*;
+
 public class NamesRouterTest {
 
-    // TODO: HTTPexchange is an abstract class so you can extend it to create a mocked version and test this class without having the server running (you can always do this unless it is final)
-
+    // This is horrible to test - how do I get away from the HttpExchange???
     @Test
-    public void shouldCallGreetingFormatterWhenGetIsCalledOnRootURI() throws URISyntaxException, IOException {
-        HTTPExchangeStub exchange = new HTTPExchangeStub("GET", new URI("http://localhost:8080/"));
+    public void shouldCallNamesRouterPutClassWhenRequestIsAPut() throws IOException, URISyntaxException {
+        NamesHandler mockedNamesHandler = mock(NamesHandler.class);
+        HttpExchange mockedExchange = mock(HttpExchange.class);
+        NameList nameList = new NameList();
+        nameList.addToNameList("Bob");
+        when(mockedExchange.getRequestURI()).thenReturn(new URI("http://localhost:8080/names/Bob"));
+        when(mockedExchange.getRequestMethod()).thenReturn("PUT");
+        when(mockedNamesHandler.handlePut("/names/Bob", mockedExchange, nameList)).thenReturn("James");
+        NamesRouter namesRouter = new NamesRouter(new HttpResponseSender(), new NameList(), mockedNamesHandler);
 
-        NamesRouter handler = new NamesRouter(new ResponseSender(), new NameList(), new NamesHandler());
-
-        String greeting = "Hello Vanessa - the time on the server is ";
-
-        handler.handle(exchange);
-
+        namesRouter.handle(mockedExchange);
 
     }
 

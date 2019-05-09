@@ -4,16 +4,15 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.*;
-import java.util.stream.Collectors;
 
 public class NamesRouter implements HttpHandler {
 
     private NameList nameList;
-    private ResponseSender responseSender;
+    private HttpResponseSender httpResponseSender;
     private NamesHandler namesHandler;
 
-    NamesRouter(ResponseSender responseSender, NameList nameList, NamesHandler namesHandler) {
-        this.responseSender = responseSender;
+    NamesRouter(HttpResponseSender httpResponseSender, NameList nameList, NamesHandler namesHandler) {
+        this.httpResponseSender = httpResponseSender;
         this.nameList = nameList;
         this.namesHandler = namesHandler;
     }
@@ -26,23 +25,23 @@ public class NamesRouter implements HttpHandler {
 
     private void routeNames(HttpExchange exchange, String requestedPath) throws IOException {
         String requestMethod = exchange.getRequestMethod();
-        String response = "";
+        String responseBody = "";
         int statusCode = 200;
         if (requestMethod.equalsIgnoreCase("get")) {
-            response = namesHandler.handleGetNames(nameList);
+            responseBody = namesHandler.handleGetNames(nameList);
         }
         if (requestMethod.equalsIgnoreCase("delete")) {
-            response = namesHandler.handleDelete(requestedPath, nameList);
+            responseBody = namesHandler.handleDelete(requestedPath, nameList);
         }
         if (requestMethod.equalsIgnoreCase("post")) {
-            response = namesHandler.handlePost(exchange, nameList);
+            responseBody = namesHandler.handlePost(exchange, nameList);
         }
         if (requestMethod.equalsIgnoreCase("put")) {
-            // TODO: How does PUT work? How do you send a response with no body?
-            response = namesHandler.handlePut(requestedPath, exchange, nameList);
+            responseBody = namesHandler.handlePut(requestedPath, exchange, nameList);
             statusCode = 201;
         }
-        responseSender.send(response, exchange, statusCode);
+        HttpResponse response = new HttpResponse(responseBody, statusCode, exchange);
+        httpResponseSender.send(response);
     }
 
 }

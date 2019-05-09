@@ -13,12 +13,23 @@ public class NamesHandlerTest {
 
     @Test
     public void postShouldAddNameToList() {
+        NamesHandler handler = new NamesHandler();
+        NameList nameList = new NameList();
 
+        HttpExchange mockedExchange = mock(HttpExchange.class);
+        String requestBodyContent = "name=Bob";
+        InputStream requestBodyStream = new ByteArrayInputStream(requestBodyContent.getBytes());
+        when(mockedExchange.getRequestBody()).thenReturn(requestBodyStream);
+
+        handler.handlePost(mockedExchange, nameList);
+
+        assertTrue(nameList.getList().contains("Bob"));
     }
 
     @Test
     public void postShouldRefuseToAddNameIfNameAlreadyInList() {
-
+        // Not sure how I want it to behave in this case!
+        // TODO: Work out what behaviour you want here
     }
 
     @Test
