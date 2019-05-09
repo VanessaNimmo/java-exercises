@@ -10,7 +10,6 @@ import static org.hamcrest.Matchers.containsString;
 
 public class HelloWorldServerTest {
 
-    // TODO: work out how to make the integration tests start up the server themselves (and stop it). Note that if there is only one thread Java will start the server and then just wait and nothing else will happen
     @Before
     public void setUp() {
         String[] args = new String[0];
@@ -82,6 +81,17 @@ public class HelloWorldServerTest {
         delete("http://localhost:8080/names/Bob").then().body(containsString("Bob"));
 
         get("http://localhost:8080/").then().body(containsString("Hello Vanessa - the time on the server is"));
+    }
+
+    @Test
+    public void sendingAPutOnANameReceives201StatusCode() {
+        given().
+                param("name", "Bob").
+                when().
+                post("http://localhost:8080/names").
+                then().
+                body(containsString("Bob"));
+        given().param("name", "James").when().put("http://localhost:8080/names/Bob").then().statusCode(201);
     }
 }
 

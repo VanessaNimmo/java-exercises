@@ -8,11 +8,17 @@ import java.net.InetSocketAddress;
 public class HelloWorldServer {
 
     private static HttpServer server;
+    private static NameList nameList;
 
     public static void main(String[] args) throws IOException {
 
         server = HttpServer.create(new InetSocketAddress(8080), 0);
-        server.createContext("/", new RequestHandler(new GreetingFormatter(), new ResponseSender()));
+        nameList = new NameList();
+        NamesHandler namesHandler = new NamesHandler();
+        NamesRouter namesRouter = new NamesRouter(new ResponseSender(), nameList, namesHandler);
+        RootRouterAndHandler rootRouterAndHandler = new RootRouterAndHandler(new GreetingFormatter(), new ResponseSender(), nameList);
+        server.createContext("/names", namesRouter);
+        server.createContext("/", rootRouterAndHandler);
         server.setExecutor(null);
         server.start();
     }
