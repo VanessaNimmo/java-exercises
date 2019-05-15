@@ -10,40 +10,42 @@ public class NameListTest {
 
     @Test
     public void theNameVanessaIsAddedByDefault() {
-        NameList nameList = new NameList();
+        NameList nameList = new NameList("Vanessa");
 
-        assertTrue(nameList.getList().contains("Vanessa"));
+        ArrayList<String> result = nameList.getList();
+
+        assertTrue(result.contains("Vanessa"));
     }
 
     @Test
     public void addingANameAddsItToTheListAddsThatNameToTheList() {
-        NameList nameList = new NameList();
-
+        NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Mary");
 
-        assertTrue(nameList.getList().contains("Mary"));
+        ArrayList<String> result = nameList.getList();
+
+        assertTrue(result.contains("Mary"));
 
     }
 
     @Test
     public void theNameVanessaCannotBeRemovedFromTheList() {
-        NameList nameList = new NameList();
-
+        NameList nameList = new NameList("Vanessa");
         nameList.removeFromList("Vanessa");
 
         ArrayList<String> result = nameList.getList();
 
-        assertTrue(nameList.getList().contains("Vanessa"));
+        assertTrue(result.contains("Vanessa"));
     }
 
     @Test
     public void otherNamesCanBeRemovedFromTheList() {
-        NameList nameList = new NameList();
-
+        NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Mary");
-
         nameList.removeFromList("Mary");
 
-        assertFalse(nameList.getList().contains("Mary"));
+        ArrayList<String> result = nameList.getList();
+
+        assertFalse(result.contains("Mary"));
     }
 }

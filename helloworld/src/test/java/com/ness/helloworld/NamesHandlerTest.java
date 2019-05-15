@@ -10,7 +10,7 @@ public class NamesHandlerTest {
     @Test
     public void postShouldAddNameToList() {
         NamesHandler handler = new NamesHandler();
-        NameList nameList = new NameList();
+        NameList nameList = new NameList("Vanessa");
         String requestBody = "name=Bob";
 
         handler.handlePost(nameList, requestBody);
@@ -27,7 +27,7 @@ public class NamesHandlerTest {
     @Test
     public void putShouldRemoveOldNameFromList() {
         NamesHandler handler = new NamesHandler();
-        NameList nameList = new NameList();
+        NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Bob");
         String requestBody = "name=James";
 
@@ -39,7 +39,7 @@ public class NamesHandlerTest {
     @Test
     public void putShouldAddNewNameToList() {
         NamesHandler handler = new NamesHandler();
-        NameList nameList = new NameList();
+        NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Bob");
         String requestBody = "name=James";
 

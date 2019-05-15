@@ -13,10 +13,10 @@ public class HelloWorldServer {
     public static void main(String[] args) throws IOException {
 
         server = HttpServer.create(new InetSocketAddress(8080), 0);
-        nameList = new NameList();
+        nameList = new NameList("Vanessa");
         NamesHandler namesHandler = new NamesHandler();
         NamesRouter namesRouter = new NamesRouter(new HttpResponseSender(), nameList, namesHandler);
-        RootRouterAndHandler rootRouterAndHandler = new RootRouterAndHandler(new GreetingFormatter(), new HttpResponseSender(), nameList);
+        RootRouterAndHandler rootRouterAndHandler = new RootRouterAndHandler(new GreetingFormatter(), nameList);
         server.createContext("/names", namesRouter);
         server.createContext("/", rootRouterAndHandler);
         server.setExecutor(null);

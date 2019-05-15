@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 public class NameList {
 
-    public ArrayList<String> getList() {
-        return list;
-    }
-
+    private final String seedName;
     private ArrayList<String> list;
 
-    NameList() {
+    NameList(String seedName) {
         ArrayList<String> list = new ArrayList<>();
+        this.seedName = seedName;
         this.list = list;
-        list.add("Vanessa");
+        list.add(seedName);
     }
 
     void addToNameList(String name) {
@@ -21,8 +19,13 @@ public class NameList {
     }
 
     void removeFromList(String name) {
-        if (!name.equalsIgnoreCase("vanessa")) {
+        if (!name.equalsIgnoreCase(this.seedName)) {
             list.remove(name);
         }
     }
+
+    ArrayList<String> getList() {
+        return list;
+    }
+
 }

@@ -1,20 +1,20 @@
 package com.ness.helloworld;
 
-public class HttpResponse {
+class HttpResponse {
 
-    private String body;
-    private int statusCode;
+    private final String body;
+    private final int statusCode;
 
     HttpResponse(String body, int statusCode) {
         this.body = body;
         this.statusCode = statusCode;
     }
 
-    public String getBody() {
+    String getBody() {
         return body;
     }
 
-    public int getStatusCode() {
+    int getStatusCode() {
         return statusCode;
     }
 }
