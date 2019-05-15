@@ -30,13 +30,14 @@ public class HttpResponseSenderTest {
 
     @Test
     public void shouldSendResponseGivenToIt() throws IOException {
+        HttpResponseSender sender = new HttpResponseSender();
         HttpExchange mockedExchange = mock(HttpExchange.class);
         when(mockedExchange.getResponseBody()).thenReturn(outContent);
         mockedExchange.sendResponseHeaders(200, 13);
 
         HttpResponse response = new HttpResponse("Test response", 200);
 
-        HttpResponseSender.send(response, mockedExchange);
+        sender.send(response, mockedExchange);
 
         assertThat(outContent.toString(), containsString("Test response"));
     }

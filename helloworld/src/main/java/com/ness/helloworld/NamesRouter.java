@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 public class NamesRouter implements HttpHandler {
 
     private NameList nameList;
-    private HttpResponseSender httpResponseSender;
     private HttpResponseCreator httpResponseCreator;
+    private HttpResponseSender httpResponseSender;
 
-    NamesRouter(HttpResponseSender httpResponseSender, NameList nameList, HttpResponseCreator httpResponseCreator) {
-        this.httpResponseSender = httpResponseSender;
+    NamesRouter(NameList nameList, HttpResponseCreator httpResponseCreator, HttpResponseSender sender) {
         this.nameList = nameList;
         this.httpResponseCreator = httpResponseCreator;
+        this.httpResponseSender = sender;
     }
 
     @Override
@@ -34,20 +34,38 @@ public class NamesRouter implements HttpHandler {
             response = httpResponseCreator.handleDelete(requestedPath, nameList);
         }
         if (requestMethod.equalsIgnoreCase("post")) {
-            String requestBody = getRequestBody(exchange);
-            response = httpResponseCreator.handlePost(nameList, requestBody);
+            try {
+                String requestBody = getRequestBody(exchange);
+                response = httpResponseCreator.handlePost(nameList, requestBody);
+            } catch (NullPointerException e) {
+                System.out.println("System error occured");
+            }
         }
         if (requestMethod.equalsIgnoreCase("put")) {
-            String requestBody = getRequestBody(exchange);
-            response = httpResponseCreator.handlePut(requestedPath, nameList, requestBody);
+            try {
+                String requestBody = getRequestBody(exchange);
+                response = httpResponseCreator.handlePut(requestedPath, nameList, requestBody);
+            } catch (NullPointerException e) {
+                System.out.println("System error occured");
+            }
         }
-        HttpResponseSender.send(response, exchange);
+        if (requestNotImplemented(requestMethod)) {
+            response = new HttpResponse("Not implemented", 501);
+        }
+        httpResponseSender.send(response, exchange);
     }
 
-    private String getRequestBody(HttpExchange exchange) {
+    private String getRequestBody(HttpExchange exchange) throws NullPointerException {
         InputStream requestBodyStream = exchange.getRequestBody();
-        String requestBody = new BufferedReader(new InputStreamReader(requestBodyStream))
+        return new BufferedReader(new InputStreamReader(requestBodyStream))
                 .lines().collect(Collectors.joining("\n"));
-        return requestBody;
+    }
+
+    private boolean requestNotImplemented(String requestMethod) {
+        return (requestMethod.equalsIgnoreCase("head") ||
+                requestMethod.equalsIgnoreCase("connect") ||
+                requestMethod.equalsIgnoreCase("options") ||
+                requestMethod.equalsIgnoreCase("trace") ||
+                requestMethod.equalsIgnoreCase("patch"));
     }
 }

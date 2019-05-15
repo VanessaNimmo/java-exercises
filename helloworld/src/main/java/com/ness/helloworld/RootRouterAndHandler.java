@@ -10,16 +10,18 @@ public class RootRouterAndHandler implements HttpHandler {
 
     private GreetingFormatter greetingFormatter;
     private NameList nameList;
+    private HttpResponseSender httpResponseSender;
 
-    RootRouterAndHandler(GreetingFormatter formatter, NameList list) {
-        greetingFormatter = formatter;
-        nameList = list;
+    RootRouterAndHandler(GreetingFormatter greetingFormatter, NameList nameList, HttpResponseSender httpResponseSender) {
+        this.greetingFormatter = greetingFormatter;
+        this.nameList = nameList;
+        this.httpResponseSender = httpResponseSender;
     }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
          String responseBody = greetingFormatter.createFormattedGreeting(LocalDateTime.now(), nameList);
          HttpResponse response = new HttpResponse(responseBody, 200);
-         HttpResponseSender.send(response, exchange);
+         httpResponseSender.send(response, exchange);
     }
 }

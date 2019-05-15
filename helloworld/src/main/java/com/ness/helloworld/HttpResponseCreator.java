@@ -11,6 +11,9 @@ public class HttpResponseCreator {
 
     public HttpResponse handleDelete(String requestedPath, NameList nameList) {
         String name = requestedPath.split("/names/")[1];
+        if (name.equalsIgnoreCase(nameList.getSeedName())) {
+            return new HttpResponse("Cannot delete the seed name.", 405);
+        }
         nameList.removeFromList(name);
         return new HttpResponse(name, 200);
     }
@@ -21,12 +24,12 @@ public class HttpResponseCreator {
             return new HttpResponse(name, 405);
         }
         nameList.addToNameList(name);
-        return new HttpResponse(name, 200);
+        return new HttpResponse(name, 201);
     }
 
     public HttpResponse handlePut(String requestedPath, NameList nameList, String requestBody) {
         String originalName = requestedPath.split("/names/")[1];
-        if (nameList.getList().contains(originalName)) {
+        if (nameList.getList().contains(originalName) && originalName != nameList.getSeedName()) {
             String newName = requestBody.split("=")[1];
             nameList.removeFromList(originalName);
             nameList.addToNameList(newName);

@@ -28,4 +28,7 @@ public class NameList {
         return list;
     }
 
+    public String getSeedName() {
+        return seedName;
+    }
 }
