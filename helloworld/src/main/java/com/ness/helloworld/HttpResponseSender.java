@@ -5,13 +5,18 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class HttpResponseSender {
+public class HttpResponseSender implements IResponseSender {
 
     static void send(HttpResponse httpResponse, HttpExchange exchange) throws IOException {
-        int responseLength = httpResponse.getBody().length();
+        int responseLength = httpResponse.getMessage().length();
         exchange.sendResponseHeaders(httpResponse.getStatusCode(), responseLength);
         OutputStream outputStream = exchange.getResponseBody();
-        outputStream.write(httpResponse.getBody().getBytes());
+        outputStream.write(httpResponse.getMessage().getBytes());
         outputStream.close();
+    }
+
+    @Override
+    public void send(IResponse response, OutputStream output) {
+
     }
 }

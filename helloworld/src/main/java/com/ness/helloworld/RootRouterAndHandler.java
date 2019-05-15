@@ -18,7 +18,7 @@ public class RootRouterAndHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-         String responseBody = greetingFormatter.createResponse(LocalDateTime.now(), nameList);
+         String responseBody = greetingFormatter.createFormattedGreeting(LocalDateTime.now(), nameList);
          HttpResponse response = new HttpResponse(responseBody, 200);
          HttpResponseSender.send(response, exchange);
     }

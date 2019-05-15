@@ -10,12 +10,12 @@ public class NamesRouter implements HttpHandler {
 
     private NameList nameList;
     private HttpResponseSender httpResponseSender;
-    private NamesHandler namesHandler;
+    private HttpResponseCreator httpResponseCreator;
 
-    NamesRouter(HttpResponseSender httpResponseSender, NameList nameList, NamesHandler namesHandler) {
+    NamesRouter(HttpResponseSender httpResponseSender, NameList nameList, HttpResponseCreator httpResponseCreator) {
         this.httpResponseSender = httpResponseSender;
         this.nameList = nameList;
-        this.namesHandler = namesHandler;
+        this.httpResponseCreator = httpResponseCreator;
     }
 
     @Override
@@ -28,18 +28,18 @@ public class NamesRouter implements HttpHandler {
         String requestMethod = exchange.getRequestMethod();
         HttpResponse response = new HttpResponse("Internal server error.", 500);
         if (requestMethod.equalsIgnoreCase("get")) {
-            response = namesHandler.handleGetNames(nameList);
+            response = httpResponseCreator.handleGetNames(nameList);
         }
         if (requestMethod.equalsIgnoreCase("delete")) {
-            response = namesHandler.handleDelete(requestedPath, nameList);
+            response = httpResponseCreator.handleDelete(requestedPath, nameList);
         }
         if (requestMethod.equalsIgnoreCase("post")) {
             String requestBody = getRequestBody(exchange);
-            response = namesHandler.handlePost(nameList, requestBody);
+            response = httpResponseCreator.handlePost(nameList, requestBody);
         }
         if (requestMethod.equalsIgnoreCase("put")) {
             String requestBody = getRequestBody(exchange);
-            response = namesHandler.handlePut(requestedPath, nameList, requestBody);
+            response = httpResponseCreator.handlePut(requestedPath, nameList, requestBody);
         }
         HttpResponseSender.send(response, exchange);
     }

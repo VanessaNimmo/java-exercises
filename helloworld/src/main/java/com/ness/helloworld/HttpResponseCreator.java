@@ -2,7 +2,7 @@ package com.ness.helloworld;
 
 import java.util.stream.Collectors;
 
-public class NamesHandler {
+public class HttpResponseCreator {
 
     public HttpResponse handleGetNames(NameList nameList) {
        String reponse = nameList.getList().stream().collect(Collectors.joining(", "));

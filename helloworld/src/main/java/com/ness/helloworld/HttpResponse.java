@@ -1,6 +1,6 @@
 package com.ness.helloworld;
 
-class HttpResponse {
+class HttpResponse implements IResponse {
 
     private final String body;
     private final int statusCode;
@@ -10,11 +10,12 @@ class HttpResponse {
         this.statusCode = statusCode;
     }
 
-    String getBody() {
-        return body;
-    }
-
     int getStatusCode() {
         return statusCode;
+    }
+
+    @Override
+    public String getMessage() {
+        return body;
     }
 }

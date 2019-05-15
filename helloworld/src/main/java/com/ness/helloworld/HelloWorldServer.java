@@ -14,8 +14,8 @@ public class HelloWorldServer {
 
         server = HttpServer.create(new InetSocketAddress(8080), 0);
         nameList = new NameList("Vanessa");
-        NamesHandler namesHandler = new NamesHandler();
-        NamesRouter namesRouter = new NamesRouter(new HttpResponseSender(), nameList, namesHandler);
+        HttpResponseCreator httpResponseCreator = new HttpResponseCreator();
+        NamesRouter namesRouter = new NamesRouter(new HttpResponseSender(), nameList, httpResponseCreator);
         RootRouterAndHandler rootRouterAndHandler = new RootRouterAndHandler(new GreetingFormatter(), nameList);
         server.createContext("/names", namesRouter);
         server.createContext("/", rootRouterAndHandler);
