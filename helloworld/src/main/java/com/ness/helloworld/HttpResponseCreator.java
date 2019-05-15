@@ -17,15 +17,22 @@ public class HttpResponseCreator {
 
     public HttpResponse handlePost(NameList nameList, String requestBody) {
         String name = requestBody.split("=")[1];
+        if(nameList.getList().contains(name)) {
+            return new HttpResponse(name, 405);
+        }
         nameList.addToNameList(name);
         return new HttpResponse(name, 200);
     }
 
     public HttpResponse handlePut(String requestedPath, NameList nameList, String requestBody) {
         String originalName = requestedPath.split("/names/")[1];
-        String newName = requestBody.split("=")[1];
-        nameList.removeFromList(originalName);
-        nameList.addToNameList(newName);
-        return new HttpResponse(newName, 201);
+        if (nameList.getList().contains(originalName)) {
+            String newName = requestBody.split("=")[1];
+            nameList.removeFromList(originalName);
+            nameList.addToNameList(newName);
+            return new HttpResponse(newName, 201);
+        } else {
+            return new HttpResponse(originalName, 404);
+        }
     }
 }

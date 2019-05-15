@@ -1,6 +1,6 @@
 package com.ness.helloworld;
 
-class HttpResponse implements IResponse {
+class HttpResponse {
 
     private final String body;
     private final int statusCode;
@@ -14,8 +14,7 @@ class HttpResponse implements IResponse {
         return statusCode;
     }
 
-    @Override
-    public String getMessage() {
+    String getBody() {
         return body;
     }
 }

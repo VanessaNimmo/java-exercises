@@ -2,8 +2,7 @@ package com.ness.helloworld;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class HttpResponseCreatorTest {
 
@@ -19,9 +18,16 @@ public class HttpResponseCreatorTest {
     }
 
     @Test
-    public void postShouldRefuseToAddNameIfNameAlreadyInList() {
-        // Not sure how I want it to behave in this case!
-        // TODO: Work out what behaviour you want here - the response creator should create the error rseponses as well
+    public void postShouldReturnA405ErrorResponseIfPostingAnExistingName() {
+        HttpResponseCreator handler = new HttpResponseCreator();
+        NameList nameList = new NameList("Vanessa");
+        nameList.addToNameList("Bob");
+        String requestBody = "name=Bob";
+
+        HttpResponse result = handler.handlePost(nameList, requestBody);
+
+        assertEquals(405, result.getStatusCode());
+
     }
 
     @Test
@@ -46,6 +52,17 @@ public class HttpResponseCreatorTest {
         handler.handlePut("/names/Bob", nameList, requestBody);
 
         assertTrue(nameList.getList().contains("James"));
+    }
+
+    @Test
+    public void putShouldReturnA404ErrorIfNoNameExistsToReplace() {
+        HttpResponseCreator handler = new HttpResponseCreator();
+        NameList nameList = new NameList("Vanessa");
+        String requestBody = "name=James";
+
+        HttpResponse result = handler.handlePut("/names/Bob", nameList, requestBody);
+
+        assertEquals(404, result.getStatusCode());
     }
 
 }
