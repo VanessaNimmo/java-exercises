@@ -9,12 +9,10 @@ import java.time.LocalDateTime;
 public class RootRouterAndHandler implements HttpHandler {
 
     private GreetingFormatter greetingFormatter;
-    private HttpResponseSender httpResponseSender;
     private NameList nameList;
 
-    RootRouterAndHandler(GreetingFormatter formatter, HttpResponseSender sender, NameList list) {
+    RootRouterAndHandler(GreetingFormatter formatter, NameList list) {
         greetingFormatter = formatter;
-        httpResponseSender = sender;
         nameList = list;
     }
 
