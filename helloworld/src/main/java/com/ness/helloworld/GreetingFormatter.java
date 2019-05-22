@@ -1,12 +1,14 @@
 package com.ness.helloworld;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class GreetingFormatter {
 
-    public String createFormattedGreeting(LocalDateTime time, NameList nameList) {
+    public String createFormattedGreeting(ZonedDateTime time, NameList nameList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mma 'on' dd LLLL yyyy");
         String formattedDateTime = time.format(formatter);
         String formattedDateTimeWithLowercase = formattedDateTime.replace("AM", "am").replace("PM","pm");

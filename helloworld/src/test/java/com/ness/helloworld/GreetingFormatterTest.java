@@ -2,7 +2,8 @@ package com.ness.helloworld;
 
 import org.junit.Test;
 
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,8 @@ public class GreetingFormatterTest {
 
         String expected = "Hello Vanessa - the time on the server is 10:48pm on 14 March 2018";
         NameList nameList = new NameList("Vanessa");
-        String result = greetingFormatter.createFormattedGreeting(LocalDateTime.of(2018, 3, 14, 22, 48, 0, 0), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Melbourne");
+        String result = greetingFormatter.createFormattedGreeting(ZonedDateTime.of(2018, 3, 14, 22, 48, 0, 0, zoneId), nameList);
 
         assertEquals(expected, result);
     }
@@ -26,7 +28,8 @@ public class GreetingFormatterTest {
         String expected = "Hello Vanessa and Bob - the time on the server is 10:48pm on 14 March 2018";
         NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Bob");
-        String result = greetingFormatter.createFormattedGreeting(LocalDateTime.of(2018, 3, 14, 22, 48, 0, 0), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Melbourne");
+        String result = greetingFormatter.createFormattedGreeting(ZonedDateTime.of(2018, 3, 14, 22, 48, 0, 0, zoneId), nameList);
 
         assertEquals(expected, result);
     }
@@ -39,7 +42,8 @@ public class GreetingFormatterTest {
         NameList nameList = new NameList("Vanessa");
         nameList.addToNameList("Bob");
         nameList.addToNameList("Mary");
-        String result = greetingFormatter.createFormattedGreeting(LocalDateTime.of(2018, 3, 14, 22, 48, 0, 0), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Melbourne");
+        String result = greetingFormatter.createFormattedGreeting(ZonedDateTime.of(2018, 3, 14, 22, 48, 0, 0, zoneId), nameList);
 
         assertEquals(expected, result);
     }
@@ -53,7 +57,8 @@ public class GreetingFormatterTest {
         nameList.addToNameList("Bob");
         nameList.addToNameList("Mary");
         nameList.addToNameList("Mohamad");
-        String result = greetingFormatter.createFormattedGreeting(LocalDateTime.of(2018, 3, 14, 22, 48, 0, 0), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Melbourne");
+        String result = greetingFormatter.createFormattedGreeting(ZonedDateTime.of(2018, 3, 14, 22, 48, 0, 0, zoneId), nameList);
 
         assertEquals(expected, result);
     }
@@ -68,7 +73,8 @@ public class GreetingFormatterTest {
         nameList.addToNameList("Mary");
         nameList.addToNameList("Mohamad");
         nameList.addToNameList("Preethi");
-        String result = greetingFormatter.createFormattedGreeting(LocalDateTime.of(2018, 3, 14, 22, 48, 0, 0), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Melbourne");
+        String result = greetingFormatter.createFormattedGreeting(ZonedDateTime.of(2018, 3, 14, 22, 48, 0, 0, zoneId), nameList);
 
         assertEquals(expected, result);
     }

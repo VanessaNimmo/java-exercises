@@ -4,7 +4,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class RootRouterAndHandler implements HttpHandler {
 
@@ -20,7 +21,9 @@ public class RootRouterAndHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-         String responseBody = greetingFormatter.createFormattedGreeting(LocalDateTime.now(), nameList);
+        ZoneId zoneId = ZoneId.of("Australia/Sydney");
+        ZonedDateTime zonedTime = ZonedDateTime.now(zoneId);
+         String responseBody = greetingFormatter.createFormattedGreeting(zonedTime, nameList);
          HttpResponse response = new HttpResponse(responseBody, 200);
          httpResponseSender.send(response, exchange);
     }
