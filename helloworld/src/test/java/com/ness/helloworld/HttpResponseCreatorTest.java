@@ -65,4 +65,15 @@ public class HttpResponseCreatorTest {
         assertEquals(404, result.getStatusCode());
     }
 
+    @Test
+    public void putShouldReturn405IfRequestTriesToReplaceTheSeedName() {
+        HttpResponseCreator handler = new HttpResponseCreator();
+        NameList nameList = new NameList("Vanessa");
+        String requestBody = "name=James";
+
+        HttpResponse result = handler.handlePut("/names/Vanessa", nameList, requestBody);
+
+        assertEquals(405, result.getStatusCode());
+    }
+
 }

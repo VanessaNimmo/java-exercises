@@ -24,6 +24,10 @@ And for integration tests, use:
 
 ```./gradlew integrationTest```
 
+To run the app, run the following after building:
+
+```java -jar build/libs/helloworld-1.0-SNAPSHOT.jar```
+
 ## Running the App Locally with Docker
 
 To build a production docker image, run 

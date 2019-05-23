@@ -29,13 +29,13 @@ public class HttpResponseCreator {
 
     public HttpResponse handlePut(String requestedPath, NameList nameList, String requestBody) {
         String originalName = requestedPath.split("/names/")[1];
-        if (nameList.getList().contains(originalName) && originalName != nameList.getSeedName()) {
+        if (nameList.getList().contains(originalName) && !originalName.equalsIgnoreCase(nameList.getSeedName())) {
             String newName = requestBody.split("=")[1];
             nameList.removeFromList(originalName);
             nameList.addToNameList(newName);
             return new HttpResponse(newName, 201);
         } else {
-            return new HttpResponse(originalName, 404);
+            return originalName.equalsIgnoreCase(nameList.getSeedName()) ? new HttpResponse("Cannot replace seed name.", 405) : new HttpResponse(originalName, 404);
         }
     }
 }
