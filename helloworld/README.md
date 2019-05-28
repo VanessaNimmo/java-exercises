@@ -32,12 +32,12 @@ To run the app, run the following after building:
 
 To build a production docker image, run 
 ```
-docker build -f Dockerfile.app .
+docker build -t helloworld -f Dockerfile.app .
 ```
 
 To run the file:
 ```
-docker run -P -p 80:8080 <image-name>
+docker run -P -p 80:8080 helloworld
 ```
 
 Use ```docker ps``` to see a list of running images and ```docker port <container-name>``` to find out the port to connect with the container.
