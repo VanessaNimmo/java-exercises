@@ -10,7 +10,7 @@ Returns a greeting to Vanessa and the time on the server (AEST).
 
 Responds to GET, POST, PUT and DELETE in the standard HTTP manner.
 
-## Running the App Locally Manually
+## Running and Testing the App Locally Manually
 
 The project uses gradle with a wrapper. To build the project, use:
 
@@ -28,9 +28,16 @@ To run the app, run the following after building:
 
 ```java -jar build/libs/helloworld-1.0-SNAPSHOT.jar```
 
-## Running the App Locally with Docker
+## Running and Testing the App Locally with Docker
 
-To build a production docker image, run 
+To build a test Docker image, run: 
+
+```
+docker build -t helloworldtest -f Dockerfile.test .
+```
+
+To build a production Docker image, run:
+
 ```
 docker build -t helloworld -f Dockerfile.app .
 ```
