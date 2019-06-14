@@ -2,37 +2,31 @@ package com.ness.payslipgenerator;
 
 public class TaxBracket {
 
-    private final long lowerLimit;
-    private final long upperLimit;
-    private final long baseAmount;
-    private final long startOfPerDollar;
-    private final long perDollarAmount;
+    private final double lowerLimit;
+    private final double baseAmount;
+    private final double startOfPerDollar;
+    private final double perDollarAmount;
 
-    public TaxBracket(long lowerLimit, long upperLimit, long baseAmount, long startOfPerDollar, long perDollarAmount) {
+    public TaxBracket(double lowerLimit, double baseAmount, double startOfPerDollar, double perDollarAmount) {
         this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
         this.baseAmount = baseAmount;
         this.startOfPerDollar = startOfPerDollar;
         this.perDollarAmount = perDollarAmount;
     }
 
-    public long getLowerLimit() {
+    public double getLowerLimit() {
         return lowerLimit;
     }
 
-    public long getUpperLimit() {
-        return upperLimit;
-    }
-
-    public long getBaseAmount() {
+    public double getBaseAmount() {
         return baseAmount;
     }
 
-    public long getStartOfPerDollar() {
+    public double getStartOfPerDollar() {
         return startOfPerDollar;
     }
 
-    public long getPerDollarAmount() {
+    public double getPerDollarAmount() {
         return perDollarAmount;
     }
 }

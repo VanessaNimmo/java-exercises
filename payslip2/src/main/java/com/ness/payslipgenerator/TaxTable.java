@@ -1,7 +1,6 @@
 package com.ness.payslipgenerator;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TaxTable {
 
@@ -12,10 +11,14 @@ public class TaxTable {
     }
 
     public TaxBracket getTaxBracket(int totalPay) {
-        return taxBrackets.stream().filter(bracket -> payIsWithinBracket(totalPay, bracket)).collect(Collectors.toList()).get(0);
+        TaxBracket correctBracket = taxBrackets.get(taxBrackets.size() - 1);
+        for (int i = 0; i < taxBrackets.size() - 1; i++) {
+            correctBracket = payFitsInBracket(totalPay, i) ? taxBrackets.get(i) : correctBracket;
+        }
+        return correctBracket;
     }
 
-    private boolean payIsWithinBracket(int totalPay, TaxBracket bracket) {
-        return totalPay >= bracket.getLowerLimit() && totalPay <= bracket.getUpperLimit();
+    private boolean payFitsInBracket(int totalPay, int i) {
+        return totalPay >= taxBrackets.get(i).getLowerLimit() && totalPay < taxBrackets.get(i + 1).getLowerLimit();
     }
 }
