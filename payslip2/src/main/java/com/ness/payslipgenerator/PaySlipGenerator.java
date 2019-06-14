@@ -6,9 +6,9 @@ public class PaySlipGenerator {
 
 //        Employee employee = input.getEmployee();
 //        TaxTable taxTable = input.getTaxTable();
-//        TaxCalculator taxCalculator = new TaxCalculator();
-//        PaySlip paySlip = taxCalculator.calculate(employee, taxTable);
-//        output.print(paySlip);
+//        PayCalculator payCalculator = new PayCalculator();
+//        Pay pay = payCalculator.calculate(employee, taxTable);
+//        output.print(pay.paySlip);
 
     }
 }
