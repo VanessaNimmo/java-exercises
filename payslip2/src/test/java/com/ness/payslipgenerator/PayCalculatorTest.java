@@ -58,4 +58,16 @@ public class PayCalculatorTest {
 
         assertEquals(expectedNetIncome, pay.getNetIncome());
     }
+
+    @Test
+    public void acceptsAnEmployeeAndTaxTableAndCalculatesSuper() {
+        Employee employee = new Employee("Jane", "Smith", 60050, 9);
+
+        PayCalculator payCalculator = new PayCalculator(employee, taxTable, payPeriod);
+        Pay pay = payCalculator.calculate();
+
+        int expectedSuper = 450;
+
+        assertEquals(expectedSuper, pay.getSuper());
+    }
 }

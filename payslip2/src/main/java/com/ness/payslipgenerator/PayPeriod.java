@@ -57,7 +57,6 @@ public class PayPeriod {
                 break;
             default:
                 validNumberOfDays = this.days == 30;
-
         }
         return validNumberOfDays;
     }

@@ -18,7 +18,13 @@ public class PayCalculator {
         int grossIncome = calculateGrossIncome((long)employee.getAnnualSalary());
         int incomeTax = calculateIncomeTax();
         int netIncome = calculateNetIncome(grossIncome, incomeTax);
-        return new Pay(payPeriod, grossIncome, incomeTax, netIncome);
+        int superPayment = calculateSuper(grossIncome, employee.getSuperRate());
+        return new Pay(payPeriod, grossIncome, incomeTax, netIncome,  superPayment);
+    }
+
+    private int calculateSuper(int grossIncome, double superRate) {
+        superRate = superRate/100;
+        return (int) Math.round(grossIncome * superRate);
     }
 
     private int calculateGrossIncome(long annualSalary) {

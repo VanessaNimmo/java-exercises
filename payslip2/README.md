@@ -1,0 +1,1 @@
+``java -jar build/libs/payslip-1.0-SNAPSHOT.jar

@@ -2,9 +2,6 @@ package com.ness.payslipgenerator;
 
 public interface IInput {
 
-    Employee getEmployee();
+    String getInput();
 
-    TaxTable getTaxTable();
-
-    PayPeriod getPayPeriod();
 }

@@ -4,9 +4,9 @@ class Employee {
 
     private final String firstName, lastName;
     private final int annualSalary;
-    private final long superRate;
+    private final double superRate;
 
-    Employee(String firstName, String lastName, int annualSalary, long superRate) {
+    Employee(String firstName, String lastName, int annualSalary, double superRate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualSalary = annualSalary;
@@ -25,7 +25,11 @@ class Employee {
         return annualSalary;
     }
 
-    public long getSuperRate() {
+    public double getSuperRate() {
         return superRate;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

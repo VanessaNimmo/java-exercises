@@ -2,6 +2,7 @@ package com.ness.payslipgenerator;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +13,7 @@ public class AcceptanceTests {
 
     @Test
     public void givenAnEmployeeItCalculatesGrossPay() {
+        taxBrackets = new ArrayList<>();
         taxBrackets.add(new TaxBracket(0, 0, 0, 0));
         taxBrackets.add(new TaxBracket(18201, 0, 18200, 0.19));
         taxBrackets.add(new TaxBracket(37001, 3572, 37000, 0.325));
