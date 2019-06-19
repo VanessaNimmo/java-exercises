@@ -5,4 +5,6 @@ public interface IInput {
     Employee getEmployee();
 
     TaxTable getTaxTable();
+
+    PayPeriod getPayPeriod();
 }

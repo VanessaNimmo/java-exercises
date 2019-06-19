@@ -3,9 +3,10 @@ package com.ness.payslipgenerator;
 class Employee {
 
     private final String firstName, lastName;
-    private final long annualSalary, superRate;
+    private final int annualSalary;
+    private final long superRate;
 
-    Employee(String firstName, String lastName, long annualSalary, long superRate) {
+    Employee(String firstName, String lastName, int annualSalary, long superRate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.annualSalary = annualSalary;
@@ -20,7 +21,7 @@ class Employee {
         return lastName;
     }
 
-    public long getAnnualSalary() {
+    int getAnnualSalary() {
         return annualSalary;
     }
 

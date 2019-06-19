@@ -6,7 +6,8 @@ public class PaySlipGenerator {
 
 //        Employee employee = input.getEmployee();
 //        TaxTable taxTable = input.getTaxTable();
-//        PayCalculator payCalculator = new PayCalculator();
+//        PayPeriodValidator payPeriod = input.getPayPeriod();
+//        PayCalculator payCalculator = new PayCalculator(employee, taxTable, payPeriod);
 //        Pay pay = payCalculator.calculate(employee, taxTable);
 //        output.print(pay.paySlip);
 
